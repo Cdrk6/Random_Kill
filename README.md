@@ -2,7 +2,6 @@
 Jean-Yann commit
 Thomas !!!! 
 Ammallanhello
-Florian test branche 2
 
 commande github:
 git config --global user.email "votre_email"
