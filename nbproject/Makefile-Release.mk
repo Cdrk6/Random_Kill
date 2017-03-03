@@ -35,7 +35,6 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 
 # Object Files
 OBJECTFILES= \
-	${OBJECTDIR}/newClass.o \
 	${OBJECTDIR}/src/Entity.o \
 	${OBJECTDIR}/src/RK.o
 
@@ -63,11 +62,6 @@ LDLIBSOPTIONS=
 ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/random_kill: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
 	${LINK.cc} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/random_kill ${OBJECTFILES} ${LDLIBSOPTIONS}
-
-${OBJECTDIR}/newClass.o: newClass.cpp 
-	${MKDIR} -p ${OBJECTDIR}
-	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/newClass.o newClass.cpp
 
 ${OBJECTDIR}/src/Entity.o: src/Entity.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src
