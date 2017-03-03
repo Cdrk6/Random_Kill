@@ -4,7 +4,9 @@
     <logicalFolder name="HeaderFiles"
                    displayName="Header Files"
                    projectFiles="true">
+      <itemPath>src/Entity.hpp</itemPath>
       <itemPath>src/RK.hpp</itemPath>
+      <itemPath>newClass.hpp</itemPath>
     </logicalFolder>
     <logicalFolder name="ResourceFiles"
                    displayName="Resource Files"
@@ -13,7 +15,9 @@
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
                    projectFiles="true">
+      <itemPath>src/Entity.cpp</itemPath>
       <itemPath>src/RK.cpp</itemPath>
+      <itemPath>newClass.cpp</itemPath>
     </logicalFolder>
     <logicalFolder name="TestFiles"
                    displayName="Test Files"
@@ -37,6 +41,14 @@
       </toolsSet>
       <compileType>
       </compileType>
+      <item path="newClass.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="newClass.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/Entity.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/Entity.hpp" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="src/RK.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/RK.hpp" ex="false" tool="3" flavor2="0">
@@ -62,6 +74,14 @@
           <developmentMode>5</developmentMode>
         </asmTool>
       </compileType>
+      <item path="newClass.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="newClass.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/Entity.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/Entity.hpp" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="src/RK.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/RK.hpp" ex="false" tool="3" flavor2="0">
