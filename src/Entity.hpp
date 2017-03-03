@@ -13,8 +13,8 @@
 
 class Entity {
 public:
-    Entity();
-    Entity(const Entity& orig);
+    virtual void Entity();
+    virtual void Entity(const Entity& orig);
     virtual ~Entity();
 private:
 
