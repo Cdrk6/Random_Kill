@@ -36,6 +36,7 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 # Object Files
 OBJECTFILES= \
 	${OBJECTDIR}/src/Entity.o \
+	${OBJECTDIR}/src/Map.o \
 	${OBJECTDIR}/src/RK.o
 
 
@@ -67,6 +68,11 @@ ${OBJECTDIR}/src/Entity.o: src/Entity.cpp
 	${MKDIR} -p ${OBJECTDIR}/src
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/Entity.o src/Entity.cpp
+
+${OBJECTDIR}/src/Map.o: src/Map.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/Map.o src/Map.cpp
 
 ${OBJECTDIR}/src/RK.o: src/RK.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src
