@@ -1,21 +1,13 @@
-/*
- * 
- */
-
-/* 
- * File:   Player.hpp
- * Author: cedric
- *
- * Created on March 3, 2017, 3:32 PM
- */
-
 #ifndef PLAYER_HPP
 #define PLAYER_HPP
 
-class Player:Entity {
+#include "Entity.hpp"
+
+class Player : public Entity {
 public:
     Player();
     virtual ~Player();
+    
 private:
 
 };
