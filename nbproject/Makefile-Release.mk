@@ -36,7 +36,11 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 # Object Files
 OBJECTFILES= \
 	${OBJECTDIR}/src/Entity.o \
+<<<<<<< HEAD
 	${OBJECTDIR}/src/Player.o \
+=======
+	${OBJECTDIR}/src/Map.o \
+>>>>>>> 6e3eb6621e3896c25c061539d93ef3c0a9c5012f
 	${OBJECTDIR}/src/RK.o
 
 
@@ -69,10 +73,17 @@ ${OBJECTDIR}/src/Entity.o: src/Entity.cpp
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/Entity.o src/Entity.cpp
 
+<<<<<<< HEAD
 ${OBJECTDIR}/src/Player.o: src/Player.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/Player.o src/Player.cpp
+=======
+${OBJECTDIR}/src/Map.o: src/Map.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/Map.o src/Map.cpp
+>>>>>>> 6e3eb6621e3896c25c061539d93ef3c0a9c5012f
 
 ${OBJECTDIR}/src/RK.o: src/RK.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src
