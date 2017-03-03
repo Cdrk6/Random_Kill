@@ -5,11 +5,8 @@
                    displayName="Header Files"
                    projectFiles="true">
       <itemPath>src/Entity.hpp</itemPath>
-<<<<<<< HEAD
       <itemPath>src/Player.hpp</itemPath>
-=======
       <itemPath>src/Map.hpp</itemPath>
->>>>>>> 6e3eb6621e3896c25c061539d93ef3c0a9c5012f
       <itemPath>src/RK.hpp</itemPath>
     </logicalFolder>
     <logicalFolder name="ResourceFiles"
@@ -20,11 +17,8 @@
                    displayName="Source Files"
                    projectFiles="true">
       <itemPath>src/Entity.cpp</itemPath>
-<<<<<<< HEAD
       <itemPath>src/Player.cpp</itemPath>
-=======
       <itemPath>src/Map.cpp</itemPath>
->>>>>>> 6e3eb6621e3896c25c061539d93ef3c0a9c5012f
       <itemPath>src/RK.cpp</itemPath>
     </logicalFolder>
     <logicalFolder name="TestFiles"
@@ -53,15 +47,13 @@
       </item>
       <item path="src/Entity.hpp" ex="false" tool="3" flavor2="0">
       </item>
-<<<<<<< HEAD
       <item path="src/Player.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/Player.hpp" ex="false" tool="3" flavor2="0">
-=======
+	</item>
       <item path="src/Map.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/Map.hpp" ex="false" tool="3" flavor2="0">
->>>>>>> 6e3eb6621e3896c25c061539d93ef3c0a9c5012f
       </item>
       <item path="src/RK.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -92,15 +84,13 @@
       </item>
       <item path="src/Entity.hpp" ex="false" tool="3" flavor2="0">
       </item>
-<<<<<<< HEAD
       <item path="src/Player.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/Player.hpp" ex="false" tool="3" flavor2="0">
-=======
+	</item>
       <item path="src/Map.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/Map.hpp" ex="false" tool="3" flavor2="0">
->>>>>>> 6e3eb6621e3896c25c061539d93ef3c0a9c5012f
       </item>
       <item path="src/RK.cpp" ex="false" tool="1" flavor2="0">
       </item>
