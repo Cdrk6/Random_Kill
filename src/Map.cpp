@@ -59,7 +59,7 @@ bool init()
 	return success;
 }
 
-SDL_Surface* loadMedia(char* img)
+SDL_Surface* loadMedia(char const* img)
 {
         SDL_Surface* var;
 	
@@ -87,7 +87,7 @@ void close()
 	SDL_Quit();
 }
 
-int main( int argc, char* args[] )
+void start()
 {
 	//Start up SDL and create window
 	if( !init() )
@@ -96,9 +96,9 @@ int main( int argc, char* args[] )
 	}
 	else
 	{
-                gHelloWorld = loadMedia("Fond2.bmp");
-                gHelloWorld2 = loadMedia("Maison2.bmp");
-                gHelloWorld3 = loadMedia("maison1.bmp");
+                gHelloWorld = loadMedia("res/Fond2.bmp");
+                gHelloWorld2 = loadMedia("res/Maison2.bmp");
+                gHelloWorld3 = loadMedia("res/maison1.bmp");
                 
 		//Load media
 		if( gHelloWorld == NULL || gHelloWorld2 == NULL || gHelloWorld3 == NULL)
@@ -109,8 +109,8 @@ int main( int argc, char* args[] )
 		{
 			//Apply the image
 			SDL_BlitSurface( gHelloWorld, NULL, gScreenSurface, NULL );
-                        SDL_BlitSurface( gHelloWorld2, NULL, gScreenSurface, NULL );
-                        SDL_BlitSurface( gHelloWorld3, NULL, gScreenSurface, NULL );
+            SDL_BlitSurface( gHelloWorld2, NULL, gScreenSurface, NULL );
+            SDL_BlitSurface( gHelloWorld3, NULL, gScreenSurface, NULL );
 			
 			
 			//Update the surface
@@ -123,9 +123,8 @@ int main( int argc, char* args[] )
 
 	//Free resources and close SDL
 	close();
-
-	return 0;
 }
+
 Map::Map() {
 }
 

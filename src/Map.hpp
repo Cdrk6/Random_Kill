@@ -3,6 +3,8 @@
 
 #include "Entity.hpp"
 
+void start();
+
 class Map : public Entity {
 public:
     Map();

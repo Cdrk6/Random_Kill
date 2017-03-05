@@ -3,9 +3,9 @@
 
 #include <vector>
 
-/*#include "Display.hpp"
+//#include "Display.hpp"
 #include "Entity.hpp"
-#include "IO.hpp"
+/*#include "IO.hpp"
 #include "Input.hpp"
 #include "Sound.hpp"
 #include "State.hpp"
@@ -30,9 +30,9 @@ class RK {
     /**
      * @element-type Entity
      */
-    /*std::vector< Entity > myEntity;
+    std::vector< Entity > myEntity;
 
-    State myState;
+    /*State myState;
 
     Stats myStats;*/
 };

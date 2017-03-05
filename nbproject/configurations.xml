@@ -5,8 +5,8 @@
                    displayName="Header Files"
                    projectFiles="true">
       <itemPath>src/Entity.hpp</itemPath>
-      <itemPath>src/Player.hpp</itemPath>
       <itemPath>src/Map.hpp</itemPath>
+      <itemPath>src/Player.hpp</itemPath>
       <itemPath>src/RK.hpp</itemPath>
     </logicalFolder>
     <logicalFolder name="ResourceFiles"
@@ -17,8 +17,8 @@
                    displayName="Source Files"
                    projectFiles="true">
       <itemPath>src/Entity.cpp</itemPath>
-      <itemPath>src/Player.cpp</itemPath>
       <itemPath>src/Map.cpp</itemPath>
+      <itemPath>src/Player.cpp</itemPath>
       <itemPath>src/RK.cpp</itemPath>
     </logicalFolder>
     <logicalFolder name="TestFiles"
@@ -42,18 +42,21 @@
         <rebuildPropChanged>false</rebuildPropChanged>
       </toolsSet>
       <compileType>
+        <linkerTool>
+          <commandLine>-lSDL2 -lSDL2main -lSDL2_image</commandLine>
+        </linkerTool>
       </compileType>
       <item path="src/Entity.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/Entity.hpp" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="src/Player.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="src/Player.hpp" ex="false" tool="3" flavor2="0">
-	</item>
       <item path="src/Map.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/Map.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/Player.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/Player.hpp" ex="false" tool="3" flavor2="0">
       </item>
       <item path="src/RK.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -84,13 +87,13 @@
       </item>
       <item path="src/Entity.hpp" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="src/Player.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="src/Player.hpp" ex="false" tool="3" flavor2="0">
-	</item>
       <item path="src/Map.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/Map.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/Player.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/Player.hpp" ex="false" tool="3" flavor2="0">
       </item>
       <item path="src/RK.cpp" ex="false" tool="1" flavor2="0">
       </item>
