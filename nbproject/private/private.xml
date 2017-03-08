@@ -7,14 +7,30 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/florian/Documents/Dropbox/ESIEA/3A/PST3/Random_Kill/src/Entity.cpp</file>
-            <file>file:/home/florian/Documents/Dropbox/ESIEA/3A/PST3/Random_Kill/src/Player.cpp</file>
-            <file>file:/home/florian/Documents/Dropbox/ESIEA/3A/PST3/Random_Kill/src/Player.hpp</file>
+            <file>file:/home/florian/Documents/Dropbox/ESIEA/3A/PST3/Random_Kill/src/Display.cpp</file>
+            <file>file:/home/florian/Documents/Dropbox/ESIEA/3A/PST3/Random_Kill/src/Entity/Player.hpp</file>
             <file>file:/home/florian/Documents/Dropbox/ESIEA/3A/PST3/Random_Kill/src/RK.cpp</file>
+            <file>file:/home/florian/Documents/Dropbox/ESIEA/3A/PST3/Random_Kill/src/Display.hpp</file>
+            <file>file:/home/florian/Documents/Dropbox/ESIEA/3A/PST3/Random_Kill/src/View/View.cpp</file>
+            <file>file:/home/florian/Documents/Dropbox/ESIEA/3A/PST3/Random_Kill/src/View/View.hpp</file>
+            <file>file:/home/florian/Documents/Dropbox/ESIEA/3A/PST3/Random_Kill/src/Entity/Player.cpp</file>
+            <file>file:/home/florian/Documents/Dropbox/ESIEA/3A/PST3/Random_Kill/src/Entity/Entity.hpp</file>
+            <file>file:/home/florian/Documents/Dropbox/ESIEA/3A/PST3/Random_Kill/src/View/GameView.hpp</file>
+            <file>file:/home/florian/Documents/Dropbox/ESIEA/3A/PST3/Random_Kill/src/View/MenuView.hpp</file>
+            <file>file:/home/florian/Documents/Dropbox/ESIEA/3A/PST3/Random_Kill/src/Sound.cpp</file>
+            <file>file:/home/florian/Documents/Dropbox/ESIEA/3A/PST3/Random_Kill/src/Stats.hpp</file>
+            <file>file:/home/florian/Documents/Dropbox/ESIEA/3A/PST3/Random_Kill/src/Stats.cpp</file>
+            <file>file:/home/florian/Documents/Dropbox/ESIEA/3A/PST3/Random_Kill/src/Sound.hpp</file>
+            <file>file:/home/florian/Documents/Dropbox/ESIEA/3A/PST3/Random_Kill/src/View/GameView.cpp</file>
             <file>file:/home/florian/Documents/Dropbox/ESIEA/3A/PST3/Random_Kill/src/RK.hpp</file>
             <file>file:/home/florian/Documents/Dropbox/ESIEA/3A/PST3/Random_Kill/src/Map.hpp</file>
-            <file>file:/home/florian/Documents/Dropbox/ESIEA/3A/PST3/Random_Kill/src/Entity.hpp</file>
+            <file>file:/home/florian/Documents/Dropbox/ESIEA/3A/PST3/Random_Kill/src/Input.cpp</file>
+            <file>file:/home/florian/Documents/Dropbox/ESIEA/3A/PST3/Random_Kill/src/IO.hpp</file>
+            <file>file:/home/florian/Documents/Dropbox/ESIEA/3A/PST3/Random_Kill/src/Entity/Entity.cpp</file>
+            <file>file:/home/florian/Documents/Dropbox/ESIEA/3A/PST3/Random_Kill/src/IO.cpp</file>
             <file>file:/home/florian/Documents/Dropbox/ESIEA/3A/PST3/Random_Kill/src/Map.cpp</file>
+            <file>file:/home/florian/Documents/Dropbox/ESIEA/3A/PST3/Random_Kill/src/Input.hpp</file>
+            <file>file:/home/florian/Documents/Dropbox/ESIEA/3A/PST3/Random_Kill/src/View/MenuView.cpp</file>
         </group>
     </open-files>
 </project-private>

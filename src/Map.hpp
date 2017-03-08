@@ -1,7 +1,7 @@
 #ifndef MAP_HPP
 #define MAP_HPP
 
-#include "Entity.hpp"
+#include "Entity/Entity.hpp"
 
 void start();
 

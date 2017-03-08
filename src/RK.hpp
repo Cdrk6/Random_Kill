@@ -3,38 +3,33 @@
 
 #include <vector>
 
-//#include "Display.hpp"
-#include "Entity.hpp"
-/*#include "IO.hpp"
+#include "Display.hpp"
+#include "Entity/Entity.hpp"
+#include "IO.hpp"
 #include "Input.hpp"
 #include "Sound.hpp"
-#include "State.hpp"
+//#include "State.hpp"
 #include "Stats.hpp"
-#include "View.hpp"*/
-
+#include "View/View.hpp"
 
 class RK {
+public:
 
- public:
+	Sound mySound;
 
-    /*Sound mySound;
+	Display myDisplay;
 
-    Display myDisplay;
+	Input myInput;
 
-    Input myInput;
+	View myView;
 
-    View myView;
+	IO myIO;
 
-    IO myIO;
+	std::vector< Entity > myEntity;
 
-    /**
-     * @element-type Entity
-     */
-    std::vector< Entity > myEntity;
+	//State myState;
 
-    /*State myState;
-
-    Stats myStats;*/
+	Stats myStats;
 };
 
 #endif /* RK_HPP */
