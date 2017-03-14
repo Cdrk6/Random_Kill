@@ -1,6 +1,10 @@
 #ifndef INPUT_HPP
 #define INPUT_HPP
 
+#include <iostream>
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_joystick.h>
+
 enum class JoystickButtonPressed {
     //Directions
     UP, 
@@ -56,14 +60,19 @@ enum class KeyPressed {
     //...
 };
 
+
 class Input {
 public:
 	Input();
 	Input(const Input& orig);
 	virtual ~Input();
+        
+        bool isJoystickConnected();
 private:
+        enum GameMode {JOYSTICK, KEYBOARD};
+        GameMode gameControl;
+        SDL_Joystick* myJoystick;
 
 };
 
 #endif /* INPUT_HPP */
-
