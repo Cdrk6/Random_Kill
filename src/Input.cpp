@@ -22,6 +22,7 @@ Input::Input(int timeout) {
             std::cout << "Joystick Connected." << std::endl;
             std::cout << "\tJoystick : " << event.jdevice.which << std::endl;
             myJoystick = SDL_JoystickOpen(event.jdevice.which);
+            gameControl = JOYSTICK;
             cont = false;
         }
         
