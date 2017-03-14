@@ -2,60 +2,64 @@
 #define INPUT_HPP
 
 #include <iostream>
+#include <fstream>
+#include <string>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_joystick.h>
 
-enum class JoystickButtonPressed {
+using namespace std;
+
+enum class JoystickButtons {
     //Directions
-    UP,
-    DOWN,
-    LEFT,
-    RIGHT,
+    UP = 0,
+    DOWN = 1,
+    LEFT = 2,
+    RIGHT = 3,
 
     //Actions
-    A,
-    B,
-    X,
-    Y,
-
-    //Option
-    SELECT,
-    START,
-
-    //Joysticks
-    R_UP,
-    R_DOWN,
-    R_LEFT,
-    R_RIGHT,
-
-    L_UP,
-    L_DOWN,
-    L_LEFT,
-    L_RIGHT,
-
-    //Triggers
-    L1,
-    L2,
-    R1,
-    R2
-};
-
-enum class KeyPressed {
-    //Directions
-    UP,
-    DOWN,
-    LEFT,
-    RIGHT,
-
-    //Actions
-    SPACEBAR,
-    A,
-    Z,
-    E,
+    A = 4,
+    B = 5,
+    X = 6,
+    Y = 7,
 
     //Options
-    ENTER,
-    BACK,
+    SELECT = 8,
+    START = 9,
+
+    //Joysticks
+    R_UP = 10,
+    R_DOWN = 11,
+    R_LEFT = 12,
+    R_RIGHT = 13,
+
+    L_UP = 14,
+    L_DOWN = 15,
+    L_LEFT = 16,
+    L_RIGHT = 17,
+
+    //Triggers
+    L1 = 18,
+    L2 = 19,
+    R1 = 20,
+    R2 = 21
+};
+
+enum class KeyboardKeys {
+    //Directions
+    UP = 0,
+    DOWN = 1,
+    LEFT = 2,
+    RIGHT = 3,
+
+    //Actions
+    SPACEBAR = 4,
+    A = 5,
+    Z = 6,
+    E = 7,
+
+    //Options
+    BACK = 8,
+    ENTER = 9,
 
     //...
 };
@@ -66,15 +70,23 @@ enum GameMode {
 
 class Input {
 public:
-    Input(int timeout); //Max time (seconds) searching input devices
+    Input(int timeout, int nbButtonsUsed); //Max time (seconds) searching input devices
     Input(const Input& orig);
     virtual ~Input();
 
     bool isJoystickConnected();
+    //void checkButtonPressed();
 
 private:
-    GameMode gameControl;
+    GameMode gameControlType;
     SDL_Joystick* myJoystick;
+    JoystickButtons* myJoystickConfig;
+    JoystickButtons* buttonsPressed;
+    KeyboardKeys* myKeyboardConfig;
+    KeyboardKeys* keysPressed;
+    int myNbButtonsUsed;
+    
+    void initJoystickButtons();
 
 };
 

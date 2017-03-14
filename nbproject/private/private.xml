@@ -7,8 +7,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/cedric/Documents/CPP_Projects/Random_Kill/src/Map.hpp</file>
+            <file>file:/home/cedric/Documents/CPP_Projects/Random_Kill/src/Input.cpp</file>
+            <file>file:/home/cedric/Documents/CPP_Projects/Random_Kill/src/Input.hpp</file>
             <file>file:/home/cedric/Documents/CPP_Projects/Random_Kill/src/Map.cpp</file>
+            <file>file:/home/cedric/Documents/CPP_Projects/Random_Kill/src/RK.cpp</file>
         </group>
     </open-files>
 </project-private>
