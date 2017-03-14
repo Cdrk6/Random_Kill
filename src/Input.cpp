@@ -1,6 +1,6 @@
 #include "Input.hpp"
 
-Input::Input() {
+Input::Input(int timeout) {
     //SDL Joystick initialization
     if (SDL_Init(SDL_INIT_JOYSTICK) != 0) {
         fprintf(stdout, "SDL Initialization failure : %s\n", SDL_GetError());
@@ -13,15 +13,20 @@ Input::Input() {
 
     SDL_Event event;
     bool cont = true;
+    clock_t begin = clock();
     
     while (cont) {
         SDL_PollEvent(&event);
         
         if (event.type == SDL_JOYDEVICEADDED) {
             std::cout << "Joystick Connected." << std::endl;
-            std::cout << "\tJoystick : %d" << event.jdevice.which << std::endl;
+            std::cout << "\tJoystick : " << event.jdevice.which << std::endl;
             myJoystick = SDL_JoystickOpen(event.jdevice.which);
+            cont = false;
         }
+        
+        if ((clock() - begin)/CLOCKS_PER_SEC >= timeout)
+            cont = false;
     }
 }
 
