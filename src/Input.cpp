@@ -35,7 +35,7 @@ Input::Input(int timeout, int nbButtonsUsed) {
     
     //Joystick Buttons initialization
     if (isJoystickConnected())
-        Input::initJoystickButton();
+        Input::initJoystickButtons();
     
     configureJoystick(true, true);
 }
@@ -55,7 +55,7 @@ bool Input::isJoystickConnected() {
     return (myJoystick != NULL);
 }
 
-void Input::initJoystickButton() {
+void Input::initJoystickButtons() {
     int nbButtonsConfigured;
     ifstream file;
     file.open("res/NES_Default_Config");
@@ -82,10 +82,10 @@ void Input::initJoystickButton() {
         
         cout << "Joystick nbButtons match : " << nbButtonsConfigured << endl;
         
-        int indexJoystickButton;
+        int joystickButtonValue;
         for (int i = 0; i < nbButtonsConfigured; ++i) {
-            file >> indexJoystickButton;
-            myJoystickConfig[i] = static_cast<JoystickButton>(indexJoystickButton);
+            file >> joystickButtonValue;
+            myJoystickConfig[i] = static_cast<JoystickButton>(joystickButtonValue);
             cout << JoystickButton_toString(myJoystickConfig[i]) << " ";
         }
         cout << endl;
@@ -128,7 +128,30 @@ void Input::configureJoystick(bool defaultConfig, bool NESType) {
     
     file << myNbButtonsUsed << endl;
     
+     SDL_Window* pWindow = NULL;
+        pWindow = SDL_CreateWindow("Ma première application SDL2",SDL_WINDOWPOS_UNDEFINED,
+                                                                  SDL_WINDOWPOS_UNDEFINED,
+                                                                  640,
+                                                                  480,
+                                                                  SDL_WINDOW_SHOWN);
+
     
+    SDL_Event event;
+    bool cont = true;
+    
+    SDL_JoystickEventState(SDL_ENABLE);
+    
+    while (cont) {
+        SDL_PollEvent(&event);
+        
+        if (event.type == SDL_JOYBUTTONDOWN)
+            cout << "Button " << event.jbutton.button << " has been pressed." << endl;
+        
+        else if (event.type == SDL_KEYDOWN) {
+            cout << "Quit !" << endl;
+            cont = false;
+        }
+    }
     
     file.close();
 }

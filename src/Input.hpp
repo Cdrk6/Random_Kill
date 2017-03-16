@@ -90,7 +90,6 @@ public:
     virtual ~Input();
 
     bool isJoystickConnected();
-    void configureJoystick(bool defaultConfig, bool NESType);
 
 private:
     GameMode gameControlType;
@@ -101,7 +100,8 @@ private:
     KeyboardKey* myKeyboardConfig;
     KeyboardKey* keysPressed;
 
-    void initJoystickButton();
+    void configureJoystick(bool defaultConfig, bool NESType);
+    void initJoystickButtons();
 
 };
 
