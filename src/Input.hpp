@@ -36,17 +36,22 @@ enum class JoystickButton {
     R_DOWN = 11,
     R_LEFT = 12,
     R_RIGHT = 13,
+    R_BUTTON = 14,
 
-    L_UP = 14,
-    L_DOWN = 15,
-    L_LEFT = 16,
-    L_RIGHT = 17,
+    L_UP = 15,
+    L_DOWN = 16,
+    L_LEFT = 17,
+    L_RIGHT = 18,
+    L_BUTTON = 19,
 
     //Triggers
-    L1 = 18,
-    L2 = 19,
-    R1 = 20,
-    R2 = 21
+    L1 = 20,
+    L2 = 21,
+    R1 = 22,
+    R2 = 23,
+            
+    //Unused
+    UNUSED = -1
 };
 
 enum class KeyboardKey {
@@ -85,7 +90,7 @@ public:
     virtual ~Input();
 
     bool isJoystickConnected();
-    //void checkButtonPressed();
+    void configureJoystick(bool defaultConfig, bool NESType);
 
 private:
     GameMode gameControlType;

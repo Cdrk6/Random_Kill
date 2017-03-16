@@ -20,7 +20,10 @@
     <logicalFolder name="ResourceFiles"
                    displayName="Resource Files"
                    projectFiles="true">
+      <itemPath>res/Controller_Default_Config</itemPath>
+      <itemPath>res/Controller_Perso_Config</itemPath>
       <itemPath>res/NES_Default_Config</itemPath>
+      <itemPath>res/NES_Perso_Config</itemPath>
     </logicalFolder>
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
@@ -66,7 +69,13 @@
           <commandLine>-lSDL2 -lSDL2main -lSDL2_image</commandLine>
         </linkerTool>
       </compileType>
+      <item path="res/Controller_Default_Config" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="res/Controller_Perso_Config" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="res/NES_Default_Config" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="res/NES_Perso_Config" ex="false" tool="3" flavor2="0">
       </item>
       <item path="src/Display.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -137,7 +146,13 @@
           <developmentMode>5</developmentMode>
         </asmTool>
       </compileType>
+      <item path="res/Controller_Default_Config" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="res/Controller_Perso_Config" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="res/NES_Default_Config" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="res/NES_Perso_Config" ex="false" tool="3" flavor2="0">
       </item>
       <item path="src/Display.cpp" ex="false" tool="1" flavor2="0">
       </item>

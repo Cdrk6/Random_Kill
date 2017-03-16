@@ -36,6 +36,8 @@ Input::Input(int timeout, int nbButtonsUsed) {
     //Joystick Buttons initialization
     if (isJoystickConnected())
         Input::initJoystickButton();
+    
+    configureJoystick(true, true);
 }
 
 Input::Input(const Input& orig) {
@@ -61,6 +63,7 @@ void Input::initJoystickButton() {
     //Error in file opening
     if (!file.is_open()) {
         cerr << "Error : res/NES_Default_Config did not open." << endl;
+        gameControlType = KEYBOARD;
         exit(-1);
     }
     
@@ -73,6 +76,7 @@ void Input::initJoystickButton() {
         //Error in memory allocation
         if (myJoystickConfig == NULL) {
             cerr << "Error : myJoystickConfig allocation failed" << endl;
+            gameControlType = KEYBOARD;
             exit(-1);
         }
         
@@ -99,15 +103,36 @@ void Input::initJoystickButton() {
     file.close();
 }
 
-/*
- * void Input::checkButtonPressed() {
-    static SDL_Event *event;
-    
-    if(gameControlType == JOYSTICK) {
-        
+void Input::configureJoystick(bool defaultConfig, bool NESType) {
+    //Error in joystick connection
+    if (!isJoystickConnected()) {
+        cerr << "The Joystick can not be configured if it is not connected." << endl;
+        gameControlType = KEYBOARD;
+        exit(-1);
     }
+    
+    ofstream file;
+    
+    if (defaultConfig) {
+        if (NESType)
+            file.open("res/NES_Default_Config", ios::out | ios::trunc);
+        else
+            file.open("res/Controller_Default_Config", ios::out | ios::trunc);
+    }
+    else {
+        if (NESType)
+            file.open("res/NES_Perso_Config", ios::out | ios::trunc);
+        else
+            file.open("res/Controller_Perso_Config", ios::out | ios::trunc);
+    }
+    
+    file << myNbButtonsUsed << endl;
+    
+    
+    
+    file.close();
 }
-*/
+
 
 string JoystickButton_toString (JoystickButton joystickButton) {
     switch(joystickButton) {
@@ -137,6 +162,8 @@ string JoystickButton_toString (JoystickButton joystickButton) {
             return "R_DOWN";
         case JoystickButton::R_LEFT :
             return "R_LEFT";
+        case JoystickButton::R_BUTTON :
+            return "R_BUTTON";
         case JoystickButton::L_UP :
             return "L_UP";
         case JoystickButton::L_DOWN :
@@ -145,6 +172,8 @@ string JoystickButton_toString (JoystickButton joystickButton) {
             return "L_LEFT";
         case JoystickButton::L_RIGHT :
             return "L_RIGHT";
+        case JoystickButton::L_BUTTON :
+            return "L_BUTTON";
         case JoystickButton::L1 :
             return "L1";
         case JoystickButton::L2 :
