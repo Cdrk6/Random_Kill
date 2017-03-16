@@ -42,6 +42,11 @@ Input::Input(const Input& orig) {
 }
 
 Input::~Input() {
+    free(myJoystick);
+    free(myJoystickConfig);
+    free(buttonsPressed);
+    free(myKeyboardConfig);
+    free(keysPressed);
 }
 
 bool Input::isJoystickConnected() {
@@ -52,12 +57,46 @@ void Input::initJoystickButtons() {
     int nbButtonsConfigured;
     ifstream file;
     file.open("res/NES_Default_Config");
+        
+    //Error in file opening
+    if (!file.is_open()) {
+        cerr << "Error : res/NES_Default_Config did not open." << endl;
+        exit(-1);
+    }
     
-    if (file.is_open())
-        file >> nbButtonsConfigured;
+    file >> nbButtonsConfigured;
     
-    if (nbButtonsConfigured == myNbButtonsUsed)
-        cout << "Joystick nbButtons match" << endl;
+    //Case : The default config matches with the wanted one
+    if (nbButtonsConfigured >= myNbButtonsUsed) {
+        myJoystickConfig = new (nothrow) JoystickButtons [nbButtonsConfigured];
+        
+        //Error in memory allocation
+        if (myJoystickConfig == NULL) {
+            cerr << "Error : myJoystickConfig allocation failed" << endl;
+            exit(-1);
+        }
+        
+        cout << "Joystick nbButtons match : " << nbButtonsConfigured << endl;
+        
+        int indexJoystickButtons;
+        for (int i = 0; i < nbButtonsConfigured; ++i) {
+            file >> indexJoystickButtons;
+            myJoystickConfig[i] = static_cast<JoystickButtons>(indexJoystickButtons);
+            //cout << myJoystickConfig[i] << " ";
+        }
+        cout << endl;
+    }
+    
+    //Case : The default config is not sufficient for the wanted one
+    else {
+        /**
+         * The function is not created yet.
+         * 
+         * Input::configureJoystick()
+         */
+    }
+    
+    file.close();
 }
 
 /*

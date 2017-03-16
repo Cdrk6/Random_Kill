@@ -80,11 +80,11 @@ public:
 private:
     GameMode gameControlType;
     SDL_Joystick* myJoystick;
+    int myNbButtonsUsed;
     JoystickButtons* myJoystickConfig;
     JoystickButtons* buttonsPressed;
     KeyboardKeys* myKeyboardConfig;
     KeyboardKeys* keysPressed;
-    int myNbButtonsUsed;
     
     void initJoystickButtons();
 
