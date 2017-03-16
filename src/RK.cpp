@@ -8,6 +8,6 @@ using namespace std;
 int main(int argc, char* args[]) {
     cout << "Hello World\n";
     //start();
-    Input *myInput = new Input(5, 13);
+    Input *myInput = new Input(DEFAULT_TIMEOUT, DEFAULT_NB_BUTTONS_USED);
     return 0;
 }

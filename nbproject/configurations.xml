@@ -59,6 +59,9 @@
         <rebuildPropChanged>false</rebuildPropChanged>
       </toolsSet>
       <compileType>
+        <ccTool>
+          <commandLine>-std=c++11</commandLine>
+        </ccTool>
         <linkerTool>
           <commandLine>-lSDL2 -lSDL2main -lSDL2_image</commandLine>
         </linkerTool>

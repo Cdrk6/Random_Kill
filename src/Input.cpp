@@ -35,7 +35,7 @@ Input::Input(int timeout, int nbButtonsUsed) {
     
     //Joystick Buttons initialization
     if (isJoystickConnected())
-        Input::initJoystickButtons();
+        Input::initJoystickButton();
 }
 
 Input::Input(const Input& orig) {
@@ -53,7 +53,7 @@ bool Input::isJoystickConnected() {
     return (myJoystick != NULL);
 }
 
-void Input::initJoystickButtons() {
+void Input::initJoystickButton() {
     int nbButtonsConfigured;
     ifstream file;
     file.open("res/NES_Default_Config");
@@ -68,7 +68,7 @@ void Input::initJoystickButtons() {
     
     //Case : The default config matches with the wanted one
     if (nbButtonsConfigured >= myNbButtonsUsed) {
-        myJoystickConfig = new (nothrow) JoystickButtons [nbButtonsConfigured];
+        myJoystickConfig = new (nothrow) JoystickButton [nbButtonsConfigured];
         
         //Error in memory allocation
         if (myJoystickConfig == NULL) {
@@ -78,11 +78,11 @@ void Input::initJoystickButtons() {
         
         cout << "Joystick nbButtons match : " << nbButtonsConfigured << endl;
         
-        int indexJoystickButtons;
+        int indexJoystickButton;
         for (int i = 0; i < nbButtonsConfigured; ++i) {
-            file >> indexJoystickButtons;
-            myJoystickConfig[i] = static_cast<JoystickButtons>(indexJoystickButtons);
-            //cout << myJoystickConfig[i] << " ";
+            file >> indexJoystickButton;
+            myJoystickConfig[i] = static_cast<JoystickButton>(indexJoystickButton);
+            cout << JoystickButton_toString(myJoystickConfig[i]) << " ";
         }
         cout << endl;
     }
@@ -108,3 +108,87 @@ void Input::initJoystickButtons() {
     }
 }
 */
+
+string JoystickButton_toString (JoystickButton joystickButton) {
+    switch(joystickButton) {
+        case JoystickButton::UP :
+            return "UP";
+        case JoystickButton::DOWN :
+            return "DOWN";
+        case JoystickButton::LEFT :
+            return "LEFT";
+        case JoystickButton::RIGHT :
+            return "RIGHT";
+        case JoystickButton::A :
+            return "A";
+        case JoystickButton::B :
+            return "B";
+        case JoystickButton::X :
+            return "X";
+        case JoystickButton::Y :
+            return "Y";
+        case JoystickButton::SELECT :
+            return "SELECT";
+        case JoystickButton::START :
+            return "START";
+        case JoystickButton::R_UP :
+            return "R_UP";
+        case JoystickButton::R_DOWN :
+            return "R_DOWN";
+        case JoystickButton::R_LEFT :
+            return "R_LEFT";
+        case JoystickButton::L_UP :
+            return "L_UP";
+        case JoystickButton::L_DOWN :
+            return "L_DOWN";
+        case JoystickButton::L_LEFT :
+            return "L_LEFT";
+        case JoystickButton::L_RIGHT :
+            return "L_RIGHT";
+        case JoystickButton::L1 :
+            return "L1";
+        case JoystickButton::L2 :
+            return "L2";
+        case JoystickButton::R1 :
+            return "R1";
+        case JoystickButton::R2 :
+            return "R2";
+    }
+    return "Error";
+}
+
+string KeyboardKey_toString (KeyboardKey keyboardKey) {
+    switch(keyboardKey) {
+        case KeyboardKey::UP :
+            return "UP";
+        case KeyboardKey::DOWN :
+            return "DOWN";
+        case KeyboardKey::LEFT :
+            return "LEFT";
+        case KeyboardKey::RIGHT :
+            return "RIGHT";
+        case KeyboardKey::SPACEBAR :
+            return "SPACEBAR";
+        case KeyboardKey::A :
+            return "A";
+        case KeyboardKey::Z :
+            return "Z";
+        case KeyboardKey::E :
+            return "E";
+        case KeyboardKey::BACK :
+            return "BACK";
+        case KeyboardKey::ENTER :
+            return "ENTER";
+    }
+    return "Error";
+}
+
+string GameMode_toString (GameMode gameMode) {
+    switch (gameMode) {
+        case GameMode::JOYSTICK :
+            return "JOYSTICK";    
+        case GameMode::KEYBOARD :
+            return "KEYBOARD";
+    }
+    return "Error";
+}
