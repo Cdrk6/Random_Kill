@@ -1,8 +1,6 @@
 #ifndef RK_HPP
 #define RK_HPP
 
-#include <vector>
-
 #include "Display.hpp"
 #include "Entity/Entity.hpp"
 #include "IO.hpp"
@@ -12,24 +10,22 @@
 #include "Stats.hpp"
 #include "View/View.hpp"
 
+#include <vector>
+#include <iostream>
+
 class RK {
-public:
-
-	Sound mySound;
-
-	Display myDisplay;
-
-	Input myInput;
-
+  public:
+	RK();
+	~RK();
+  private:
+	Display *display;
+	Input *input;
 	View myView;
-
 	IO myIO;
-
 	std::vector< Entity > myEntity;
-
+	Sound mySound;
 	//State myState;
-
 	Stats myStats;
 };
 
-#endif /* RK_HPP */
+#endif
