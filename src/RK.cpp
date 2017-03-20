@@ -5,9 +5,17 @@
 
 using namespace std;
 
+RK::RK() {
+    Input *input = new Input(DEFAULT_TIMEOUT, DEFAULT_NB_BUTTONS_USED);
+    Display *display;
+}
+
+RK::~RK() {
+
+}
+
 int main(int argc, char* args[]) {
-    cout << "Hello World\n";
-    //start();
-    Input *myInput = new Input(DEFAULT_TIMEOUT, DEFAULT_NB_BUTTONS_USED);
+    cout << "RandomKill - V pre-alpha\n";
+    RK rk;
     return 0;
 }

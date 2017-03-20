@@ -13,22 +13,17 @@
 #include "View/View.hpp"
 
 class RK {
-public:
-
+  public:
+	RK();
+	~RK();
+  private:
 	Sound mySound;
-
-	Display myDisplay;
-
-	Input myInput;
-
+	Display display;
+	Input input;
 	View myView;
-
 	IO myIO;
-
 	std::vector< Entity > myEntity;
-
 	//State myState;
-
 	Stats myStats;
 };
 
