@@ -245,7 +245,7 @@ string JoystickButton_toString(JoystickButton joystickButton) {
         case JoystickButton::R2 :
             return "R2";
         case JoystickButton::UNUSED :
-            return "UNUSED;
+            return "UNUSED";
     }
     return "Error";
 }
