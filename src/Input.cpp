@@ -23,7 +23,7 @@ Input::Input(int timeout, int nbButtonsUsed) {
 
         if (event.type == SDL_JOYDEVICEADDED) {
             cout << "Joystick Connected." << endl;
-            cout << "\tJoystick : " << event.jdevice.which << endl;
+            cout << "\tJoystick : " << (int)event.jdevice.which << endl;
             myJoystick = SDL_JoystickOpen(event.jdevice.which);
             gameControlType = JOYSTICK;
             cont = false;

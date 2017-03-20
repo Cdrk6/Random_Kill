@@ -19,7 +19,7 @@ class Display {
 
 };
 
-//const string Display::TITLE = "Random Kill";
+const string Display::TITLE = "Random Kill";
 
 #endif
 
