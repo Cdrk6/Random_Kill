@@ -3,8 +3,8 @@
 using namespace std;
 
 RK::RK() {
-    Input *input = new Input(DEFAULT_TIMEOUT, DEFAULT_NB_BUTTONS_USED);
-    Display *display = new Display();
+    input = new Input(DEFAULT_TIMEOUT, DEFAULT_NB_BUTTONS_USED);
+    display = new Display();
 }
 
 RK::~RK() {
