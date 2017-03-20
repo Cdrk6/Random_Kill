@@ -90,7 +90,7 @@ public:
     Input(const Input& orig);
     virtual ~Input();
 
-    bool isJoystickConnected();
+    bool isJoystickModeEnabled();
 
 private:
     GameMode gameControlType;
