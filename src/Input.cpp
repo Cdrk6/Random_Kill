@@ -34,7 +34,7 @@ Input::Input(int timeout, int nbButtonsUsed) {
     }
 
     //Joystick Buttons initialization
-    if (isJoystickConnected())
+    if (isJoystickModeEnabled())
         Input::initJoystickButtons();
 }
 
@@ -42,16 +42,20 @@ Input::Input(const Input& orig) {
 }
 
 Input::~Input() {
-    SDL_JoystickClose(myJoystick);
-    free(myJoystick);
-    free(myJoystickConfig);
-    free(buttonsPressed);
-    free(myKeyboardConfig);
-    free(keysPressed);
+    if (isJoystickModeEnabled())
+        SDL_JoystickClose(myJoystick);
+    if (myJoystickConfig != NULL)
+        delete myJoystickConfig;
+    if (buttonsPressed != NULL)
+        delete buttonsPressed;
+    if (myKeyboardConfig != NULL)
+        delete myKeyboardConfig;
+    if (keysPressed != NULL)
+        delete keysPressed;
 }
 
-bool Input::isJoystickConnected() {
-    return (myJoystick != NULL);
+bool Input::isJoystickModeEnabled() {
+    return (gameControlType != JOYSTICK);
 }
 
 void Input::initJoystickButtons() {
@@ -104,7 +108,7 @@ void Input::initJoystickButtons() {
 
 void Input::configureJoystick(bool defaultConfig, bool NESType) {
     //Error in joystick connection
-    if (!isJoystickConnected()) {
+    if (!isJoystickModeEnabled()) {
         cerr << "The Joystick can not be configured if it is not connected." << endl;
         gameControlType = KEYBOARD;
         exit(-1);
