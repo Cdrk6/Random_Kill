@@ -6,10 +6,11 @@
 #include <string>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_joystick.h>
+#include <SDL2/SDL_ttf.h>
 
 #define toString(name) # name
 #define DEFAULT_TIMEOUT 5
-#define DEFAULT_NB_BUTTONS_USED 10
+#define DEFAULT_NB_BUTTONS_USED 19
 
 using namespace std;
 
@@ -104,5 +105,45 @@ private:
     void initJoystickButtons();
 
 };
+
+/**
+ * @Documentation
+ * 
+ * The config arrays :
+ * 
+ * Both of the config arrays (myJoystickConfig and myKeyboardConfig) have values
+ * in JoystickButton or KeyboardKey enums. The indexes of the arrays are defined
+ * like so :
+ * 
+ * For NES Controller :
+ * 0.  A
+ * 1.  B
+ * 2.  ?
+ * 3.  X
+ * 4.  Y
+ * 5.  ?
+ * 6.  L1
+ * 7.  R1
+ * 8.  L2
+ * 9.  R2
+ * 10. SELECT
+ * 11. START
+ * 12. ?
+ * 13. L_BUTTON
+ * 14. R_BUTTON
+ * 15. UP (hat 0 -> val 1)
+ * 16. DOWN (hat 0 -> val 4)
+ * 17. LEFT (hat 0 -> val 8)
+ * 18. RIGHT (hat 0 -> val 2)
+ * 19. L_UP
+ * 20. L_DOWN
+ * 21. L_LEFT
+ * 22. L_RIGHT
+ * 23. R_UP
+ * 24. R_DOWN
+ * 25. R_LEFT
+ * 26. R_RIGHT
+ * 
+ */
 
 #endif /* INPUT_HPP */

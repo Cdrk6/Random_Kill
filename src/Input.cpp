@@ -6,7 +6,7 @@ Input::Input(int timeout, int nbButtonsUsed) {
         fprintf(stdout, "SDL Initialization failure : %s\n", SDL_GetError());
         exit(-1);
     }
-    
+
     //Attributes initialization
     myJoystick = NULL;
     gameControlType = KEYBOARD;
@@ -17,10 +17,10 @@ Input::Input(int timeout, int nbButtonsUsed) {
     SDL_Event event;
     bool cont = true;
     clock_t begin = clock();
-    
+
     while (cont) {
         SDL_PollEvent(&event);
-        
+
         if (event.type == SDL_JOYDEVICEADDED) {
             cout << "Joystick Connected." << endl;
             cout << "\tJoystick : " << event.jdevice.which << endl;
@@ -28,22 +28,21 @@ Input::Input(int timeout, int nbButtonsUsed) {
             gameControlType = JOYSTICK;
             cont = false;
         }
-        
-        if ((clock() - begin)/CLOCKS_PER_SEC >= timeout)
+
+        if ((clock() - begin) / CLOCKS_PER_SEC >= timeout)
             cont = false;
     }
-    
+
     //Joystick Buttons initialization
     if (isJoystickConnected())
         Input::initJoystickButtons();
-    
-    configureJoystick(true, true);
 }
 
 Input::Input(const Input& orig) {
 }
 
 Input::~Input() {
+    SDL_JoystickClose(myJoystick);
     free(myJoystick);
     free(myJoystickConfig);
     free(buttonsPressed);
@@ -59,47 +58,47 @@ void Input::initJoystickButtons() {
     int nbButtonsConfigured;
     ifstream file;
     file.open("res/NES_Default_Config");
-        
+
     //Error in file opening
     if (!file.is_open()) {
         cerr << "Error : res/NES_Default_Config did not open." << endl;
         gameControlType = KEYBOARD;
         exit(-1);
     }
-    
+
+    //Case : The file is empty
+    if (file.peek() == std::ifstream::traits_type::eof()) {
+        cout << "File is empty" << endl;
+        Input::configureJoystick(true, true);
+    }
+
     file >> nbButtonsConfigured;
-    
+
     //Case : The default config matches with the wanted one
     if (nbButtonsConfigured >= myNbButtonsUsed) {
         myJoystickConfig = new (nothrow) JoystickButton [nbButtonsConfigured];
-        
+
         //Error in memory allocation
         if (myJoystickConfig == NULL) {
             cerr << "Error : myJoystickConfig allocation failed" << endl;
             gameControlType = KEYBOARD;
             exit(-1);
         }
-        
+
         cout << "Joystick nbButtons match : " << nbButtonsConfigured << endl;
-        
+
         int joystickButtonValue;
         for (int i = 0; i < nbButtonsConfigured; ++i) {
             file >> joystickButtonValue;
-            myJoystickConfig[i] = static_cast<JoystickButton>(joystickButtonValue);
+            myJoystickConfig[i] = static_cast<JoystickButton> (joystickButtonValue);
             cout << JoystickButton_toString(myJoystickConfig[i]) << " ";
         }
         cout << endl;
-    }
-    
-    //Case : The default config is not sufficient for the wanted one
+    }//Case : The default config is not sufficient for the wanted one
     else {
-        /**
-         * The function is not created yet.
-         * 
-         * Input::configureJoystick()
-         */
+        Input::configureJoystick(true, true);
     }
-    
+
     file.close();
 }
 
@@ -110,55 +109,93 @@ void Input::configureJoystick(bool defaultConfig, bool NESType) {
         gameControlType = KEYBOARD;
         exit(-1);
     }
-    
+
     ofstream file;
-    
+
     if (defaultConfig) {
         if (NESType)
             file.open("res/NES_Default_Config", ios::out | ios::trunc);
         else
             file.open("res/Controller_Default_Config", ios::out | ios::trunc);
-    }
-    else {
+    } else {
         if (NESType)
             file.open("res/NES_Perso_Config", ios::out | ios::trunc);
         else
             file.open("res/Controller_Perso_Config", ios::out | ios::trunc);
     }
-    
-    file << myNbButtonsUsed << endl;
-    
-     SDL_Window* pWindow = NULL;
-        pWindow = SDL_CreateWindow("Ma première application SDL2",SDL_WINDOWPOS_UNDEFINED,
-                                                                  SDL_WINDOWPOS_UNDEFINED,
-                                                                  640,
-                                                                  480,
-                                                                  SDL_WINDOW_SHOWN);
 
+    file << myNbButtonsUsed << endl;
+
+    SDL_Window* pWindow = NULL;
+    pWindow = SDL_CreateWindow("Config NES Default",
+            SDL_WINDOWPOS_UNDEFINED,
+            SDL_WINDOWPOS_UNDEFINED,
+            640,
+            480,
+            SDL_WINDOW_SHOWN
+            );
+
+
+    SDL_Renderer* renderer = SDL_CreateRenderer(pWindow, -1, 0);
+    if (TTF_Init() == -1) {
+        cout << "TTF_Init failed." << endl;
+        exit(-1);
+    }
+    SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+    SDL_RenderClear(renderer);
+
+    TTF_Font* font = TTF_OpenFont("res/typewriter.ttf", 24);
+    if (!font) {
+        cout << "Font failed loading." << endl;
+        exit(-1);
+    }
+
+    SDL_Color Black = {0, 0, 0};
+    SDL_Surface* surfaceMessage = TTF_RenderText_Solid(font, "Press A", Black);
+    SDL_Texture* Message = SDL_CreateTextureFromSurface(renderer, surfaceMessage);
+    SDL_Rect MessageCoord;
+    MessageCoord.x = 270;
+    MessageCoord.y = 190;
+    MessageCoord.w = 100;
+    MessageCoord.h = 100;
+
+    SDL_RenderCopy(renderer, Message, NULL, &MessageCoord);    
     
+    SDL_RenderPresent(renderer);
+
     SDL_Event event;
     bool cont = true;
-    
+    int i;
+
     SDL_JoystickEventState(SDL_ENABLE);
-    
+
     while (cont) {
+
         SDL_PollEvent(&event);
-        
+
         if (event.type == SDL_JOYBUTTONDOWN)
-            cout << "Button " << event.jbutton.button << " has been pressed." << endl;
-        
+            cout << "Joystick " << (int) event.jbutton.which << ", Button " << (int) event.jbutton.button << " is in state : " << (int) event.jbutton.state << "." << endl;
+
+        else if (event.type == SDL_JOYBALLMOTION)
+            cout << "Joystick " << (int) event.jball.which << ", Trackball " << (int) event.jball.ball << " has moved by X : " << (int) event.jball.xrel << "and by Y : " << (int) event.jball.yrel << "." << endl;
+
+        else if (event.type == SDL_JOYHATMOTION)
+            cout << "Joystick " << (int) event.jhat.which << ", Hat " << (int) event.jhat.hat << " has moved by : " << (int) event.jhat.value << "." << endl;
+
         else if (event.type == SDL_KEYDOWN) {
             cout << "Quit !" << endl;
             cont = false;
         }
     }
-    
+
+    SDL_DestroyWindow(pWindow);
+
     file.close();
+    TTF_CloseFont(font);
 }
 
-
-string JoystickButton_toString (JoystickButton joystickButton) {
-    switch(joystickButton) {
+string JoystickButton_toString(JoystickButton joystickButton) {
+    switch (joystickButton) {
         case JoystickButton::UP :
             return "UP";
         case JoystickButton::DOWN :
@@ -185,6 +222,8 @@ string JoystickButton_toString (JoystickButton joystickButton) {
             return "R_DOWN";
         case JoystickButton::R_LEFT :
             return "R_LEFT";
+        case JoystickButton::R_RIGHT :
+            return "R_RIGHT";
         case JoystickButton::R_BUTTON :
             return "R_BUTTON";
         case JoystickButton::L_UP :
@@ -205,41 +244,43 @@ string JoystickButton_toString (JoystickButton joystickButton) {
             return "R1";
         case JoystickButton::R2 :
             return "R2";
+        case JoystickButton::UNUSED :
+            return "UNUSED;
     }
     return "Error";
 }
 
-string KeyboardKey_toString (KeyboardKey keyboardKey) {
-    switch(keyboardKey) {
-        case KeyboardKey::UP :
+string KeyboardKey_toString(KeyboardKey keyboardKey) {
+    switch (keyboardKey) {
+        case KeyboardKey::UP:
             return "UP";
-        case KeyboardKey::DOWN :
+        case KeyboardKey::DOWN:
             return "DOWN";
-        case KeyboardKey::LEFT :
+        case KeyboardKey::LEFT:
             return "LEFT";
-        case KeyboardKey::RIGHT :
+        case KeyboardKey::RIGHT:
             return "RIGHT";
-        case KeyboardKey::SPACEBAR :
+        case KeyboardKey::SPACEBAR:
             return "SPACEBAR";
-        case KeyboardKey::A :
+        case KeyboardKey::A:
             return "A";
-        case KeyboardKey::Z :
+        case KeyboardKey::Z:
             return "Z";
-        case KeyboardKey::E :
+        case KeyboardKey::E:
             return "E";
-        case KeyboardKey::BACK :
+        case KeyboardKey::BACK:
             return "BACK";
-        case KeyboardKey::ENTER :
+        case KeyboardKey::ENTER:
             return "ENTER";
     }
     return "Error";
 }
 
-string GameMode_toString (GameMode gameMode) {
+string GameMode_toString(GameMode gameMode) {
     switch (gameMode) {
-        case GameMode::JOYSTICK :
-            return "JOYSTICK";    
-        case GameMode::KEYBOARD :
+        case GameMode::JOYSTICK:
+            return "JOYSTICK";
+        case GameMode::KEYBOARD:
             return "KEYBOARD";
     }
     return "Error";
