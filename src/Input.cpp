@@ -55,7 +55,7 @@ Input::~Input() {
 }
 
 bool Input::isJoystickModeEnabled() {
-    return (gameControlType != JOYSTICK);
+    return (gameControlType == JOYSTICK);
 }
 
 void Input::initJoystickButtons() {
