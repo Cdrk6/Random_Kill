@@ -4,52 +4,53 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <type_traits>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_joystick.h>
 #include <SDL2/SDL_ttf.h>
 
 #define toString(name) # name
 #define DEFAULT_TIMEOUT 5
-#define DEFAULT_NB_BUTTONS_USED 19
+#define DEFAULT_NB_BUTTONS_USED 10
 
 using namespace std;
 
 
 enum class JoystickButton {
     //Directions
-    UP = 0,
-    DOWN = 1,
-    LEFT = 2,
-    RIGHT = 3,
+    UP,
+    DOWN,
+    LEFT,
+    RIGHT,
 
     //Actions
-    A = 4,
-    B = 5,
-    X = 6,
-    Y = 7,
+    A,
+    B,
+    X,
+    Y,
 
     //Options
-    SELECT = 8,
-    START = 9,
+    SELECT,
+    START,
 
     //Joysticks
-    R_UP = 10,
-    R_DOWN = 11,
-    R_LEFT = 12,
-    R_RIGHT = 13,
-    R_BUTTON = 14,
+    R_UP,
+    R_DOWN,
+    R_LEFT,
+    R_RIGHT,
+    R_BUTTON,
 
-    L_UP = 15,
-    L_DOWN = 16,
-    L_LEFT = 17,
-    L_RIGHT = 18,
-    L_BUTTON = 19,
+    L_UP,
+    L_DOWN,
+    L_LEFT,
+    L_RIGHT,
+    L_BUTTON,
 
     //Triggers
-    L1 = 20,
-    L2 = 21,
-    R1 = 22,
-    R2 = 23,
+    L1,
+    L2,
+    R1,
+    R2,
             
     //Unused
     UNUSED = -1
@@ -83,6 +84,9 @@ string JoystickButton_toString(JoystickButton joystickButton);
 string KeyboardKey_toString(KeyboardKey keyboardKey);
 string GameMode_toString(GameMode gameMode);
 
+JoystickButton& operator++(JoystickButton& but);
+JoystickButton operator++(JoystickButton& but, int);
+
 
 class Input {
 public:
@@ -96,13 +100,14 @@ private:
     GameMode gameControlType;
     SDL_Joystick* myJoystick;
     int myNbButtonsUsed;
-    JoystickButton* myJoystickConfig;
+    int* myJoystickConfig;
     JoystickButton* buttonsPressed;
-    KeyboardKey* myKeyboardConfig;
+    int* myKeyboardConfig;
     KeyboardKey* keysPressed;
-
+    
     void configureJoystick(bool defaultConfig, bool NESType);
     void initJoystickButtons();
+    int getIndexOfCommand();
 
 };
 
@@ -118,17 +123,17 @@ private:
  * For NES Controller :
  * 0.  A
  * 1.  B
- * 2.  ?
+ * 2.  --
  * 3.  X
  * 4.  Y
- * 5.  ?
+ * 5.  --
  * 6.  L1
  * 7.  R1
  * 8.  L2
  * 9.  R2
  * 10. SELECT
  * 11. START
- * 12. ?
+ * 12. --
  * 13. L_BUTTON
  * 14. R_BUTTON
  * 15. UP (hat 0 -> val 1)
@@ -145,5 +150,32 @@ private:
  * 26. R_RIGHT
  * 
  */
+
+static const char* configInstructions[24] = {
+    "Press UP",
+    "Press DOWN",
+    "Press LEFT",
+    "Press RIGHT",
+    "Press A",
+    "Press B",
+    "Press X",
+    "Press Y",
+    "Press SELECT",
+    "Press START",
+    "Press L Joystick UP",
+    "Press L Joystick DOWN",
+    "Press L Joystick LEFT",
+    "Press L Joystick RIGHT",
+    "Press L3",
+    "Press R Joystick UP",
+    "Press R Joystick DOWN",
+    "Press R Joystick LEFT",
+    "Press R Joystick RIGHT"
+    "Press R3",
+    "Press L1",
+    "Press L2",
+    "Press R1",
+    "Press R2"
+};
 
 #endif /* INPUT_HPP */

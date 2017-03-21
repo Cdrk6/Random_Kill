@@ -23,7 +23,7 @@ Input::Input(int timeout, int nbButtonsUsed) {
 
         if (event.type == SDL_JOYDEVICEADDED) {
             cout << "Joystick Connected." << endl;
-            cout << "\tJoystick : " << (int)event.jdevice.which << endl;
+            cout << "\tJoystick : " << (int) event.jdevice.which << endl;
             myJoystick = SDL_JoystickOpen(event.jdevice.which);
             gameControlType = JOYSTICK;
             cont = false;
@@ -38,7 +38,7 @@ Input::Input(int timeout, int nbButtonsUsed) {
         Input::initJoystickButtons();
 }
 
-Input::Input(const Input& orig) {
+Input::Input(const Input& but) {
 }
 
 Input::~Input() {
@@ -72,36 +72,42 @@ void Input::initJoystickButtons() {
 
     //Case : The file is empty
     if (file.peek() == std::ifstream::traits_type::eof()) {
-        cout << "File is empty" << endl;
+        cout << "File is empty." << endl;
         Input::configureJoystick(true, true);
     }
 
+    file.clear();
     file >> nbButtonsConfigured;
 
-    //Case : The default config matches with the wanted one
-    if (nbButtonsConfigured >= myNbButtonsUsed) {
-        myJoystickConfig = new (nothrow) JoystickButton [nbButtonsConfigured];
 
-        //Error in memory allocation
-        if (myJoystickConfig == NULL) {
-            cerr << "Error : myJoystickConfig allocation failed" << endl;
-            gameControlType = KEYBOARD;
-            exit(-1);
-        }
-
-        cout << "Joystick nbButtons match : " << nbButtonsConfigured << endl;
-
-        int joystickButtonValue;
-        for (int i = 0; i < nbButtonsConfigured; ++i) {
-            file >> joystickButtonValue;
-            myJoystickConfig[i] = static_cast<JoystickButton> (joystickButtonValue);
-            cout << JoystickButton_toString(myJoystickConfig[i]) << " ";
-        }
-        cout << endl;
-    }//Case : The default config is not sufficient for the wanted one
-    else {
+    //Case : The default config is not sufficient for the wanted one
+    if (nbButtonsConfigured < myNbButtonsUsed) {
+        cout << "File has not enough configurations." << endl;
         Input::configureJoystick(true, true);
     }
+
+
+    myJoystickConfig = new (nothrow) int [nbButtonsConfigured];
+
+    //Error in memory allocation
+    if (myJoystickConfig == NULL) {
+        cerr << "Error : myJoystickConfig allocation failed" << endl;
+        gameControlType = KEYBOARD;
+        exit(-1);
+    }
+
+    cout << "Joystick nbButtons match : " << nbButtonsConfigured << endl;
+
+    int joystickButtonValue;
+    for (int i = 0; i < nbButtonsConfigured; ++i) {
+        file >> joystickButtonValue;
+        myJoystickConfig[i] = joystickButtonValue;
+        cout << JoystickButton_toString(static_cast<JoystickButton> (i)) << " : " << myJoystickConfig[i];
+        if (i < nbButtonsConfigured - 1)
+            cout << "  |  ";
+    }
+    cout << endl;
+
 
     file.close();
 }
@@ -141,12 +147,12 @@ void Input::configureJoystick(bool defaultConfig, bool NESType) {
 
 
     SDL_Renderer* renderer = SDL_CreateRenderer(pWindow, -1, 0);
+
+    //Error in TTF initialization
     if (TTF_Init() == -1) {
         cout << "TTF_Init failed." << endl;
         exit(-1);
     }
-    SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
-    SDL_RenderClear(renderer);
 
     TTF_Font* font = TTF_OpenFont("res/typewriter.ttf", 24);
     if (!font) {
@@ -155,41 +161,44 @@ void Input::configureJoystick(bool defaultConfig, bool NESType) {
     }
 
     SDL_Color Black = {0, 0, 0};
-    SDL_Surface* surfaceMessage = TTF_RenderText_Solid(font, "Press A", Black);
-    SDL_Texture* Message = SDL_CreateTextureFromSurface(renderer, surfaceMessage);
+
+    SDL_Surface** surfaceMessage = new (nothrow) SDL_Surface* [myNbButtonsUsed];
+    for (int i = 0; i < myNbButtonsUsed; ++i) {
+        surfaceMessage[i] = TTF_RenderText_Solid(font, configInstructions[i], Black);
+    }
+
     SDL_Rect MessageCoord;
     MessageCoord.x = 270;
     MessageCoord.y = 190;
     MessageCoord.w = 100;
     MessageCoord.h = 100;
 
-    SDL_RenderCopy(renderer, Message, NULL, &MessageCoord);    
-    
-    SDL_RenderPresent(renderer);
+    SDL_Texture* message;
 
     SDL_Event event;
     bool cont = true;
-    int i;
+    int i = 0;
+    JoystickButton but = JoystickButton::UP;
 
     SDL_JoystickEventState(SDL_ENABLE);
 
     while (cont) {
+        SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+        SDL_RenderClear(renderer);
+        message = SDL_CreateTextureFromSurface(renderer, surfaceMessage[(int) but]);
+        SDL_RenderCopy(renderer, message, NULL, &MessageCoord);
+        SDL_RenderPresent(renderer);
 
-        SDL_PollEvent(&event);
-
-        if (event.type == SDL_JOYBUTTONDOWN)
-            cout << "Joystick " << (int) event.jbutton.which << ", Button " << (int) event.jbutton.button << " is in state : " << (int) event.jbutton.state << "." << endl;
-
-        else if (event.type == SDL_JOYBALLMOTION)
-            cout << "Joystick " << (int) event.jball.which << ", Trackball " << (int) event.jball.ball << " has moved by X : " << (int) event.jball.xrel << "and by Y : " << (int) event.jball.yrel << "." << endl;
-
-        else if (event.type == SDL_JOYHATMOTION)
-            cout << "Joystick " << (int) event.jhat.which << ", Hat " << (int) event.jhat.hat << " has moved by : " << (int) event.jhat.value << "." << endl;
-
-        else if (event.type == SDL_KEYDOWN) {
-            cout << "Quit !" << endl;
-            cont = false;
+        i = getIndexOfCommand();
+        
+        if (i >= 0) {
+            cout << JoystickButton_toString(but) << " = " << (int) but << " -> " << i << endl;
+            file << i << endl;
+            but++;
         }
+
+        if ((int) but >= myNbButtonsUsed)
+            cont = false;
     }
 
     SDL_DestroyWindow(pWindow);
@@ -198,57 +207,98 @@ void Input::configureJoystick(bool defaultConfig, bool NESType) {
     TTF_CloseFont(font);
 }
 
+int Input::getIndexOfCommand() {
+    SDL_Event event;
+    
+    SDL_PollEvent(&event);
+    
+    if (event.type == SDL_JOYHATMOTION && event.jhat.value == 0)
+        return -1;
+    
+    switch (event.type) {
+        case SDL_JOYBUTTONDOWN:
+            return event.jbutton.button;
+        case SDL_JOYHATMOTION:
+            switch (event.jhat.value) {
+                case 1:
+                    return 15;
+                case 2:
+                    return 18;
+                case 4:
+                    return 16;
+                case 8:
+                    return 17;
+            }
+            break;
+    }
+    return -1;
+}
+
+JoystickButton& operator++(JoystickButton& but) {
+    if (but != JoystickButton::R2)
+        but = static_cast<JoystickButton> ((int) but + 1);
+    else
+        but = JoystickButton::UNUSED;
+    return but;
+}
+
+JoystickButton operator++(JoystickButton& but, int) {
+    JoystickButton rVal = but;
+    ++but;
+    return rVal;
+}
+
 string JoystickButton_toString(JoystickButton joystickButton) {
     switch (joystickButton) {
-        case JoystickButton::UP :
+        case JoystickButton::UP:
             return "UP";
-        case JoystickButton::DOWN :
+        case JoystickButton::DOWN:
             return "DOWN";
-        case JoystickButton::LEFT :
+        case JoystickButton::LEFT:
             return "LEFT";
-        case JoystickButton::RIGHT :
+        case JoystickButton::RIGHT:
             return "RIGHT";
-        case JoystickButton::A :
+        case JoystickButton::A:
             return "A";
-        case JoystickButton::B :
+        case JoystickButton::B:
             return "B";
-        case JoystickButton::X :
+        case JoystickButton::X:
             return "X";
-        case JoystickButton::Y :
+        case JoystickButton::Y:
             return "Y";
-        case JoystickButton::SELECT :
+        case JoystickButton::SELECT:
             return "SELECT";
-        case JoystickButton::START :
+        case JoystickButton::START:
             return "START";
-        case JoystickButton::R_UP :
+        case JoystickButton::R_UP:
             return "R_UP";
-        case JoystickButton::R_DOWN :
+        case JoystickButton::R_DOWN:
             return "R_DOWN";
-        case JoystickButton::R_LEFT :
+        case JoystickButton::R_LEFT:
             return "R_LEFT";
-        case JoystickButton::R_RIGHT :
+        case JoystickButton::R_RIGHT:
             return "R_RIGHT";
-        case JoystickButton::R_BUTTON :
+        case JoystickButton::R_BUTTON:
             return "R_BUTTON";
-        case JoystickButton::L_UP :
+        case JoystickButton::L_UP:
             return "L_UP";
-        case JoystickButton::L_DOWN :
+        case JoystickButton::L_DOWN:
             return "L_DOWN";
-        case JoystickButton::L_LEFT :
+        case JoystickButton::L_LEFT:
             return "L_LEFT";
-        case JoystickButton::L_RIGHT :
+        case JoystickButton::L_RIGHT:
             return "L_RIGHT";
-        case JoystickButton::L_BUTTON :
+        case JoystickButton::L_BUTTON:
             return "L_BUTTON";
-        case JoystickButton::L1 :
+        case JoystickButton::L1:
             return "L1";
-        case JoystickButton::L2 :
+        case JoystickButton::L2:
             return "L2";
-        case JoystickButton::R1 :
+        case JoystickButton::R1:
             return "R1";
-        case JoystickButton::R2 :
+        case JoystickButton::R2:
             return "R2";
-        case JoystickButton::UNUSED :
+        case JoystickButton::UNUSED:
             return "UNUSED";
     }
     return "Error";
