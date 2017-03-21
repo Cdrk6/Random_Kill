@@ -38,8 +38,7 @@ Input::Input(int timeout, int nbButtonsUsed) {
         Input::initJoystickButtons();
 }
 
-Input::Input(const Input& but) {
-}
+//Input::Input(const Input& but) {}
 
 Input::~Input() {
     if (isJoystickModeEnabled())
@@ -57,6 +56,11 @@ Input::~Input() {
 bool Input::isJoystickModeEnabled() {
     return (gameControlType == JOYSTICK);
 }
+
+JoystickButton* Input::getButtonsPressed() {
+    return buttonsPressed;
+}
+
 
 void Input::initJoystickButtons() {
     int nbButtonsConfigured;
@@ -178,6 +182,8 @@ void Input::configureJoystick(bool defaultConfig, bool NESType) {
     SDL_Event event;
     bool cont = true;
     int i = 0;
+    bool retry = false;
+    int* temp = new (nothrow) int [myNbButtonsUsed];
     JoystickButton but = JoystickButton::UP;
 
     SDL_JoystickEventState(SDL_ENABLE);
@@ -188,12 +194,21 @@ void Input::configureJoystick(bool defaultConfig, bool NESType) {
         message = SDL_CreateTextureFromSurface(renderer, surfaceMessage[(int) but]);
         SDL_RenderCopy(renderer, message, NULL, &MessageCoord);
         SDL_RenderPresent(renderer);
-
+        
+        retry = false;
         i = getIndexOfCommand();
         
-        if (i >= 0) {
+        for (int j = 0; j < (int)but; ++j) {
+            if(temp[j] == i) {
+                retry = true;
+                cout << "This button is already used." << endl;
+            }
+        }
+        
+        if (i >= 0 && !retry) {
             cout << JoystickButton_toString(but) << " = " << (int) but << " -> " << i << endl;
             file << i << endl;
+            temp[(int)but] = i;
             but++;
         }
 
@@ -201,6 +216,8 @@ void Input::configureJoystick(bool defaultConfig, bool NESType) {
             cont = false;
     }
 
+    delete temp;
+    
     SDL_DestroyWindow(pWindow);
 
     file.close();
@@ -210,7 +227,7 @@ void Input::configureJoystick(bool defaultConfig, bool NESType) {
 int Input::getIndexOfCommand() {
     SDL_Event event;
     
-    SDL_PollEvent(&event);
+    SDL_WaitEvent(&event);
     
     if (event.type == SDL_JOYHATMOTION && event.jhat.value == 0)
         return -1;
@@ -233,6 +250,23 @@ int Input::getIndexOfCommand() {
     }
     return -1;
 }
+
+void Input::updateButtonsPressed() {
+    //For now we will consider we can only have ONE button pressed at a time.
+    int action = getIndexOfCommand();
+    buttonsPressed = new (nothrow) JoystickButton[1];
+    for (JoystickButton but = JoystickButton::UP; (int)but < myNbButtonsUsed; ++but) {
+        if (action == myJoystickConfig[(int)but]) {
+            buttonsPressed[0] = but;
+            return;
+        }
+    }
+    buttonsPressed = NULL;
+}
+
+
+
+/******************************* Enum operations ******************************/
 
 JoystickButton& operator++(JoystickButton& but) {
     if (but != JoystickButton::R2)

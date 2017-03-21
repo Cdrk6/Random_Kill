@@ -91,10 +91,11 @@ JoystickButton operator++(JoystickButton& but, int);
 class Input {
 public:
     Input(int timeout, int nbButtonsUsed); //Max time (seconds) searching input devices
-    Input(const Input& orig);
+    //Input(const Input& orig);
     virtual ~Input();
 
     bool isJoystickModeEnabled();
+    JoystickButton* getButtonsPressed();
 
 private:
     GameMode gameControlType;
@@ -108,6 +109,7 @@ private:
     void configureJoystick(bool defaultConfig, bool NESType);
     void initJoystickButtons();
     int getIndexOfCommand();
+    void updateButtonsPressed();
 
 };
 
@@ -162,15 +164,15 @@ static const char* configInstructions[24] = {
     "Press Y",
     "Press SELECT",
     "Press START",
-    "Press L Joystick UP",
-    "Press L Joystick DOWN",
-    "Press L Joystick LEFT",
-    "Press L Joystick RIGHT",
+    "Incline L Joystick UP",
+    "Incline L Joystick DOWN",
+    "Incline L Joystick LEFT",
+    "Incline L Joystick RIGHT",
     "Press L3",
-    "Press R Joystick UP",
-    "Press R Joystick DOWN",
-    "Press R Joystick LEFT",
-    "Press R Joystick RIGHT"
+    "Incline R Joystick UP",
+    "Incline R Joystick DOWN",
+    "Incline R Joystick LEFT",
+    "Incline R Joystick RIGHT"
     "Press R3",
     "Press L1",
     "Press L2",
