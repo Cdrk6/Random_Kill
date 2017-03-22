@@ -97,9 +97,13 @@ void start()
 	}
 	else
 	{
+                SDL_Rect positionFond;
                 gHelloWorld = loadMedia("res/Fond2.bmp");
                 gHelloWorld2 = loadMedia("res/Maison2.bmp");
+                positionFond.x = 330;
+                positionFond.y = 350;
                 gHelloWorld3 = loadMedia("res/maison1.bmp");
+                SDL_BlitSurface(gHelloWorld3, NULL, gHelloWorld, &positionFond);
                 
 		//Load media
 		if( gHelloWorld == NULL || gHelloWorld2 == NULL || gHelloWorld3 == NULL)

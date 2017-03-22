@@ -9,7 +9,7 @@
 //#include "State.hpp"
 #include "Stats.hpp"
 #include "View/View.hpp"
-
+#include "Map.hpp"
 #include <vector>
 #include <iostream>
 
@@ -20,6 +20,7 @@ class RK {
   private:
 	Display *display;
 	Input *input;
+        Map *map;
 	View myView;
 	IO myIO;
 	std::vector< Entity > myEntity;
