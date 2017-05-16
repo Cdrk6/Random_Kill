@@ -158,7 +158,7 @@ void Input::configureJoystick(bool defaultConfig, bool NESType) {
         exit(-1);
     }
 
-    TTF_Font* font = TTF_OpenFont("res/typewriter.ttf", 24);
+    TTF_Font* font = TTF_OpenFont("res/arial_narrow_7.ttf", 100);
     if (!font) {
         cout << "Font failed loading." << endl;
         exit(-1);
