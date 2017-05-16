@@ -4,11 +4,11 @@
     <logicalFolder name="HeaderFiles"
                    displayName="Header Files"
                    projectFiles="true">
+      <itemPath>src/Controller.hpp</itemPath>
       <itemPath>src/Display.hpp</itemPath>
       <itemPath>src/Entity/Entity.hpp</itemPath>
       <itemPath>src/View/GameView.hpp</itemPath>
       <itemPath>src/IO.hpp</itemPath>
-      <itemPath>src/Input.hpp</itemPath>
       <itemPath>src/Map.hpp</itemPath>
       <itemPath>src/View/MenuView.hpp</itemPath>
       <itemPath>src/Entity/Player.hpp</itemPath>
@@ -39,11 +39,11 @@
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
                    projectFiles="true">
+      <itemPath>src/Controller.cpp</itemPath>
       <itemPath>src/Display.cpp</itemPath>
       <itemPath>src/Entity/Entity.cpp</itemPath>
       <itemPath>src/View/GameView.cpp</itemPath>
       <itemPath>src/IO.cpp</itemPath>
-      <itemPath>src/Input.cpp</itemPath>
       <itemPath>src/Map.cpp</itemPath>
       <itemPath>src/View/MenuView.cpp</itemPath>
       <itemPath>src/Entity/Player.cpp</itemPath>
@@ -103,6 +103,10 @@
       </item>
       <item path="res/images/maison1.bmp" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="src/Controller.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/Controller.hpp" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="src/Display.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/Display.hpp" ex="false" tool="3" flavor2="0">
@@ -118,10 +122,6 @@
       <item path="src/IO.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/IO.hpp" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="src/Input.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="src/Input.hpp" ex="false" tool="3" flavor2="0">
       </item>
       <item path="src/Map.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -190,6 +190,10 @@
       </item>
       <item path="res/images/maison1.bmp" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="src/Controller.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/Controller.hpp" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="src/Display.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/Display.hpp" ex="false" tool="3" flavor2="0">
@@ -205,10 +209,6 @@
       <item path="src/IO.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/IO.hpp" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="src/Input.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="src/Input.hpp" ex="false" tool="3" flavor2="0">
       </item>
       <item path="src/Map.cpp" ex="false" tool="1" flavor2="0">
       </item>

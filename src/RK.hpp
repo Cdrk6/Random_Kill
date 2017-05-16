@@ -4,7 +4,7 @@
 #include "Display.hpp"
 #include "Entity/Entity.hpp"
 #include "IO.hpp"
-#include "Input.hpp"
+#include "Controller.hpp"
 #include "Sound.hpp"
 //#include "State.hpp"
 #include "Stats.hpp"
@@ -19,8 +19,8 @@ class RK {
 	~RK();
   private:
 	Display *display;
-	Input *input;
-        Map *map;
+	Controller *controller;
+	Map *map;
 	View myView;
 	IO myIO;
 	std::vector< Entity > myEntity;

@@ -3,13 +3,13 @@
 using namespace std;
 
 RK::RK() {
-    input = new Input(DEFAULT_TIMEOUT, DEFAULT_NB_BUTTONS_USED);
+    controller = new Controller(DEFAULT_TIMEOUT, DEFAULT_NB_BUTTONS_USED);
     display = new Display();
     map = new Map();
 }
 
 RK::~RK() {
-    delete input;
+    delete controller;
     delete display;
     delete map;
 }

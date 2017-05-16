@@ -35,11 +35,11 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 
 # Object Files
 OBJECTFILES= \
+	${OBJECTDIR}/src/Controller.o \
 	${OBJECTDIR}/src/Display.o \
 	${OBJECTDIR}/src/Entity/Entity.o \
 	${OBJECTDIR}/src/Entity/Player.o \
 	${OBJECTDIR}/src/IO.o \
-	${OBJECTDIR}/src/Input.o \
 	${OBJECTDIR}/src/Map.o \
 	${OBJECTDIR}/src/RK.o \
 	${OBJECTDIR}/src/Sound.o \
@@ -73,6 +73,11 @@ ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/random_kill: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
 	${LINK.cc} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/random_kill ${OBJECTFILES} ${LDLIBSOPTIONS} -lSDL2 -lSDL2main -lSDL2_image -lSDL2_ttf
 
+${OBJECTDIR}/src/Controller.o: src/Controller.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/Controller.o src/Controller.cpp
+
 ${OBJECTDIR}/src/Display.o: src/Display.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src
 	${RM} "$@.d"
@@ -92,11 +97,6 @@ ${OBJECTDIR}/src/IO.o: src/IO.cpp
 	${MKDIR} -p ${OBJECTDIR}/src
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/IO.o src/IO.cpp
-
-${OBJECTDIR}/src/Input.o: src/Input.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src
-	${RM} "$@.d"
-	$(COMPILE.cc) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/Input.o src/Input.cpp
 
 ${OBJECTDIR}/src/Map.o: src/Map.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src
