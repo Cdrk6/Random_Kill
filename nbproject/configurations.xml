@@ -20,11 +20,21 @@
     <logicalFolder name="ResourceFiles"
                    displayName="Resource Files"
                    projectFiles="true">
-      <itemPath>res/Controller_Default_Config</itemPath>
-      <itemPath>res/Controller_Perso_Config</itemPath>
-      <itemPath>res/NES_Default_Config</itemPath>
-      <itemPath>res/NES_Perso_Config</itemPath>
-      <itemPath>res/typewriter.ttf</itemPath>
+      <logicalFolder name="data" displayName="data" projectFiles="true">
+        <itemPath>res/data/Controller_Default_Config</itemPath>
+        <itemPath>res/data/Controller_Perso_Config</itemPath>
+        <itemPath>res/data/NES_Default_Config</itemPath>
+        <itemPath>res/data/NES_Perso_Config</itemPath>
+      </logicalFolder>
+      <logicalFolder name="fonts" displayName="fonts" projectFiles="true">
+        <itemPath>res/fonts/arial_narrow_7.ttf</itemPath>
+        <itemPath>res/fonts/typewriter.ttf</itemPath>
+      </logicalFolder>
+      <logicalFolder name="images" displayName="images" projectFiles="true">
+        <itemPath>res/images/Fond2.bmp</itemPath>
+        <itemPath>res/images/Maison2.bmp</itemPath>
+        <itemPath>res/images/maison1.bmp</itemPath>
+      </logicalFolder>
     </logicalFolder>
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
@@ -54,6 +64,11 @@
       <itemPath>Random_Kill-Makefile.mk</itemPath>
     </logicalFolder>
   </logicalFolder>
+  <sourceRootList>
+    <Elem>res/data</Elem>
+    <Elem>res/fonts</Elem>
+    <Elem>res/images</Elem>
+  </sourceRootList>
   <projectmakefile>Random_Kill-Makefile.mk</projectmakefile>
   <confs>
     <conf name="Debug" type="1">
@@ -70,15 +85,23 @@
           <commandLine>-lSDL2 -lSDL2main -lSDL2_image -lSDL2_ttf</commandLine>
         </linkerTool>
       </compileType>
-      <item path="res/Controller_Default_Config" ex="false" tool="3" flavor2="0">
+      <item path="res/data/Controller_Default_Config" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="res/Controller_Perso_Config" ex="false" tool="3" flavor2="0">
+      <item path="res/data/Controller_Perso_Config" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="res/NES_Default_Config" ex="false" tool="3" flavor2="0">
+      <item path="res/data/NES_Default_Config" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="res/NES_Perso_Config" ex="false" tool="3" flavor2="0">
+      <item path="res/data/NES_Perso_Config" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="res/typewriter.ttf" ex="false" tool="3" flavor2="0">
+      <item path="res/fonts/arial_narrow_7.ttf" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="res/fonts/typewriter.ttf" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="res/images/Fond2.bmp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="res/images/Maison2.bmp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="res/images/maison1.bmp" ex="false" tool="3" flavor2="0">
       </item>
       <item path="src/Display.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -149,15 +172,23 @@
           <developmentMode>5</developmentMode>
         </asmTool>
       </compileType>
-      <item path="res/Controller_Default_Config" ex="false" tool="3" flavor2="0">
+      <item path="res/data/Controller_Default_Config" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="res/Controller_Perso_Config" ex="false" tool="3" flavor2="0">
+      <item path="res/data/Controller_Perso_Config" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="res/NES_Default_Config" ex="false" tool="3" flavor2="0">
+      <item path="res/data/NES_Default_Config" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="res/NES_Perso_Config" ex="false" tool="3" flavor2="0">
+      <item path="res/data/NES_Perso_Config" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="res/typewriter.ttf" ex="false" tool="3" flavor2="0">
+      <item path="res/fonts/arial_narrow_7.ttf" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="res/fonts/typewriter.ttf" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="res/images/Fond2.bmp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="res/images/Maison2.bmp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="res/images/maison1.bmp" ex="false" tool="3" flavor2="0">
       </item>
       <item path="src/Display.cpp" ex="false" tool="1" flavor2="0">
       </item>
