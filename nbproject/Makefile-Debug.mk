@@ -71,7 +71,7 @@ LDLIBSOPTIONS=
 
 ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/random_kill: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
-	${LINK.cc} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/random_kill ${OBJECTFILES} ${LDLIBSOPTIONS} -lSDL2 -lSDL2main -lSDL2_image -lSDL2_ttf
+	${LINK.cc} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/random_kill ${OBJECTFILES} ${LDLIBSOPTIONS} -lSDL2 -lSDL2main -lSDL2_image -lSDL2_ttf -lboost_system -lboost_filesystem
 
 ${OBJECTDIR}/src/Controller.o: src/Controller.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src

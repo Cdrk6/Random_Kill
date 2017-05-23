@@ -13,17 +13,20 @@
 #include <vector>
 #include <iostream>
 
+using namespace std;
+
 class RK {
   public:
 	RK();
 	~RK();
+	IO* getIO();
   private:
 	Display *display;
 	Controller *controller;
 	Map *map;
+	IO *io;
 	View myView;
-	IO myIO;
-	std::vector< Entity > myEntity;
+	vector<Entity> myEntity;
 	Sound mySound;
 	//State myState;
 	Stats myStats;
