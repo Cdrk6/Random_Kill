@@ -15,6 +15,8 @@
       <itemPath>src/RK.hpp</itemPath>
       <itemPath>src/Sound.hpp</itemPath>
       <itemPath>src/Stats.hpp</itemPath>
+      <itemPath>src/Texture.hpp</itemPath>
+      <itemPath>src/Timer.hpp</itemPath>
       <itemPath>src/View/View.hpp</itemPath>
     </logicalFolder>
     <logicalFolder name="ResourceFiles"
@@ -50,6 +52,8 @@
       <itemPath>src/RK.cpp</itemPath>
       <itemPath>src/Sound.cpp</itemPath>
       <itemPath>src/Stats.cpp</itemPath>
+      <itemPath>src/Texture.cpp</itemPath>
+      <itemPath>src/Timer.cpp</itemPath>
       <itemPath>src/View/View.cpp</itemPath>
     </logicalFolder>
     <logicalFolder name="TestFiles"
@@ -139,6 +143,14 @@
       </item>
       <item path="src/Stats.hpp" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="src/Texture.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/Texture.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/Timer.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/Timer.hpp" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="src/View/GameView.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/View/GameView.hpp" ex="false" tool="3" flavor2="0">
@@ -225,6 +237,14 @@
       <item path="src/Stats.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/Stats.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/Texture.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/Texture.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/Timer.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/Timer.hpp" ex="false" tool="3" flavor2="0">
       </item>
       <item path="src/View/GameView.cpp" ex="false" tool="1" flavor2="0">
       </item>

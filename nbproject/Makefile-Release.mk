@@ -44,6 +44,8 @@ OBJECTFILES= \
 	${OBJECTDIR}/src/RK.o \
 	${OBJECTDIR}/src/Sound.o \
 	${OBJECTDIR}/src/Stats.o \
+	${OBJECTDIR}/src/Texture.o \
+	${OBJECTDIR}/src/Timer.o \
 	${OBJECTDIR}/src/View/GameView.o \
 	${OBJECTDIR}/src/View/MenuView.o \
 	${OBJECTDIR}/src/View/View.o
@@ -117,6 +119,16 @@ ${OBJECTDIR}/src/Stats.o: src/Stats.cpp
 	${MKDIR} -p ${OBJECTDIR}/src
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/Stats.o src/Stats.cpp
+
+${OBJECTDIR}/src/Texture.o: src/Texture.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/Texture.o src/Texture.cpp
+
+${OBJECTDIR}/src/Timer.o: src/Timer.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/Timer.o src/Timer.cpp
 
 ${OBJECTDIR}/src/View/GameView.o: src/View/GameView.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/View

@@ -65,11 +65,11 @@ JoystickButton* Controller::getButtonsPressed() {
 void Controller::initJoystickButtons() {
     int nbButtonsConfigured;
     ifstream file;
-    file.open("res/NES_Default_Config");
+    file.open("res/data/NES_Default_Config");
 
     //Error in file opening
     if (!file.is_open()) {
-        cerr << "Error : res/NES_Default_Config did not open." << endl;
+        cerr << "Error : res/data/NES_Default_Config did not open." << endl;
         gameControlType = KEYBOARD;
         exit(-1);
     }
@@ -128,14 +128,14 @@ void Controller::configureJoystick(bool defaultConfig, bool NESType) {
 
     if (defaultConfig) {
         if (NESType)
-            file.open("res/NES_Default_Config", ios::out | ios::trunc);
+            file.open("res/data/NES_Default_Config", ios::out | ios::trunc);
         else
-            file.open("res/Controller_Default_Config", ios::out | ios::trunc);
+            file.open("res/data/Controller_Default_Config", ios::out | ios::trunc);
     } else {
         if (NESType)
-            file.open("res/NES_Perso_Config", ios::out | ios::trunc);
+            file.open("res/data/NES_Perso_Config", ios::out | ios::trunc);
         else
-            file.open("res/Controller_Perso_Config", ios::out | ios::trunc);
+            file.open("res/data/Controller_Perso_Config", ios::out | ios::trunc);
     }
 
     file << myNbButtonsUsed << endl;
@@ -158,7 +158,7 @@ void Controller::configureJoystick(bool defaultConfig, bool NESType) {
         exit(-1);
     }
 
-    TTF_Font* font = TTF_OpenFont("res/arial_narrow_7.ttf", 100);
+    TTF_Font* font = TTF_OpenFont("res/fonts/arial_narrow_7.ttf", 100);
     if (!font) {
         cout << "Font failed loading." << endl;
         exit(-1);
