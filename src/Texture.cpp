@@ -7,6 +7,12 @@ Texture::Texture(SDL_Texture* texture, int w, int h, SDL_Renderer* renderer) {
     mHeight = h;
 }
 
+Texture::Texture(string txt, TTF_Font* font, SDL_Renderer* renderer) {
+    gRenderer = renderer;
+    gFont = font;
+    setText(txt);
+}
+
 Texture::~Texture() {
     free(); //Deallocate
 }
@@ -18,6 +24,23 @@ void Texture::free() {
         mTexture = NULL;
         mWidth = 0;
         mHeight = 0;
+    }
+}
+
+void Texture::setText(string txt) {
+    free(); //Get rid of preexisting texture
+    SDL_Surface* textSurface = TTF_RenderText_Solid(gFont, txt.c_str(), {255, 255, 255}); //Render text surface
+    if (textSurface != NULL) {
+        mTexture = SDL_CreateTextureFromSurface(gRenderer, textSurface); //Create texture from surface pixels
+        if (mTexture == NULL)
+            cout << "Unable to create texture from rendered text! SDL Error: " << SDL_GetError() << endl;
+        else {
+            mWidth = textSurface->w; //Get image dimensions
+            mHeight = textSurface->h; //
+        }
+        SDL_FreeSurface(textSurface); //Get rid of old surface
+    } else {
+        cout << "Unable to render text surface! SDL_ttf Error: " <<  TTF_GetError() << endl;
     }
 }
 
@@ -41,11 +64,6 @@ void Texture::render(int x, int y, SDL_Rect* clip, double angle, SDL_Point* cent
     }
     SDL_RenderCopyEx(gRenderer, mTexture, clip, &renderQuad, angle, center, flip); //Render to screen
 }
-
-/*void Texture::render(int x, int y) {
-    SDL_Rect renderQuad = { x, y, mWidth, mHeight };
-    SDL_RenderCopy(gRenderer, mTexture, NULL, &renderQuad);
-}*/
 
 int Texture::getWidth() {
     return mWidth;

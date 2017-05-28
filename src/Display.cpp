@@ -98,6 +98,8 @@ void Display::startSDL(IO* io) {
         //Render textures
         io->getImages()[0]->render(10, 100);
         io->getImages()[1]->render(15, 120);
+        Texture fps(to_string(avgFPS), io->getFonts()[0], gRenderer);
+        fps.render(20, 20);
 
         SDL_RenderPresent(gRenderer); //Update screen
         ++countedFPS; //Real FPS
