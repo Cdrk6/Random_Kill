@@ -9,14 +9,18 @@ const string IO::SND_PATH = "res/sounds";
 IO::IO(SDL_Renderer* r) {
     gRenderer = r;
     loadImages();
-    /*loadData();
+    //loadData();
     loadFonts();
-    loadSounds();*/
+    //loadSounds();
 }
 
 IO::~IO() {
-    for(int i = 0; i < images.size(); i++)
+    for (int i = 0; i < images.size(); i++)
         delete images[i];
+    for (int i = 0; i < fonts.size(); i++) {
+        TTF_CloseFont(fonts[i]);
+        fonts[i] = NULL;
+    }
 }
 
 //Renvoie un tableau de string contenant tous les chemins vers tous les fichiers contenues dans p
@@ -50,7 +54,7 @@ Texture* IO::loadTexture(const string &path) {
     if (loadedSurface == NULL)
         cerr << "Unable to load image " << path << "! SDL_image Error: " << IMG_GetError() << endl;
     else {
-        SDL_SetColorKey(loadedSurface, SDL_TRUE, SDL_MapRGB(loadedSurface->format, 0xFF, 0xFF, 0xFF)); //Color key image
+        //SDL_SetColorKey(loadedSurface, SDL_TRUE, SDL_MapRGB(loadedSurface->format, 0xFF, 0xFF, 0xFF)); //Color key image
         sdlTexture = SDL_CreateTextureFromSurface(gRenderer, loadedSurface); //Create texture from surface pixels
         if (sdlTexture == NULL)
             cerr << "Unable to create texture from " << path << "! SDL Error: " << SDL_GetError() << endl;
@@ -72,34 +76,24 @@ void IO::loadImages() {
     delete paths;
 }
 
+void IO::loadFonts() {
+    vector<string>* paths = findAllFiles(FNT_PATH);
+    fonts = vector<TTF_Font*>(paths->size());
+    for (int i = 0; i < paths->size(); i++) {
+        filesystem::path path((*paths)[i]);
+        //cout << i << ". " << (*paths)[i] << " ;FN : "<< path.stem().string() << endl;
+        fonts[stoi(path.stem().string())] = TTF_OpenFont((*paths)[i].c_str(), 30);
+        if(!fonts[stoi(path.stem().string())])
+            cerr << "Unable to load font from " << path.relative_path() << "! TTF Error: " << TTF_GetError() << endl;
+    }
+    cout << "[OK] Fonts loaded : " << fonts.size() << endl;
+    delete paths;
+}
+
 vector<Texture*> IO::getImages() {
     return images;
 }
 
-/*bool Texture::loadFonts(string textureText, SDL_Color textColor) {
-    //Get rid of preexisting texture
-    free();
-
-    //Render text surface
-    SDL_Surface* textSurface = TTF_RenderText_Solid(gFont, textureText.c_str(), textColor);
-    if (textSurface != NULL) {
-        //Create texture from surface pixels
-        mTexture = SDL_CreateTextureFromSurface(gRenderer, textSurface);
-        if (mTexture == NULL) {
-            printf("Unable to create texture from rendered text! SDL Error: %s\n", SDL_GetError());
-        } else {
-            //Get image dimensions
-            mWidth = textSurface->w;
-            mHeight = textSurface->h;
-        }
-
-        //Get rid of old surface
-        SDL_FreeSurface(textSurface);
-    } else {
-        printf("Unable to render text surface! SDL_ttf Error: %s\n", TTF_GetError());
-    }
-
-
-    //Return success
-    return mTexture != NULL;
-}*/
+vector<TTF_Font*> IO::getFonts() {
+    return fonts;
+}

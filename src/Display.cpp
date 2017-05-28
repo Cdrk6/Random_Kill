@@ -22,6 +22,7 @@ Display::~Display() {
     gRenderer = NULL;
 
     //Quit SDL subsystems
+    TTF_Quit();
     IMG_Quit();
     SDL_Quit();
 }
@@ -38,12 +39,12 @@ bool Display::initSDL() {
     } else {
         if (!SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "1")) //Set texture filtering to linear
             cout << "Warning: Linear texture filtering not enabled!";
-        gWindow = SDL_CreateWindow(TITLE.c_str(), SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, W, H, SDL_WINDOW_SHOWN); //Create window
+        gWindow = SDL_CreateWindow(TITLE.c_str(), SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, W, H, SDL_WINDOW_SHOWN | SDL_WINDOW_FULLSCREEN | SDL_WINDOW_BORDERLESS | SDL_WINDOW_INPUT_GRABBED); //Create window
         if (gWindow == NULL) {
             cerr << "Window could not be created! SDL Error: " << SDL_GetError() << endl;
             success = false;
         } else {
-            SDL_SetWindowFullscreen(gWindow, SDL_WINDOW_FULLSCREEN); //Fullsreen
+            //SDL_SetWindowFullscreen(gWindow, 0);//SDL_WINDOW_FULLSCREEN); //Fullsreen
             gRenderer = SDL_CreateRenderer(gWindow, -1, SDL_RENDERER_ACCELERATED); //Create renderer for window
             if (gRenderer == NULL) {
                 cerr << "Renderer could not be created! SDL Error: " << SDL_GetError() << endl;
@@ -53,6 +54,10 @@ bool Display::initSDL() {
                 int imgFlags = IMG_INIT_PNG; //Initialize PNG loading
                 if (!(IMG_Init(imgFlags) & imgFlags)) {
                     cerr << "SDL_image could not initialize! SDL_image Error: " << IMG_GetError() << endl;
+                    success = false;
+                }
+                if (TTF_Init() == -1) { //Initialize SDL_ttf
+                    cerr << "SDL_ttf could not initialize! SDL_ttf Error: " << TTF_GetError() << endl;
                     success = false;
                 }
             }
@@ -87,11 +92,12 @@ void Display::startSDL(IO* io) {
         //stepTimer.start(); //Restart step timer
 
         //Clear screen
-        SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
+        SDL_SetRenderDrawColor(gRenderer, 0, 0, 0, 0);
         SDL_RenderClear(gRenderer);
 
         //Render textures
         io->getImages()[0]->render(10, 100);
+        io->getImages()[1]->render(15, 120);
 
         SDL_RenderPresent(gRenderer); //Update screen
         ++countedFPS; //Real FPS

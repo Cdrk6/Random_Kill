@@ -25,22 +25,24 @@ class IO {
 	IO(SDL_Renderer*);
 	~IO();
 	vector<Texture*> getImages();
+	//vector<string*> getData();
+	vector<TTF_Font*> getFonts();
+	//vector<Texture*> getSounds();
 
   private:
 	SDL_Renderer* gRenderer = NULL;
 	vector<Texture*> images;
-	//vector<string*> data = NULL;
-	//vector<TTF_Font*> fonts = NULL;
-	//vector<TTF_Font*> sounds = NULL;
+	//vector<string*> data;
+	vector<TTF_Font*> fonts;
+	//vector<TTF_Font*> sounds;
 	
 	//Méthodes :
 	vector<string>* findAllFiles(const string&); //Trouve tous les chemins de tous les fichiers dans un répertoire
 	Texture* loadTexture(const string&); //Charge une image à l'aide du chemin passé en argument
 	void loadImages(); //Charge toutes les images
-	/*void loadData(); //Charge toutes les données textuelles
+	//void loadData(); //Charge toutes les données textuelles
 	void loadFonts(); //Charge toutes les polices
-	void loadSounds(); //Charge tous les sons*/
-	//bool loadFonts(string, SDL_Color); //Creates image from font string
+	//void loadSounds(); //Charge tous les sons*/
 };
 
 #endif /* IO_HPP */
