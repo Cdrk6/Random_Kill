@@ -18,7 +18,8 @@ class Texture {
 	void setColor(Uint8, Uint8, Uint8); //Set color modulation (RGB)
 	void setBlendMode(SDL_BlendMode); //Set blending
 	void setAlpha(Uint8); //Set alpha modulation
-	void render(int, int, SDL_Rect* r = NULL, double d = 0.0, SDL_Point* p = NULL, SDL_RendererFlip rf = SDL_FLIP_NONE); //Renders texture at given point
+	void render(int, int, SDL_Rect*, double, SDL_Point*, SDL_RendererFlip rf = SDL_FLIP_NONE); //Renders texture at given point
+	void render(int, int, SDL_Rect* = NULL);
 	int getWidth(); //Gets image width
 	int getHeight(); //Gets image height
 
