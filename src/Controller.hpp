@@ -96,6 +96,7 @@ public:
 
     bool isJoystickModeEnabled();
     JoystickButton* getButtonsPressed();
+	void updateButtonsPressed();
 
 private:
     GameMode gameControlType;
@@ -108,9 +109,7 @@ private:
     
     void configureJoystick(bool defaultConfig, bool NESType);
     void initJoystickButtons();
-    int getIndexOfCommand();
-    void updateButtonsPressed();
-
+    int getIndexOfCommand(bool init);
 };
 
 /**

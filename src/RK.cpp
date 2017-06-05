@@ -4,7 +4,7 @@ RK::RK() {
     controller = new Controller(DEFAULT_TIMEOUT, DEFAULT_NB_BUTTONS_USED);
     display = new Display();
     io = new IO(display->getRenderer());
-    display->startSDL(io);
+    display->startSDL(io, controller);
 }
 
 RK::~RK() {

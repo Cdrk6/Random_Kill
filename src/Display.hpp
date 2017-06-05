@@ -3,6 +3,7 @@
 
 #include "Timer.hpp"
 #include "IO.hpp"
+#include "Controller.hpp"
 #include <string>
 #include <iostream>
 #include <SDL2/SDL.h>
@@ -23,7 +24,7 @@ class Display {
 	Display();
 	~Display();
 	SDL_Renderer* getRenderer();
-	void startSDL(IO*);
+	void startSDL(IO*, Controller*);
 	void exit();
 	
   private:

@@ -196,7 +196,7 @@ void Controller::configureJoystick(bool defaultConfig, bool NESType) {
         SDL_RenderPresent(renderer);
         
         retry = false;
-        i = getIndexOfCommand();
+        i = getIndexOfCommand(true);
         
         for (int j = 0; j < (int)but; ++j) {
             if(temp[j] == i) {
@@ -224,10 +224,13 @@ void Controller::configureJoystick(bool defaultConfig, bool NESType) {
     TTF_CloseFont(font);
 }
 
-int Controller::getIndexOfCommand() {
+int Controller::getIndexOfCommand(bool init) {
     SDL_Event event;
     
-    SDL_WaitEvent(&event);
+	if(init)
+		SDL_WaitEvent(&event);
+	else
+		SDL_PollEvent(&event);
     
     if (event.type == SDL_JOYHATMOTION && event.jhat.value == 0)
         return -1;
@@ -253,7 +256,7 @@ int Controller::getIndexOfCommand() {
 
 void Controller::updateButtonsPressed() {
     //For now we will consider we can only have ONE button pressed at a time.
-    int action = getIndexOfCommand();
+    int action = getIndexOfCommand(false);
     buttonsPressed = new (nothrow) JoystickButton[1];
     for (JoystickButton but = JoystickButton::UP; (int)but < myNbButtonsUsed; ++but) {
         if (action == myJoystickConfig[(int)but]) {
@@ -263,7 +266,6 @@ void Controller::updateButtonsPressed() {
     }
     buttonsPressed = NULL;
 }
-
 
 
 /******************************* Enum operations ******************************/
