@@ -50,7 +50,7 @@ vector<string>* IO::findAllFiles(const string &p) {
 Texture* IO::loadTexture(const string &path) {
     Texture* texture = NULL; //The final texture
     SDL_Texture* sdlTexture = NULL; //The SDL texture
-    SDL_Surface* loadedSurface = IMG_Load(path.c_str()); //Load image at specified path
+    SDL_Surface* loadedSurface = IMG_Load(path.c_str());//SDL_LoadBMP(path.c_str()); //Load image at specified path
     if (loadedSurface == NULL)
         cerr << "Unable to load image " << path << "! SDL_image Error: " << IMG_GetError() << endl;
     else {

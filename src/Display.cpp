@@ -3,7 +3,7 @@
 #include "Controller.hpp"
 
 const int Display::W = 1280;
-const int Display::H = 720;
+const int Display::H = 768;
 const string Display::TITLE = "Random Kill";
 const int Display::FPS = 60;
 const int Display::TICK_PER_FRAME = 1000 / FPS;
@@ -40,12 +40,12 @@ bool Display::initSDL() {
 	} else {
 		if (!SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "1")) //Set texture filtering to linear
 			cout << "Warning: Linear texture filtering not enabled!";
-		gWindow = SDL_CreateWindow(TITLE.c_str(), SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, W, H, SDL_WINDOW_SHOWN | SDL_WINDOW_FULLSCREEN | SDL_WINDOW_BORDERLESS | SDL_WINDOW_INPUT_GRABBED); //Create window
+		gWindow = SDL_CreateWindow(TITLE.c_str(), SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, W, H, SDL_WINDOW_SHOWN /*| SDL_WINDOW_BORDERLESS | SDL_WINDOW_FULLSCREEN | SDL_WINDOW_INPUT_GRABBED*/); //Create window
 		if (gWindow == NULL) {
 			cerr << "Window could not be created! SDL Error: " << SDL_GetError() << endl;
 			success = false;
 		} else {
-			//SDL_SetWindowFullscreen(gWindow, 0);//SDL_WINDOW_FULLSCREEN); //Fullsreen
+			SDL_SetWindowFullscreen(gWindow, SDL_WINDOW_FULLSCREEN);//SDL_WINDOW_FULLSCREEN); //Fullsreen
 			gRenderer = SDL_CreateRenderer(gWindow, -1, SDL_RENDERER_ACCELERATED); //Create renderer for window
 			if (gRenderer == NULL) {
 				cerr << "Renderer could not be created! SDL Error: " << SDL_GetError() << endl;
@@ -68,18 +68,22 @@ bool Display::initSDL() {
 }
 
 void Display::startSDL(IO* io, Controller* c) {
+        vector<Texture*> imgs = io->getImages();
+        vector<TTF_Font*> fnts = io->getFonts();
+        Texture fps("0", fnts[0], gRenderer);
 	SDL_Event e; //Event handler
 	Timer fpsTimer; //The frames per second timer
 	Timer capTimer; //The frames per second cap timer
 	//Timer stepTimer; //Keeps track of time between steps
 	int frameTicks = 0;
 	int countedFPS = 0; //Start counting frames per second
+        float avgFPS = 0;
 	//float timeStep = 0;
 	fpsTimer.start();
 
 	while (!quit) { //While application is running
 		capTimer.start(); //Start cap timer
-		float avgFPS = countedFPS / (fpsTimer.getTicks() / 1000.f); //Calculate and correct fps
+		avgFPS = countedFPS / (fpsTimer.getTicks() / 1000.f); //Calculate and correct fps
 		if (avgFPS > 2000000)
 			avgFPS = 0;
 
@@ -100,10 +104,10 @@ void Display::startSDL(IO* io, Controller* c) {
 		SDL_RenderClear(gRenderer);
 
 		//Render textures
-		io->getImages()[0]->render(10, 100);
-		io->getImages()[1]->render(15, 120);
-		io->getImages()[3]->render(0, 0);
-		Texture fps(to_string(avgFPS), io->getFonts()[0], gRenderer);
+		//imgs[0]->render(10, 100);
+		//imgs[1]->render(15, 120);
+		imgs[2]->render(0, 0);
+		fps.setText(to_string(avgFPS));
 		fps.render(20, 20);
 
 		SDL_RenderPresent(gRenderer); //Update screen

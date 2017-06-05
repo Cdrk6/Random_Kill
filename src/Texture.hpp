@@ -15,6 +15,7 @@ class Texture {
 	Texture(string, TTF_Font*, SDL_Renderer*); //Text based texture
 	~Texture();
 	void free(); //Deallocates texture
+        void setText(string);
 	void setColor(Uint8, Uint8, Uint8); //Set color modulation (RGB)
 	void setBlendMode(SDL_BlendMode); //Set blending
 	void setAlpha(Uint8); //Set alpha modulation
@@ -29,8 +30,6 @@ class Texture {
 	TTF_Font *gFont;
 	int mWidth; //Largeur image
 	int mHeight; //Hauteur image
-	
-	void setText(string);
 };
 
 #endif /* TEXTURE_HPP */
