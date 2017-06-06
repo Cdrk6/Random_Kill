@@ -88,7 +88,7 @@ void Display::startSDL(IO* io, Controller* c) {
         if (avgFPS > 2000000)
             avgFPS = 0;
 
-        handleEvents();
+        handleEvents(c);
 
         timeStep = stepTimer.getTicks() / 1000.f; //Calculate time step
         calculate(timeStep);
@@ -112,7 +112,7 @@ void Display::initResources(IO* io) {
     ents = gameEnts;
 }
 
-void Display::handleEvents() {
+void Display::handleEvents(Controller* c) {
     //c->updateButtonsPressed();
     while (SDL_PollEvent(&e) != 0) { //Handle events on queue
         if (e.type == SDL_QUIT) { //If user requests quit
@@ -134,7 +134,7 @@ void Display::draw() {
     SDL_RenderClear(gRenderer);
 
     //Render all textures
-    //imgs[4]->render(0, 0, 0, 0, W, H);
+    imgs[4]->render(0, 0, 0, 0, W, H);
     for (int i = 0; i < ents.size(); i++)
         ents[i]->draw(gRenderer);
 
@@ -149,7 +149,7 @@ void Display::initMenuEnts() {
 
 void Display::initGameEnts() {
     gameEnts = vector<Entity*>();
-    gameEnts.push_back(new Player(imgs[0]));
+    gameEnts.push_back(new Player(imgs[5]));
 }
 
 void Display::exit() {

@@ -46,7 +46,7 @@ class Display {
 	//Méthodes
 	bool initSDL();
 	void initResources(IO*); //Initialise les ressouces (graphiques...)
-	void handleEvents(); //Gère tous les évenements
+	void handleEvents(Controller*); //Gère tous les évenements
 	void calculate(float); //Calcule tout (déplacements...)
 	void draw(); //Dessine tout
 	void initMenuEnts(); //Initialise les entités du menu
