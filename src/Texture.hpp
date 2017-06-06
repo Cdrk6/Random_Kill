@@ -12,10 +12,10 @@ using namespace std;
 class Texture {
   public:
 	Texture(SDL_Texture*, int, int, SDL_Renderer*); //Image based texture
-	Texture(string, TTF_Font*, SDL_Renderer*); //Text based texture
+	Texture(TTF_Font*, SDL_Renderer*); //Text based texture
 	~Texture();
 	void free(); //Deallocates texture
-        void setText(string);
+	void setText(string);
 	void setColor(Uint8, Uint8, Uint8); //Set color modulation (RGB)
 	void setBlendMode(SDL_BlendMode); //Set blending
 	void setAlpha(Uint8); //Set alpha modulation
