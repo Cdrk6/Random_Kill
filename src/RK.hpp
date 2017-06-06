@@ -6,9 +6,7 @@
 #include "IO.hpp"
 #include "Controller.hpp"
 #include "Sound.hpp"
-//#include "State.hpp"
 #include "Stats.hpp"
-#include "View/View.hpp"
 #include "Map.hpp"
 #include <vector>
 #include <iostream>
@@ -23,13 +21,7 @@ class RK {
   private:
 	Display *display;
 	Controller *controller;
-	Map *map;
 	IO *io;
-	View myView;
-	vector<Entity> myEntity;
-	Sound mySound;
-	//State myState;
-	Stats myStats;
 };
 
 #endif

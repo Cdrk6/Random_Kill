@@ -1,6 +1,5 @@
 #include "Display.hpp"
-#include "IO.hpp"
-#include "Controller.hpp"
+#include "Entity/Player.hpp"
 
 const int Display::W = 1280;
 const int Display::H = 768;
@@ -26,6 +25,12 @@ Display::~Display() {
     TTF_Quit();
     IMG_Quit();
     SDL_Quit();
+    
+    //Destroy entities
+    for(int i = 0; i < menuEnts.size(); i++)
+        delete menuEnts[i];
+    for(int i = 0; i < gameEnts.size(); i++)
+        delete gameEnts[i];
 }
 
 SDL_Renderer* Display::getRenderer() {
@@ -68,17 +73,13 @@ bool Display::initSDL() {
 }
 
 void Display::startSDL(IO* io, Controller* c) {
-    vector<Texture*> imgs = io->getImages();
-    vector<TTF_Font*> fnts = io->getFonts();
-    Texture fps(fnts[0], gRenderer);
-    SDL_Event e; //Event handler
+    initResources(io);
     Timer fpsTimer; //The frames per second timer
     Timer capTimer; //The frames per second cap timer
-    //Timer stepTimer; //Keeps track of time between steps
+    Timer stepTimer; //Keeps track of time between steps
     int frameTicks = 0;
     int countedFPS = 0; //Start counting frames per second
-    float avgFPS = 0;
-    //float timeStep = 0;
+    float timeStep = 0;
     fpsTimer.start();
 
     while (!quit) { //While application is running
@@ -87,36 +88,68 @@ void Display::startSDL(IO* io, Controller* c) {
         if (avgFPS > 2000000)
             avgFPS = 0;
 
-        //c->updateButtonsPressed();
-        while (SDL_PollEvent(&e) != 0) { //Handle events on queue
-            if (e.type == SDL_QUIT) { //If user requests quit
-                quit = true;
-            }
+        handleEvents();
 
-            //dot.handleEvent(e); //Handle input for the dot
-        }
-        //float timeStep = stepTimer.getTicks() / 1000.f; //Calculate time step
-        //dot.move(timeStep); //Move for time step
-        //stepTimer.start(); //Restart step timer
+        timeStep = stepTimer.getTicks() / 1000.f; //Calculate time step
+        calculate(timeStep);
+        stepTimer.start(); //Restart step timer
 
-        //Clear screen
-        SDL_SetRenderDrawColor(gRenderer, 0, 0, 0, 0);
-        SDL_RenderClear(gRenderer);
-
-        //Render textures
-        //imgs[0]->render(10, 100);
-        //imgs[1]->render(15, 120);
-        imgs[3]->render(0, 0);
-        fps.setText(to_string(avgFPS));
-        fps.render(20, 20);
+        draw();
 
         SDL_RenderPresent(gRenderer); //Update screen
         ++countedFPS; //Real FPS
         frameTicks = capTimer.getTicks();
-        if (frameTicks < TICK_PER_FRAME) { //If frame finished early
+        if (frameTicks < TICK_PER_FRAME) //If frame finished early
             SDL_Delay(TICK_PER_FRAME - frameTicks); //Wait remaining time
-        }
     }
+}
+
+void Display::initResources(IO* io) {
+    imgs = io->getImages();
+    fnts = io->getFonts();
+    initMenuEnts();
+    initGameEnts();
+    ents = gameEnts;
+}
+
+void Display::handleEvents() {
+    //c->updateButtonsPressed();
+    while (SDL_PollEvent(&e) != 0) { //Handle events on queue
+        if (e.type == SDL_QUIT) { //If user requests quit
+            quit = true;
+        }
+
+        //dot.handleEvent(e); //Handle input for the dot
+    }
+}
+
+void Display::calculate(float timeStep) {
+    for (int i = 0; i < ents.size(); i++)
+        ents[i]->calculate(timeStep);
+}
+
+void Display::draw() {
+    //Clear screen
+    SDL_SetRenderDrawColor(gRenderer, 0, 0, 0, 0);
+    SDL_RenderClear(gRenderer);
+
+    //Render all textures
+    //imgs[4]->render(0, 0, 0, 0, W, H);
+    for (int i = 0; i < ents.size(); i++)
+        ents[i]->draw(gRenderer);
+
+    //imgs[0]->render(10, 100);
+    //imgs[1]->render(15, 120);
+    Texture fps(20, 20, to_string(avgFPS), fnts[0], gRenderer);
+}
+
+void Display::initMenuEnts() {
+    menuEnts = vector<Entity*>();
+}
+
+void Display::initGameEnts() {
+    gameEnts = vector<Entity*>();
+    gameEnts.push_back(new Player(imgs[0]));
 }
 
 void Display::exit() {

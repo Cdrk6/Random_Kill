@@ -7,10 +7,12 @@ Texture::Texture(SDL_Texture* texture, int w, int h, SDL_Renderer* renderer) {
     mHeight = h;
 }
 
-Texture::Texture(TTF_Font* font, SDL_Renderer* renderer) {
+Texture::Texture(int x, int y, string txt, TTF_Font* font, SDL_Renderer* renderer) {
     gRenderer = renderer;
     gFont = font;
     mTexture = NULL;
+    setText(txt);
+    render(x, y);
 }
 
 Texture::~Texture() {

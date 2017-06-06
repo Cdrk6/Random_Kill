@@ -45,10 +45,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/src/Sound.o \
 	${OBJECTDIR}/src/Stats.o \
 	${OBJECTDIR}/src/Texture.o \
-	${OBJECTDIR}/src/Timer.o \
-	${OBJECTDIR}/src/View/GameView.o \
-	${OBJECTDIR}/src/View/MenuView.o \
-	${OBJECTDIR}/src/View/View.o
+	${OBJECTDIR}/src/Timer.o
 
 
 # C Compiler Flags
@@ -129,21 +126,6 @@ ${OBJECTDIR}/src/Timer.o: src/Timer.cpp
 	${MKDIR} -p ${OBJECTDIR}/src
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/Timer.o src/Timer.cpp
-
-${OBJECTDIR}/src/View/GameView.o: src/View/GameView.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src/View
-	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/View/GameView.o src/View/GameView.cpp
-
-${OBJECTDIR}/src/View/MenuView.o: src/View/MenuView.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src/View
-	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/View/MenuView.o src/View/MenuView.cpp
-
-${OBJECTDIR}/src/View/View.o: src/View/View.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src/View
-	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/View/View.o src/View/View.cpp
 
 # Subprojects
 .build-subprojects:

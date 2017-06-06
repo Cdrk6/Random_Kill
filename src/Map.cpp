@@ -113,6 +113,6 @@ void start() {
     close();
 }
 
-Map::Map() {
+Map::Map(Texture* t) : Entity(0, 0, t){
 }
 

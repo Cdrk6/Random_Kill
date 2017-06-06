@@ -7,7 +7,7 @@ void start();
 
 class Map : public Entity {
   public:
-	Map();
+	Map(Texture* t);
 
   private:
 

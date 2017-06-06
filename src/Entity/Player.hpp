@@ -1,13 +1,17 @@
 #ifndef PLAYER_HPP
 #define PLAYER_HPP
 
+#include "../Texture.hpp"
 #include "Entity.hpp"
 
-class Player : public Entity{
-public:
-	Player();
+class Player : public Entity {
+  public:
+	Player(Texture*);
 	~Player();
-private:
+	void draw(SDL_Renderer*);
+	void calculate(float);
+
+  private:
 
 };
 

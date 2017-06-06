@@ -50,11 +50,11 @@ vector<string>* IO::findAllFiles(const string &p) {
 Texture* IO::loadTexture(const string &path) {
     Texture* texture = NULL; //The final texture
     SDL_Texture* sdlTexture = NULL; //The SDL texture
-    SDL_Surface* loadedSurface = IMG_Load(path.c_str());//SDL_LoadBMP(path.c_str()); //Load image at specified path
+    SDL_Surface* loadedSurface = SDL_LoadBMP(path.c_str());//IMG_Load(path.c_str()); //Load image at specified path
     if (loadedSurface == NULL)
         cerr << "Unable to load image " << path << "! SDL_image Error: " << IMG_GetError() << endl;
     else {
-        //SDL_SetColorKey(loadedSurface, SDL_TRUE, SDL_MapRGB(loadedSurface->format, 0xFF, 0xFF, 0xFF)); //Color key image
+        SDL_SetColorKey(loadedSurface, SDL_TRUE, SDL_MapRGB(loadedSurface->format, 0xFF, 0, 0xFF)); //Color key image
         sdlTexture = SDL_CreateTextureFromSurface(gRenderer, loadedSurface); //Create texture from surface pixels
         if (sdlTexture == NULL)
             cerr << "Unable to create texture from " << path << "! SDL Error: " << SDL_GetError() << endl;
