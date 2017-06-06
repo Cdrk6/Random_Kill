@@ -20,7 +20,8 @@ class Texture {
 	void setBlendMode(SDL_BlendMode); //Set blending
 	void setAlpha(Uint8); //Set alpha modulation
 	void render(int, int, SDL_Rect*, double, SDL_Point*, SDL_RendererFlip rf = SDL_FLIP_NONE); //Renders texture at given point
-	void render(int, int, SDL_Rect* = NULL);
+	void render(int, int, int, int, int, int);
+	void render(int, int);
 	int getWidth(); //Gets image width
 	int getHeight(); //Gets image height
 
@@ -30,6 +31,8 @@ class Texture {
 	TTF_Font *gFont;
 	int mWidth; //Largeur image
 	int mHeight; //Hauteur image
+	
+	SDL_Rect getRect(int, int, int, int); //Lel
 };
 
 #endif /* TEXTURE_HPP */

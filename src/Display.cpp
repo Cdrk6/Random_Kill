@@ -106,7 +106,7 @@ void Display::startSDL(IO* io, Controller* c) {
         //Render textures
         //imgs[0]->render(10, 100);
         //imgs[1]->render(15, 120);
-        imgs[2]->render(0, 0);
+        imgs[3]->render(0, 0);
         fps.setText(to_string(avgFPS));
         fps.render(20, 20);
 

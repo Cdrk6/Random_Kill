@@ -17,8 +17,9 @@ Texture::~Texture() {
     free(); //Deallocate
 }
 
+//Free texture if it exists
+
 void Texture::free() {
-    //Free texture if it exists
     if (mTexture != NULL) {
         SDL_DestroyTexture(mTexture);
         mTexture = NULL;
@@ -66,14 +67,15 @@ void Texture::render(int x, int y, SDL_Rect* clip, double angle, SDL_Point* cent
     SDL_RenderCopyEx(gRenderer, mTexture, clip, &renderQuad, angle, center, flip); //Render to screen
 }
 
-void Texture::render(int x, int y, SDL_Rect* clip) { //Set rendering space and render to screen SDL_Rect 
-    SDL_Rect renderQuad = {x, y, mWidth, mHeight}; //Set clip rendering dimensions i
-    if (clip != NULL) {
-        renderQuad.w = clip->w;
-        renderQuad.h = clip->h;
-    }
-    //Render to screen 
-    SDL_RenderCopy(gRenderer, mTexture, clip, &renderQuad);
+void Texture::render(int x, int y, int x2, int y2, int w2, int h2) {
+    SDL_Rect renderQuad = getRect(x, y, w2, h2); //Set rendering space and render to screen SDL_Rect 
+    SDL_Rect clip = getRect(x2, y2, w2, h2); //Set clip rendering dimensions
+    SDL_RenderCopy(gRenderer, mTexture, &clip, &renderQuad); //Render to screen 
+}
+
+void Texture::render(int x, int y) {
+    SDL_Rect renderQuad = getRect(x, y, mWidth, mHeight);
+    SDL_RenderCopy(gRenderer, mTexture, NULL, &renderQuad); //Render to screen 
 }
 
 int Texture::getWidth() {
@@ -82,4 +84,9 @@ int Texture::getWidth() {
 
 int Texture::getHeight() {
     return mHeight;
+}
+
+SDL_Rect Texture::getRect(int x, int y, int w, int h) {
+    SDL_Rect rekt = {x, y, w, h};
+    return rekt;
 }
