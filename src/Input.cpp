@@ -252,6 +252,7 @@ int Input::getIndexOfCommand() {
 }
 
 void Input::updateButtonsPressed() {
+    /*
     //For now we will consider we can only have ONE button pressed at a time.
     int action = getIndexOfCommand();
     buttonsPressed = new (nothrow) JoystickButton[1];
@@ -262,6 +263,8 @@ void Input::updateButtonsPressed() {
         }
     }
     buttonsPressed = NULL;
+    */
+    
 }
 
 
