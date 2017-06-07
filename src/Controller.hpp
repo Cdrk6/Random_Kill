@@ -1,9 +1,11 @@
-#ifndef INPUT_HPP
-#define INPUT_HPP
+#ifndef CONTROLLER_HPP
+#define CONTROLLER_HPP
 
+#include "Entity/Entity.hpp"
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <vector>
 #include <type_traits>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_joystick.h>
@@ -96,7 +98,7 @@ public:
 
     bool isJoystickModeEnabled();
     JoystickButton* getButtonsPressed();
-	void updateButtonsPressed();
+	void updateButtonsPressed(vector<Entity*> ents);
 
 private:
     GameMode gameControlType;
@@ -109,7 +111,7 @@ private:
     
     void configureJoystick(bool defaultConfig, bool NESType);
     void initJoystickButtons();
-    int getIndexOfCommand(bool init);
+    int getIndexOfCommand(bool init, vector<Entity*> ents);
 };
 
 /**

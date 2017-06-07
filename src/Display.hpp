@@ -6,10 +6,12 @@
 #include "Controller.hpp"
 #include "Entity/Entity.hpp"
 #include "Entity/Player.hpp"
+#include "Entity/Map.hpp"
 #include <string>
 #include <iostream>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
+#include <SDL2/SDL_mixer.h>
 
 using namespace std;
 

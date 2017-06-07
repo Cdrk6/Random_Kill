@@ -1,5 +1,4 @@
 #include "Display.hpp"
-#include "Entity/Player.hpp"
 
 const int Display::W = 1280;
 const int Display::H = 768;
@@ -25,11 +24,11 @@ Display::~Display() {
     TTF_Quit();
     IMG_Quit();
     SDL_Quit();
-    
+
     //Destroy entities
-    for(int i = 0; i < menuEnts.size(); i++)
+    for (int i = 0; i < menuEnts.size(); i++)
         delete menuEnts[i];
-    for(int i = 0; i < gameEnts.size(); i++)
+    for (int i = 0; i < gameEnts.size(); i++)
         delete gameEnts[i];
 }
 
@@ -39,7 +38,7 @@ SDL_Renderer* Display::getRenderer() {
 
 bool Display::initSDL() {
     bool success = true; //Initialization flag
-    if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_JOYSTICK) < 0) { //Initialize SDL
+    if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO | SDL_INIT_JOYSTICK) < 0) { //Initialize SDL
         cerr << "SDL could not initialize! SDL Error: " << SDL_GetError() << endl;
         success = false;
     } else {
@@ -50,7 +49,7 @@ bool Display::initSDL() {
             cerr << "Window could not be created! SDL Error: " << SDL_GetError() << endl;
             success = false;
         } else {
-            SDL_SetWindowFullscreen(gWindow, SDL_WINDOW_FULLSCREEN); //SDL_WINDOW_FULLSCREEN); //Fullsreen
+            //SDL_SetWindowFullscreen(gWindow, SDL_WINDOW_FULLSCREEN); //SDL_WINDOW_FULLSCREEN); //Fullsreen
             gRenderer = SDL_CreateRenderer(gWindow, -1, SDL_RENDERER_ACCELERATED); //Create renderer for window
             if (gRenderer == NULL) {
                 cerr << "Renderer could not be created! SDL Error: " << SDL_GetError() << endl;
@@ -64,6 +63,11 @@ bool Display::initSDL() {
                 }
                 if (TTF_Init() == -1) { //Initialize SDL_ttf
                     cerr << "SDL_ttf could not initialize! SDL_ttf Error: " << TTF_GetError() << endl;
+                    success = false;
+                }
+                //Initialize SDL_mixer 
+                if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) < 0) {
+                    printf("SDL_mixer could not initialize! SDL_mixer Error: %s\n", Mix_GetError());
                     success = false;
                 }
             }
@@ -113,12 +117,10 @@ void Display::initResources(IO* io) {
 }
 
 void Display::handleEvents(Controller* c) {
-    //c->updateButtonsPressed();
+    c->updateButtonsPressed(ents);
     while (SDL_PollEvent(&e) != 0) { //Handle events on queue
-        if (e.type == SDL_QUIT) { //If user requests quit
+        if (e.type == SDL_QUIT) //If user requests quit
             quit = true;
-        }
-
         //dot.handleEvent(e); //Handle input for the dot
     }
 }
@@ -134,7 +136,6 @@ void Display::draw() {
     SDL_RenderClear(gRenderer);
 
     //Render all textures
-    imgs[4]->render(0, 0, 0, 0, W, H);
     for (int i = 0; i < ents.size(); i++)
         ents[i]->draw(gRenderer);
 
@@ -149,7 +150,9 @@ void Display::initMenuEnts() {
 
 void Display::initGameEnts() {
     gameEnts = vector<Entity*>();
-    gameEnts.push_back(new Player(imgs[5]));
+    Map* m = new Map(0, 0, imgs[4]);
+    gameEnts.push_back(m);
+    gameEnts.push_back(new Player(20, 20, imgs[5], m));
 }
 
 void Display::exit() {

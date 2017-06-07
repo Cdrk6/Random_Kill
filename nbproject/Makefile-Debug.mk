@@ -38,9 +38,9 @@ OBJECTFILES= \
 	${OBJECTDIR}/src/Controller.o \
 	${OBJECTDIR}/src/Display.o \
 	${OBJECTDIR}/src/Entity/Entity.o \
+	${OBJECTDIR}/src/Entity/Map.o \
 	${OBJECTDIR}/src/Entity/Player.o \
 	${OBJECTDIR}/src/IO.o \
-	${OBJECTDIR}/src/Map.o \
 	${OBJECTDIR}/src/RK.o \
 	${OBJECTDIR}/src/Sound.o \
 	${OBJECTDIR}/src/Stats.o \
@@ -70,7 +70,7 @@ LDLIBSOPTIONS=
 
 ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/random_kill: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
-	${LINK.cc} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/random_kill ${OBJECTFILES} ${LDLIBSOPTIONS} -lSDL2 -lSDL2main -lSDL2_image -lSDL2_ttf -lboost_system -lboost_filesystem
+	${LINK.cc} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/random_kill ${OBJECTFILES} ${LDLIBSOPTIONS} -lSDL2 -lSDL2main -lSDL2_image -lSDL2_ttf -lSDL2_mixer -lboost_system -lboost_filesystem
 
 ${OBJECTDIR}/src/Controller.o: src/Controller.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src
@@ -87,6 +87,11 @@ ${OBJECTDIR}/src/Entity/Entity.o: src/Entity/Entity.cpp
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/Entity/Entity.o src/Entity/Entity.cpp
 
+${OBJECTDIR}/src/Entity/Map.o: src/Entity/Map.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/Entity
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/Entity/Map.o src/Entity/Map.cpp
+
 ${OBJECTDIR}/src/Entity/Player.o: src/Entity/Player.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/Entity
 	${RM} "$@.d"
@@ -96,11 +101,6 @@ ${OBJECTDIR}/src/IO.o: src/IO.cpp
 	${MKDIR} -p ${OBJECTDIR}/src
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/IO.o src/IO.cpp
-
-${OBJECTDIR}/src/Map.o: src/Map.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src
-	${RM} "$@.d"
-	$(COMPILE.cc) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/Map.o src/Map.cpp
 
 ${OBJECTDIR}/src/RK.o: src/RK.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src

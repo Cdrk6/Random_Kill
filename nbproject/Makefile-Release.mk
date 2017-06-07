@@ -38,9 +38,9 @@ OBJECTFILES= \
 	${OBJECTDIR}/src/Controller.o \
 	${OBJECTDIR}/src/Display.o \
 	${OBJECTDIR}/src/Entity/Entity.o \
+	${OBJECTDIR}/src/Entity/Map.o \
 	${OBJECTDIR}/src/Entity/Player.o \
 	${OBJECTDIR}/src/IO.o \
-	${OBJECTDIR}/src/Map.o \
 	${OBJECTDIR}/src/RK.o \
 	${OBJECTDIR}/src/Sound.o \
 	${OBJECTDIR}/src/Stats.o \
@@ -87,6 +87,11 @@ ${OBJECTDIR}/src/Entity/Entity.o: src/Entity/Entity.cpp
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/Entity/Entity.o src/Entity/Entity.cpp
 
+${OBJECTDIR}/src/Entity/Map.o: src/Entity/Map.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/Entity
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/Entity/Map.o src/Entity/Map.cpp
+
 ${OBJECTDIR}/src/Entity/Player.o: src/Entity/Player.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/Entity
 	${RM} "$@.d"
@@ -96,11 +101,6 @@ ${OBJECTDIR}/src/IO.o: src/IO.cpp
 	${MKDIR} -p ${OBJECTDIR}/src
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/IO.o src/IO.cpp
-
-${OBJECTDIR}/src/Map.o: src/Map.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src
-	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/Map.o src/Map.cpp
 
 ${OBJECTDIR}/src/RK.o: src/RK.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src

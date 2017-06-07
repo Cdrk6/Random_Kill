@@ -8,7 +8,7 @@
       <itemPath>src/Display.hpp</itemPath>
       <itemPath>src/Entity/Entity.hpp</itemPath>
       <itemPath>src/IO.hpp</itemPath>
-      <itemPath>src/Map.hpp</itemPath>
+      <itemPath>src/Entity/Map.hpp</itemPath>
       <itemPath>src/Entity/Player.hpp</itemPath>
       <itemPath>src/RK.hpp</itemPath>
       <itemPath>src/Sound.hpp</itemPath>
@@ -42,7 +42,7 @@
       <itemPath>src/Display.cpp</itemPath>
       <itemPath>src/Entity/Entity.cpp</itemPath>
       <itemPath>src/IO.cpp</itemPath>
-      <itemPath>src/Map.cpp</itemPath>
+      <itemPath>src/Entity/Map.cpp</itemPath>
       <itemPath>src/Entity/Player.cpp</itemPath>
       <itemPath>src/RK.cpp</itemPath>
       <itemPath>src/Sound.cpp</itemPath>
@@ -80,7 +80,7 @@
           <commandLine>-std=c++11</commandLine>
         </ccTool>
         <linkerTool>
-          <commandLine>-lSDL2 -lSDL2main -lSDL2_image -lSDL2_ttf -lboost_system -lboost_filesystem</commandLine>
+          <commandLine>-lSDL2 -lSDL2main -lSDL2_image -lSDL2_ttf -lSDL2_mixer -lboost_system -lboost_filesystem</commandLine>
         </linkerTool>
       </compileType>
       <item path="res/data/Controller_Default_Config" ex="false" tool="3" flavor2="0">
@@ -113,6 +113,10 @@
       </item>
       <item path="src/Entity/Entity.hpp" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="src/Entity/Map.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/Entity/Map.hpp" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="src/Entity/Player.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/Entity/Player.hpp" ex="false" tool="3" flavor2="0">
@@ -120,10 +124,6 @@
       <item path="src/IO.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/IO.hpp" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="src/Map.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="src/Map.hpp" ex="false" tool="3" flavor2="0">
       </item>
       <item path="src/RK.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -196,6 +196,10 @@
       </item>
       <item path="src/Entity/Entity.hpp" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="src/Entity/Map.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/Entity/Map.hpp" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="src/Entity/Player.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/Entity/Player.hpp" ex="false" tool="3" flavor2="0">
@@ -203,10 +207,6 @@
       <item path="src/IO.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/IO.hpp" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="src/Map.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="src/Map.hpp" ex="false" tool="3" flavor2="0">
       </item>
       <item path="src/RK.cpp" ex="false" tool="1" flavor2="0">
       </item>
