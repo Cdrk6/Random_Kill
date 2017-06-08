@@ -7,9 +7,6 @@
 
 class Player : public Entity {
   public:
-	//static const int C;
-	//static const int NSTEP; //Nombre d'execution de calculate par déplacement
-	
 	Player(int, int, Texture*, Map*);
 	~Player();
 	void draw(SDL_Renderer*) override;
@@ -26,6 +23,7 @@ class Player : public Entity {
 	int moving = 0;
 	float time = 0;
 	bool walking = false;
+	bool stop = true;
 };
 
 #endif /* PLAYER_HPP */
