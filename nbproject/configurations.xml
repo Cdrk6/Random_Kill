@@ -8,7 +8,13 @@
       <itemPath>src/Display.hpp</itemPath>
       <itemPath>src/Entity/Entity.hpp</itemPath>
       <itemPath>src/IO.hpp</itemPath>
+<<<<<<< HEAD
+      <itemPath>src/Map.hpp</itemPath>
+      <itemPath>src/View/MenuView.hpp</itemPath>
+      <itemPath>src/Entity/NPC.hpp</itemPath>
+=======
       <itemPath>src/Entity/Map.hpp</itemPath>
+>>>>>>> 2a390ae016e4a5004d3c802c80cc172ae9891ab9
       <itemPath>src/Entity/Player.hpp</itemPath>
       <itemPath>src/RK.hpp</itemPath>
       <itemPath>src/Sound.hpp</itemPath>
@@ -42,7 +48,13 @@
       <itemPath>src/Display.cpp</itemPath>
       <itemPath>src/Entity/Entity.cpp</itemPath>
       <itemPath>src/IO.cpp</itemPath>
+<<<<<<< HEAD
+      <itemPath>src/Map.cpp</itemPath>
+      <itemPath>src/View/MenuView.cpp</itemPath>
+      <itemPath>src/Entity/NPC.cpp</itemPath>
+=======
       <itemPath>src/Entity/Map.cpp</itemPath>
+>>>>>>> 2a390ae016e4a5004d3c802c80cc172ae9891ab9
       <itemPath>src/Entity/Player.cpp</itemPath>
       <itemPath>src/RK.cpp</itemPath>
       <itemPath>src/Sound.cpp</itemPath>
@@ -65,7 +77,8 @@
   <sourceRootList>
     <Elem>res/data</Elem>
     <Elem>res/fonts</Elem>
-    <Elem>res/images</Elem>
+    <Elem>res/imagp
+es</Elem>
   </sourceRootList>
   <projectmakefile>Random_Kill-Makefile.mk</projectmakefile>
   <confs>
@@ -113,9 +126,15 @@
       </item>
       <item path="src/Entity/Entity.hpp" ex="false" tool="3" flavor2="0">
       </item>
+<<<<<<< HEAD
+      <item path="src/Entity/NPC.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/Entity/NPC.hpp" ex="false" tool="3" flavor2="0">
+=======
       <item path="src/Entity/Map.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/Entity/Map.hpp" ex="false" tool="3" flavor2="0">
+>>>>>>> 2a390ae016e4a5004d3c802c80cc172ae9891ab9
       </item>
       <item path="src/Entity/Player.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -196,9 +215,15 @@
       </item>
       <item path="src/Entity/Entity.hpp" ex="false" tool="3" flavor2="0">
       </item>
+<<<<<<< HEAD
+      <item path="src/Entity/NPC.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/Entity/NPC.hpp" ex="false" tool="3" flavor2="0">
+=======
       <item path="src/Entity/Map.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/Entity/Map.hpp" ex="false" tool="3" flavor2="0">
+>>>>>>> 2a390ae016e4a5004d3c802c80cc172ae9891ab9
       </item>
       <item path="src/Entity/Player.cpp" ex="false" tool="1" flavor2="0">
       </item>
