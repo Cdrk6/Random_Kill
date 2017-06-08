@@ -6,11 +6,10 @@
 void start();
 
 class Map : public Entity {
-public:
-    Map();
-    Map(const Map& orig);
-    virtual ~Map();
-private:
+  public:
+	Map();
+
+  private:
 
 };
 

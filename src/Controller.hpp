@@ -89,14 +89,15 @@ JoystickButton& operator++(JoystickButton& but);
 JoystickButton operator++(JoystickButton& but, int);
 
 
-class Input {
+class Controller {
 public:
-    Input(int timeout, int nbButtonsUsed); //Max time (seconds) searching input devices
+    Controller(int timeout, int nbButtonsUsed); //Max time (seconds) searching input devices
     //Input(const Input& orig);
-    virtual ~Input();
+    virtual ~Controller();
 
     bool isJoystickModeEnabled();
     JoystickButton* getButtonsPressed();
+	void updateButtonsPressed();
 
 private:
     GameMode gameControlType;
@@ -109,9 +110,7 @@ private:
     
     void configureJoystick(bool defaultConfig, bool NESType);
     void initJoystickButtons();
-    int getIndexOfCommand();
-    void updateButtonsPressed();
-
+    int getIndexOfCommand(bool init);
 };
 
 /**

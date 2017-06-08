@@ -4,25 +4,29 @@
 #include "Display.hpp"
 #include "Entity/Entity.hpp"
 #include "IO.hpp"
-#include "Input.hpp"
+#include "Controller.hpp"
 #include "Sound.hpp"
 //#include "State.hpp"
 #include "Stats.hpp"
 #include "View/View.hpp"
-
+#include "Map.hpp"
 #include <vector>
 #include <iostream>
+
+using namespace std;
 
 class RK {
   public:
 	RK();
 	~RK();
+	IO* getIO();
   private:
 	Display *display;
-	Input *input;
+	Controller *controller;
+	Map *map;
+	IO *io;
 	View myView;
-	IO myIO;
-	std::vector< Entity > myEntity;
+	vector<Entity> myEntity;
 	Sound mySound;
 	//State myState;
 	Stats myStats;

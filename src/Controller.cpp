@@ -1,6 +1,6 @@
-#include "Input.hpp"
+#include "Controller.hpp"
 
-Input::Input(int timeout, int nbButtonsUsed) {
+Controller::Controller(int timeout, int nbButtonsUsed) {
     //SDL Joystick initialization
     if (SDL_Init(SDL_INIT_JOYSTICK) != 0) {
         fprintf(stdout, "SDL Initialization failure : %s\n", SDL_GetError());
@@ -35,12 +35,12 @@ Input::Input(int timeout, int nbButtonsUsed) {
 
     //Joystick Buttons initialization
     if (isJoystickModeEnabled())
-        Input::initJoystickButtons();
+        Controller::initJoystickButtons();
 }
 
 //Input::Input(const Input& but) {}
 
-Input::~Input() {
+Controller::~Controller() {
     if (isJoystickModeEnabled())
         SDL_JoystickClose(myJoystick);
     if (myJoystickConfig != NULL)
@@ -53,23 +53,23 @@ Input::~Input() {
         delete keysPressed;
 }
 
-bool Input::isJoystickModeEnabled() {
+bool Controller::isJoystickModeEnabled() {
     return (gameControlType == JOYSTICK);
 }
 
-JoystickButton* Input::getButtonsPressed() {
+JoystickButton* Controller::getButtonsPressed() {
     return buttonsPressed;
 }
 
 
-void Input::initJoystickButtons() {
+void Controller::initJoystickButtons() {
     int nbButtonsConfigured;
     ifstream file;
-    file.open("res/NES_Default_Config");
+    file.open("res/data/NES_Default_Config");
 
     //Error in file opening
     if (!file.is_open()) {
-        cerr << "Error : res/NES_Default_Config did not open." << endl;
+        cerr << "Error : res/data/NES_Default_Config did not open." << endl;
         gameControlType = KEYBOARD;
         exit(-1);
     }
@@ -77,7 +77,7 @@ void Input::initJoystickButtons() {
     //Case : The file is empty
     if (file.peek() == std::ifstream::traits_type::eof()) {
         cout << "File is empty." << endl;
-        Input::configureJoystick(true, true);
+        Controller::configureJoystick(true, true);
     }
 
     file.clear();
@@ -87,7 +87,7 @@ void Input::initJoystickButtons() {
     //Case : The default config is not sufficient for the wanted one
     if (nbButtonsConfigured < myNbButtonsUsed) {
         cout << "File has not enough configurations." << endl;
-        Input::configureJoystick(true, true);
+        Controller::configureJoystick(true, true);
     }
 
 
@@ -116,7 +116,7 @@ void Input::initJoystickButtons() {
     file.close();
 }
 
-void Input::configureJoystick(bool defaultConfig, bool NESType) {
+void Controller::configureJoystick(bool defaultConfig, bool NESType) {
     //Error in joystick connection
     if (!isJoystickModeEnabled()) {
         cerr << "The Joystick can not be configured if it is not connected." << endl;
@@ -128,14 +128,14 @@ void Input::configureJoystick(bool defaultConfig, bool NESType) {
 
     if (defaultConfig) {
         if (NESType)
-            file.open("res/NES_Default_Config", ios::out | ios::trunc);
+            file.open("res/data/NES_Default_Config", ios::out | ios::trunc);
         else
-            file.open("res/Controller_Default_Config", ios::out | ios::trunc);
+            file.open("res/data/Controller_Default_Config", ios::out | ios::trunc);
     } else {
         if (NESType)
-            file.open("res/NES_Perso_Config", ios::out | ios::trunc);
+            file.open("res/data/NES_Perso_Config", ios::out | ios::trunc);
         else
-            file.open("res/Controller_Perso_Config", ios::out | ios::trunc);
+            file.open("res/data/Controller_Perso_Config", ios::out | ios::trunc);
     }
 
     file << myNbButtonsUsed << endl;
@@ -158,7 +158,7 @@ void Input::configureJoystick(bool defaultConfig, bool NESType) {
         exit(-1);
     }
 
-    TTF_Font* font = TTF_OpenFont("res/typewriter.ttf", 24);
+    TTF_Font* font = TTF_OpenFont("res/fonts/arial_narrow_7.ttf", 100);
     if (!font) {
         cout << "Font failed loading." << endl;
         exit(-1);
@@ -196,7 +196,7 @@ void Input::configureJoystick(bool defaultConfig, bool NESType) {
         SDL_RenderPresent(renderer);
         
         retry = false;
-        i = getIndexOfCommand();
+        i = getIndexOfCommand(true);
         
         for (int j = 0; j < (int)but; ++j) {
             if(temp[j] == i) {
@@ -224,10 +224,13 @@ void Input::configureJoystick(bool defaultConfig, bool NESType) {
     TTF_CloseFont(font);
 }
 
-int Input::getIndexOfCommand() {
+int Controller::getIndexOfCommand(bool init) {
     SDL_Event event;
     
-    SDL_WaitEvent(&event);
+	if(init)
+		SDL_WaitEvent(&event);
+	else
+		SDL_PollEvent(&event);
     
     if (event.type == SDL_JOYHATMOTION && event.jhat.value == 0)
         return -1;
@@ -251,10 +254,14 @@ int Input::getIndexOfCommand() {
     return -1;
 }
 
+<<<<<<< HEAD:src/Input.cpp
 void Input::updateButtonsPressed() {
     /*
+=======
+void Controller::updateButtonsPressed() {
+>>>>>>> 99082e5e747a494b117ba7d9b893a0770c2d5105:src/Controller.cpp
     //For now we will consider we can only have ONE button pressed at a time.
-    int action = getIndexOfCommand();
+    int action = getIndexOfCommand(false);
     buttonsPressed = new (nothrow) JoystickButton[1];
     for (JoystickButton but = JoystickButton::UP; (int)but < myNbButtonsUsed; ++but) {
         if (action == myJoystickConfig[(int)but]) {
@@ -266,7 +273,6 @@ void Input::updateButtonsPressed() {
     */
     
 }
-
 
 
 /******************************* Enum operations ******************************/

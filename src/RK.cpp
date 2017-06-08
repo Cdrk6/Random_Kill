@@ -1,19 +1,21 @@
 #include "RK.hpp"
 
-using namespace std;
-
 RK::RK() {
-    input = new Input(DEFAULT_TIMEOUT, DEFAULT_NB_BUTTONS_USED);
+    controller = NULL;//new Controller(DEFAULT_TIMEOUT, DEFAULT_NB_BUTTONS_USED);
     display = new Display();
+    io = new IO(display->getRenderer());
+    display->startSDL(io, controller);
 }
 
 RK::~RK() {
-    delete input;
+    delete controller;
+    delete io;
     delete display;
 }
 
 int main(int argc, char* args[]) {
-    cout << "RandomKill - V pre-alpha\n";
+    cout << "RandomKill - V pre-alpha" << endl;
     RK rk;
+    //start();
     return 0;
 }
