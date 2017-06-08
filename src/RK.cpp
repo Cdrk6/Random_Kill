@@ -1,7 +1,7 @@
 #include "RK.hpp"
 
 RK::RK() {
-    controller = NULL;//new Controller(DEFAULT_TIMEOUT, DEFAULT_NB_BUTTONS_USED);
+    controller = new Controller(DEFAULT_TIMEOUT, DEFAULT_NB_BUTTONS_USED);
     display = new Display();
     io = new IO(display->getRenderer());
     display->startSDL(io, controller);

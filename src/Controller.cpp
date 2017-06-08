@@ -61,15 +61,14 @@ JoystickButton* Controller::getButtonsPressed() {
     return buttonsPressed;
 }
 
-
 void Controller::initJoystickButtons() {
     int nbButtonsConfigured;
     ifstream file;
-    file.open("res/data/NES_Default_Config");
+    file.open("res/controller/NES_Default_Config");
 
     //Error in file opening
     if (!file.is_open()) {
-        cerr << "Error : res/data/NES_Default_Config did not open." << endl;
+        cerr << "Error : res/controller/NES_Default_Config did not open." << endl;
         gameControlType = KEYBOARD;
         exit(-1);
     }
@@ -100,7 +99,7 @@ void Controller::initJoystickButtons() {
         exit(-1);
     }
 
-    cout << "Joystick nbButtons match : " << nbButtonsConfigured << endl;
+    cout << "\tJoystick nbButtons match : " << nbButtonsConfigured << endl << "\t";
 
     int joystickButtonValue;
     for (int i = 0; i < nbButtonsConfigured; ++i) {
@@ -128,14 +127,14 @@ void Controller::configureJoystick(bool defaultConfig, bool NESType) {
 
     if (defaultConfig) {
         if (NESType)
-            file.open("res/data/NES_Default_Config", ios::out | ios::trunc);
+            file.open("res/controller/NES_Default_Config", ios::out | ios::trunc);
         else
-            file.open("res/data/Controller_Default_Config", ios::out | ios::trunc);
+            file.open("res/controller/Controller_Default_Config", ios::out | ios::trunc);
     } else {
         if (NESType)
-            file.open("res/data/NES_Perso_Config", ios::out | ios::trunc);
+            file.open("res/controller/NES_Perso_Config", ios::out | ios::trunc);
         else
-            file.open("res/data/Controller_Perso_Config", ios::out | ios::trunc);
+            file.open("res/controller/Controller_Perso_Config", ios::out | ios::trunc);
     }
 
     file << myNbButtonsUsed << endl;
@@ -194,21 +193,21 @@ void Controller::configureJoystick(bool defaultConfig, bool NESType) {
         message = SDL_CreateTextureFromSurface(renderer, surfaceMessage[(int) but]);
         SDL_RenderCopy(renderer, message, NULL, &MessageCoord);
         SDL_RenderPresent(renderer);
-        
+
         retry = false;
-        i = getIndexOfCommand(true);
-        
-        for (int j = 0; j < (int)but; ++j) {
-            if(temp[j] == i) {
+        //i = getIndexOfCommand(true);
+
+        for (int j = 0; j < (int) but; ++j) {
+            if (temp[j] == i) {
                 retry = true;
                 cout << "This button is already used." << endl;
             }
         }
-        
+
         if (i >= 0 && !retry) {
             cout << JoystickButton_toString(but) << " = " << (int) but << " -> " << i << endl;
             file << i << endl;
-            temp[(int)but] = i;
+            temp[(int) but] = i;
             but++;
         }
 
@@ -217,36 +216,45 @@ void Controller::configureJoystick(bool defaultConfig, bool NESType) {
     }
 
     delete temp;
-    
+
     SDL_DestroyWindow(pWindow);
 
     file.close();
     TTF_CloseFont(font);
 }
 
-int Controller::getIndexOfCommand(bool init) {
+int Controller::getIndexOfCommand(bool init, vector<Entity*> ents) {
     SDL_Event event;
-    
-	if(init)
-		SDL_WaitEvent(&event);
-	else
-		SDL_PollEvent(&event);
-    
+    if (init)
+        SDL_WaitEvent(&event);
+    else
+        SDL_PollEvent(&event);
+
     if (event.type == SDL_JOYHATMOTION && event.jhat.value == 0)
         return -1;
-    
+
+    //Player* p = dynamic_cast <Player*> (ents[1]);
+    //cout << event.type << endl;
     switch (event.type) {
         case SDL_JOYBUTTONDOWN:
             return event.jbutton.button;
         case SDL_JOYHATMOTION:
             switch (event.jhat.value) {
-                case 1:
+                case SDL_HAT_UP:
+                    cout << "UP" << endl;
+                    ents[1]->move(3);
                     return 15;
-                case 2:
+                case SDL_HAT_RIGHT:
+                    cout << "RIGHT" << endl;
+                    ents[1]->move(2);
                     return 18;
-                case 4:
+                case SDL_HAT_DOWN:
+                    cout << "DOWN" << endl;
+                    ents[1]->move(0);
                     return 16;
-                case 8:
+                case SDL_HAT_LEFT:
+                    cout << "LEFT" << endl;
+                    ents[1]->move(1);
                     return 17;
             }
             break;
@@ -254,17 +262,21 @@ int Controller::getIndexOfCommand(bool init) {
     return -1;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD:src/Input.cpp
 void Input::updateButtonsPressed() {
     /*
 =======
 void Controller::updateButtonsPressed() {
 >>>>>>> 99082e5e747a494b117ba7d9b893a0770c2d5105:src/Controller.cpp
+=======
+void Controller::updateButtonsPressed(vector<Entity*> ents) {
+>>>>>>> 2a390ae016e4a5004d3c802c80cc172ae9891ab9
     //For now we will consider we can only have ONE button pressed at a time.
-    int action = getIndexOfCommand(false);
+    int action = getIndexOfCommand(false, ents);
     buttonsPressed = new (nothrow) JoystickButton[1];
-    for (JoystickButton but = JoystickButton::UP; (int)but < myNbButtonsUsed; ++but) {
-        if (action == myJoystickConfig[(int)but]) {
+    for (JoystickButton but = JoystickButton::UP; (int) but < myNbButtonsUsed; ++but) {
+        if (action == myJoystickConfig[(int) but]) {
             buttonsPressed[0] = but;
             return;
         }
@@ -273,7 +285,6 @@ void Controller::updateButtonsPressed() {
     */
     
 }
-
 
 /******************************* Enum operations ******************************/
 

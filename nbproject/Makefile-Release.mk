@@ -38,18 +38,18 @@ OBJECTFILES= \
 	${OBJECTDIR}/src/Controller.o \
 	${OBJECTDIR}/src/Display.o \
 	${OBJECTDIR}/src/Entity/Entity.o \
+<<<<<<< HEAD
 	${OBJECTDIR}/src/Entity/NPC.o \
+=======
+	${OBJECTDIR}/src/Entity/Map.o \
+>>>>>>> 2a390ae016e4a5004d3c802c80cc172ae9891ab9
 	${OBJECTDIR}/src/Entity/Player.o \
 	${OBJECTDIR}/src/IO.o \
-	${OBJECTDIR}/src/Map.o \
 	${OBJECTDIR}/src/RK.o \
 	${OBJECTDIR}/src/Sound.o \
 	${OBJECTDIR}/src/Stats.o \
 	${OBJECTDIR}/src/Texture.o \
-	${OBJECTDIR}/src/Timer.o \
-	${OBJECTDIR}/src/View/GameView.o \
-	${OBJECTDIR}/src/View/MenuView.o \
-	${OBJECTDIR}/src/View/View.o
+	${OBJECTDIR}/src/Timer.o
 
 
 # C Compiler Flags
@@ -91,10 +91,17 @@ ${OBJECTDIR}/src/Entity/Entity.o: src/Entity/Entity.cpp
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/Entity/Entity.o src/Entity/Entity.cpp
 
+<<<<<<< HEAD
 ${OBJECTDIR}/src/Entity/NPC.o: src/Entity/NPC.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/Entity
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/Entity/NPC.o src/Entity/NPC.cpp
+=======
+${OBJECTDIR}/src/Entity/Map.o: src/Entity/Map.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/Entity
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/Entity/Map.o src/Entity/Map.cpp
+>>>>>>> 2a390ae016e4a5004d3c802c80cc172ae9891ab9
 
 ${OBJECTDIR}/src/Entity/Player.o: src/Entity/Player.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/Entity
@@ -105,11 +112,6 @@ ${OBJECTDIR}/src/IO.o: src/IO.cpp
 	${MKDIR} -p ${OBJECTDIR}/src
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/IO.o src/IO.cpp
-
-${OBJECTDIR}/src/Map.o: src/Map.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src
-	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/Map.o src/Map.cpp
 
 ${OBJECTDIR}/src/RK.o: src/RK.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src
@@ -135,21 +137,6 @@ ${OBJECTDIR}/src/Timer.o: src/Timer.cpp
 	${MKDIR} -p ${OBJECTDIR}/src
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/Timer.o src/Timer.cpp
-
-${OBJECTDIR}/src/View/GameView.o: src/View/GameView.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src/View
-	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/View/GameView.o src/View/GameView.cpp
-
-${OBJECTDIR}/src/View/MenuView.o: src/View/MenuView.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src/View
-	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/View/MenuView.o src/View/MenuView.cpp
-
-${OBJECTDIR}/src/View/View.o: src/View/View.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src/View
-	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/View/View.o src/View/View.cpp
 
 # Subprojects
 .build-subprojects:
