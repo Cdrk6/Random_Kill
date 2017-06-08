@@ -9,7 +9,7 @@ const string IO::SND_PATH = "res/sounds";
 IO::IO(SDL_Renderer* r) {
     gRenderer = r;
     loadImages();
-    //loadData();
+    loadData();
     loadFonts();
     //loadSounds();
 }
@@ -21,6 +21,9 @@ IO::~IO() {
         TTF_CloseFont(fonts[i]);
         fonts[i] = NULL;
     }
+    /*for(int i = 0; i < data.size(); i++)
+        for(int j = 0; j < data[i].size(); j++)
+            delete data[i][j];*/
 }
 
 //Renvoie un tableau de string contenant tous les chemins vers tous les fichiers contenues dans p
@@ -50,7 +53,7 @@ vector<string>* IO::findAllFiles(const string &p) {
 Texture* IO::loadTexture(const string &path) {
     Texture* texture = NULL; //The final texture
     SDL_Texture* sdlTexture = NULL; //The SDL texture
-    SDL_Surface* loadedSurface = SDL_LoadBMP(path.c_str());//IMG_Load(path.c_str()); //Load image at specified path
+    SDL_Surface* loadedSurface = SDL_LoadBMP(path.c_str()); //IMG_Load(path.c_str()); //Load image at specified path
     if (loadedSurface == NULL)
         cerr << "Unable to load image " << path << "! SDL_image Error: " << IMG_GetError() << endl;
     else {
@@ -62,6 +65,21 @@ Texture* IO::loadTexture(const string &path) {
         SDL_FreeSurface(loadedSurface); //Get rid of old loaded surface
     }
     return texture;
+}
+
+vector<string> IO::loadTextFile(const string &path) {
+    vector<string> dat;
+    string line;
+    ifstream file(path);
+    if (file.is_open()) {
+        while (getline(file, line)) {
+            cout << line << '\n';
+            dat.push_back(line);
+        }
+        file.close();
+    }
+    else cout << "Unable to open file";
+    return dat;
 }
 
 void IO::loadImages() {
@@ -76,6 +94,19 @@ void IO::loadImages() {
     delete paths;
 }
 
+void IO::loadData() {
+    vector<string>* paths = findAllFiles(DAT_PATH);
+    data = vector<vector < string>>(paths->size());
+    for (int i = 0; i < paths->size(); i++) {
+        filesystem::path path((*paths)[i]);
+        //cout << i << ". " << (*paths)[i] << " ;FN : "<< path.stem().string() << endl;
+        data[stoi(path.stem().string())] = loadTextFile((*paths)[i]);
+    }
+    cout << "[OK] Text files loaded : " << data.size() << endl;
+    cout << data[0][0] << endl;
+    delete paths;
+}
+
 void IO::loadFonts() {
     vector<string>* paths = findAllFiles(FNT_PATH);
     fonts = vector<TTF_Font*>(paths->size());
@@ -83,7 +114,7 @@ void IO::loadFonts() {
         filesystem::path path((*paths)[i]);
         //cout << i << ". " << (*paths)[i] << " ;FN : "<< path.stem().string() << endl;
         fonts[stoi(path.stem().string())] = TTF_OpenFont((*paths)[i].c_str(), 30);
-        if(!fonts[stoi(path.stem().string())])
+        if (!fonts[stoi(path.stem().string())])
             cerr << "Unable to load font from " << path.relative_path() << "! TTF Error: " << TTF_GetError() << endl;
     }
     cout << "[OK] Fonts loaded : " << fonts.size() << endl;
@@ -92,6 +123,10 @@ void IO::loadFonts() {
 
 vector<Texture*> IO::getImages() {
     return images;
+}
+
+vector<vector<string>> IO::getData() {
+    return data;
 }
 
 vector<TTF_Font*> IO::getFonts() {

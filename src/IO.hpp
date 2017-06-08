@@ -3,6 +3,7 @@
 
 #include "Texture.hpp"
 #include <iostream>
+#include <fstream>
 #include <vector>
 #include <boost/filesystem.hpp>
 #include <SDL2/SDL.h>
@@ -25,22 +26,23 @@ class IO {
 	IO(SDL_Renderer*);
 	~IO();
 	vector<Texture*> getImages();
-	//vector<string*> getData();
+	vector<vector<string>> getData();
 	vector<TTF_Font*> getFonts();
 	//vector<Texture*> getSounds();
 
   private:
 	SDL_Renderer* gRenderer = NULL;
 	vector<Texture*> images;
-	//vector<string*> data;
+	vector<vector<string>> data;
 	vector<TTF_Font*> fonts;
 	//vector<TTF_Font*> sounds;
 	
 	//Méthodes :
 	vector<string>* findAllFiles(const string&); //Trouve tous les chemins de tous les fichiers dans un répertoire
 	Texture* loadTexture(const string&); //Charge une image à l'aide du chemin passé en argument
+	vector<string> loadTextFile(const string &); //Charge un fichier texte
 	void loadImages(); //Charge toutes les images
-	//void loadData(); //Charge toutes les données textuelles
+	void loadData(); //Charge toutes les données textuelles
 	void loadFonts(); //Charge toutes les polices
 	//void loadSounds(); //Charge tous les sons*/
 };
