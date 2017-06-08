@@ -7,8 +7,8 @@
 
 class Player : public Entity {
   public:
-	static const int C;
-	static const int NSTEP; //Nombre d'execution de calculate par déplacement
+	//static const int C;
+	//static const int NSTEP; //Nombre d'execution de calculate par déplacement
 	
 	Player(int, int, Texture*, Map*);
 	~Player();
@@ -25,6 +25,7 @@ class Player : public Entity {
 	float speed = 0.25; //Temps pour parcourir une case en seconde
 	int moving = 0;
 	float time = 0;
+	bool walking = false;
 };
 
 #endif /* PLAYER_HPP */

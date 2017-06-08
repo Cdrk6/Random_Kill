@@ -225,7 +225,6 @@ void Controller::configureJoystick(bool defaultConfig, bool NESType) {
 
 int Controller::getIndexOfCommand(bool init, vector<Entity*> ents) {
     SDL_Event event;
-
     if (init)
         SDL_WaitEvent(&event);
     else
@@ -235,25 +234,25 @@ int Controller::getIndexOfCommand(bool init, vector<Entity*> ents) {
         return -1;
 
     //Player* p = dynamic_cast <Player*> (ents[1]);
-    
+    //cout << event.type << endl;
     switch (event.type) {
         case SDL_JOYBUTTONDOWN:
             return event.jbutton.button;
         case SDL_JOYHATMOTION:
             switch (event.jhat.value) {
-                case 1:
+                case SDL_HAT_UP:
                     cout << "UP" << endl;
                     ents[1]->move(3);
                     return 15;
-                case 2:
+                case SDL_HAT_RIGHT:
                     cout << "RIGHT" << endl;
                     ents[1]->move(2);
                     return 18;
-                case 4:
+                case SDL_HAT_DOWN:
                     cout << "DOWN" << endl;
                     ents[1]->move(0);
                     return 16;
-                case 8:
+                case SDL_HAT_LEFT:
                     cout << "LEFT" << endl;
                     ents[1]->move(1);
                     return 17;

@@ -149,10 +149,12 @@ void Display::initMenuEnts() {
 }
 
 void Display::initGameEnts() {
+    int initcx = 125;//43;
+    int initcy = 130;//112;
     gameEnts = vector<Entity*>();
-    Map* m = new Map(0, 0, imgs[4]);
+    Map* m = new Map(initcx - 20, initcy - 12, imgs[4]);
     gameEnts.push_back(m);
-    gameEnts.push_back(new Player(20, 20, imgs[5], m));
+    gameEnts.push_back(new Player(initcx, initcy, imgs[5], m));
 }
 
 void Display::exit() {
