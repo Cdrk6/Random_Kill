@@ -8,13 +8,8 @@
       <itemPath>src/Display.hpp</itemPath>
       <itemPath>src/Entity/Entity.hpp</itemPath>
       <itemPath>src/IO.hpp</itemPath>
-<<<<<<< HEAD
-      <itemPath>src/Map.hpp</itemPath>
-      <itemPath>src/View/MenuView.hpp</itemPath>
       <itemPath>src/Entity/NPC.hpp</itemPath>
-=======
       <itemPath>src/Entity/Map.hpp</itemPath>
->>>>>>> 2a390ae016e4a5004d3c802c80cc172ae9891ab9
       <itemPath>src/Entity/Player.hpp</itemPath>
       <itemPath>src/RK.hpp</itemPath>
       <itemPath>src/Sound.hpp</itemPath>
@@ -26,19 +21,19 @@
                    displayName="Resource Files"
                    projectFiles="true">
       <logicalFolder name="data" displayName="data" projectFiles="true">
-        <itemPath>res/data/Controller_Default_Config</itemPath>
-        <itemPath>res/data/Controller_Perso_Config</itemPath>
-        <itemPath>res/data/NES_Default_Config</itemPath>
-        <itemPath>res/data/NES_Perso_Config</itemPath>
+        <itemPath>res/data/0.txt</itemPath>
       </logicalFolder>
       <logicalFolder name="fonts" displayName="fonts" projectFiles="true">
-        <itemPath>res/fonts/arial_narrow_7.ttf</itemPath>
-        <itemPath>res/fonts/typewriter.ttf</itemPath>
+        <itemPath>res/fonts/0.ttf</itemPath>
+        <itemPath>res/fonts/1.ttf</itemPath>
       </logicalFolder>
       <logicalFolder name="images" displayName="images" projectFiles="true">
-        <itemPath>res/images/Fond2.bmp</itemPath>
-        <itemPath>res/images/Maison2.bmp</itemPath>
-        <itemPath>res/images/maison1.bmp</itemPath>
+        <itemPath>res/images/0.bmp</itemPath>
+        <itemPath>res/images/1.bmp</itemPath>
+        <itemPath>res/images/2.bmp</itemPath>
+        <itemPath>res/images/3.bmp</itemPath>
+        <itemPath>res/images/4.bmp</itemPath>
+        <itemPath>res/images/5.bmp</itemPath>
       </logicalFolder>
     </logicalFolder>
     <logicalFolder name="SourceFiles"
@@ -48,13 +43,8 @@
       <itemPath>src/Display.cpp</itemPath>
       <itemPath>src/Entity/Entity.cpp</itemPath>
       <itemPath>src/IO.cpp</itemPath>
-<<<<<<< HEAD
-      <itemPath>src/Map.cpp</itemPath>
-      <itemPath>src/View/MenuView.cpp</itemPath>
       <itemPath>src/Entity/NPC.cpp</itemPath>
-=======
       <itemPath>src/Entity/Map.cpp</itemPath>
->>>>>>> 2a390ae016e4a5004d3c802c80cc172ae9891ab9
       <itemPath>src/Entity/Player.cpp</itemPath>
       <itemPath>src/RK.cpp</itemPath>
       <itemPath>src/Sound.cpp</itemPath>
@@ -77,8 +67,7 @@
   <sourceRootList>
     <Elem>res/data</Elem>
     <Elem>res/fonts</Elem>
-    <Elem>res/imagp
-es</Elem>
+    <Elem>res/images</Elem>
   </sourceRootList>
   <projectmakefile>Random_Kill-Makefile.mk</projectmakefile>
   <confs>
@@ -96,23 +85,23 @@ es</Elem>
           <commandLine>-lSDL2 -lSDL2main -lSDL2_image -lSDL2_ttf -lSDL2_mixer -lboost_system -lboost_filesystem</commandLine>
         </linkerTool>
       </compileType>
-      <item path="res/data/Controller_Default_Config" ex="false" tool="3" flavor2="0">
+      <item path="res/data/0.txt" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="res/data/Controller_Perso_Config" ex="false" tool="3" flavor2="0">
+      <item path="res/fonts/0.ttf" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="res/data/NES_Default_Config" ex="false" tool="3" flavor2="0">
+      <item path="res/fonts/1.ttf" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="res/data/NES_Perso_Config" ex="false" tool="3" flavor2="0">
+      <item path="res/images/0.bmp" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="res/fonts/arial_narrow_7.ttf" ex="false" tool="3" flavor2="0">
+      <item path="res/images/1.bmp" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="res/fonts/typewriter.ttf" ex="false" tool="3" flavor2="0">
+      <item path="res/images/2.bmp" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="res/images/Fond2.bmp" ex="false" tool="3" flavor2="0">
+      <item path="res/images/3.bmp" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="res/images/Maison2.bmp" ex="false" tool="3" flavor2="0">
+      <item path="res/images/4.bmp" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="res/images/maison1.bmp" ex="false" tool="3" flavor2="0">
+      <item path="res/images/5.bmp" ex="false" tool="3" flavor2="0">
       </item>
       <item path="src/Controller.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -126,15 +115,13 @@ es</Elem>
       </item>
       <item path="src/Entity/Entity.hpp" ex="false" tool="3" flavor2="0">
       </item>
-<<<<<<< HEAD
       <item path="src/Entity/NPC.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/Entity/NPC.hpp" ex="false" tool="3" flavor2="0">
-=======
+      </item>
       <item path="src/Entity/Map.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/Entity/Map.hpp" ex="false" tool="3" flavor2="0">
->>>>>>> 2a390ae016e4a5004d3c802c80cc172ae9891ab9
       </item>
       <item path="src/Entity/Player.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -185,23 +172,23 @@ es</Elem>
           <developmentMode>5</developmentMode>
         </asmTool>
       </compileType>
-      <item path="res/data/Controller_Default_Config" ex="false" tool="3" flavor2="0">
+      <item path="res/data/0.txt" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="res/data/Controller_Perso_Config" ex="false" tool="3" flavor2="0">
+      <item path="res/fonts/0.ttf" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="res/data/NES_Default_Config" ex="false" tool="3" flavor2="0">
+      <item path="res/fonts/1.ttf" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="res/data/NES_Perso_Config" ex="false" tool="3" flavor2="0">
+      <item path="res/images/0.bmp" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="res/fonts/arial_narrow_7.ttf" ex="false" tool="3" flavor2="0">
+      <item path="res/images/1.bmp" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="res/fonts/typewriter.ttf" ex="false" tool="3" flavor2="0">
+      <item path="res/images/2.bmp" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="res/images/Fond2.bmp" ex="false" tool="3" flavor2="0">
+      <item path="res/images/3.bmp" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="res/images/Maison2.bmp" ex="false" tool="3" flavor2="0">
+      <item path="res/images/4.bmp" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="res/images/maison1.bmp" ex="false" tool="3" flavor2="0">
+      <item path="res/images/5.bmp" ex="false" tool="3" flavor2="0">
       </item>
       <item path="src/Controller.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -215,15 +202,13 @@ es</Elem>
       </item>
       <item path="src/Entity/Entity.hpp" ex="false" tool="3" flavor2="0">
       </item>
-<<<<<<< HEAD
       <item path="src/Entity/NPC.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/Entity/NPC.hpp" ex="false" tool="3" flavor2="0">
-=======
+      </item>
       <item path="src/Entity/Map.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/Entity/Map.hpp" ex="false" tool="3" flavor2="0">
->>>>>>> 2a390ae016e4a5004d3c802c80cc172ae9891ab9
       </item>
       <item path="src/Entity/Player.cpp" ex="false" tool="1" flavor2="0">
       </item>

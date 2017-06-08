@@ -261,16 +261,7 @@ int Controller::getIndexOfCommand(bool init, vector<Entity*> ents) {
     return -1;
 }
 
-<<<<<<< HEAD
-<<<<<<< HEAD:src/Input.cpp
-void Input::updateButtonsPressed() {
-    /*
-=======
-void Controller::updateButtonsPressed() {
->>>>>>> 99082e5e747a494b117ba7d9b893a0770c2d5105:src/Controller.cpp
-=======
 void Controller::updateButtonsPressed(vector<Entity*> ents) {
->>>>>>> 2a390ae016e4a5004d3c802c80cc172ae9891ab9
     //For now we will consider we can only have ONE button pressed at a time.
     int action = getIndexOfCommand(false, ents);
     buttonsPressed = new (nothrow) JoystickButton[1];
@@ -281,8 +272,6 @@ void Controller::updateButtonsPressed(vector<Entity*> ents) {
         }
     }
     buttonsPressed = NULL;
-    */
-    
 }
 
 /******************************* Enum operations ******************************/

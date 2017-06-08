@@ -38,11 +38,8 @@ OBJECTFILES= \
 	${OBJECTDIR}/src/Controller.o \
 	${OBJECTDIR}/src/Display.o \
 	${OBJECTDIR}/src/Entity/Entity.o \
-<<<<<<< HEAD
-	${OBJECTDIR}/src/Entity/NPC.o \
-=======
 	${OBJECTDIR}/src/Entity/Map.o \
->>>>>>> 2a390ae016e4a5004d3c802c80cc172ae9891ab9
+	${OBJECTDIR}/src/Entity/NPC.o \
 	${OBJECTDIR}/src/Entity/Player.o \
 	${OBJECTDIR}/src/IO.o \
 	${OBJECTDIR}/src/RK.o \
@@ -91,17 +88,15 @@ ${OBJECTDIR}/src/Entity/Entity.o: src/Entity/Entity.cpp
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/Entity/Entity.o src/Entity/Entity.cpp
 
-<<<<<<< HEAD
-${OBJECTDIR}/src/Entity/NPC.o: src/Entity/NPC.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src/Entity
-	${RM} "$@.d"
-	$(COMPILE.cc) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/Entity/NPC.o src/Entity/NPC.cpp
-=======
 ${OBJECTDIR}/src/Entity/Map.o: src/Entity/Map.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/Entity
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/Entity/Map.o src/Entity/Map.cpp
->>>>>>> 2a390ae016e4a5004d3c802c80cc172ae9891ab9
+
+${OBJECTDIR}/src/Entity/NPC.o: src/Entity/NPC.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/Entity
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/Entity/NPC.o src/Entity/NPC.cpp
 
 ${OBJECTDIR}/src/Entity/Player.o: src/Entity/Player.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/Entity

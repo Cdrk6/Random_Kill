@@ -10,7 +10,6 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_joystick.h>
 #include <SDL2/SDL_ttf.h>
-#include <map>
 
 #define toString(name) # name
 #define DEFAULT_TIMEOUT 5
@@ -106,7 +105,7 @@ private:
     SDL_Joystick* myJoystick;
     int myNbButtonsUsed;
     int* myJoystickConfig;
-    map <JoystickButton, bool> buttonsPressed;
+    JoystickButton* buttonsPressed;
     int* myKeyboardConfig;
     KeyboardKey* keysPressed;
     

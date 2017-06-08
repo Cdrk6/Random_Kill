@@ -17,6 +17,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <vector>
 #include "Entity.hpp"
 
 using namespace std;
@@ -24,9 +25,10 @@ using namespace std;
 class NPC : public Entity {
 public:
     NPC();
-    NPC(const NPC& orig);
     virtual ~NPC();
-    
+    void draw(SDL_Renderer*) override;
+	void calculate(float) override;
+	void move(int) override;
     /*void copyArray(string* array1, string* array2);
     void copyArray(string** array1, string** array2);
     void copyArray(int* array1, int* array2);
