@@ -22,15 +22,15 @@
 using namespace std;
 
 class NPC : public Entity {
-/*public:
+public:
     NPC();
     NPC(const NPC& orig);
     virtual ~NPC();
     
-    void copyArray(string* array1, string* array2);
+    /*void copyArray(string* array1, string* array2);
     void copyArray(string** array1, string** array2);
     void copyArray(int* array1, int* array2);
-    void copyArray(int** array1, int** array2);
+    void copyArray(int** array1, int** array2);*/
     
 private:
     int coord[2];
@@ -41,7 +41,7 @@ private:
     bool questState;
     int* routines[2];
 
-};*/
+};
 
 #endif /* NPC_HPP */
 

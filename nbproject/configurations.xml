@@ -77,7 +77,8 @@
   <sourceRootList>
     <Elem>res/data</Elem>
     <Elem>res/fonts</Elem>
-    <Elem>res/images</Elem>
+    <Elem>res/imagp
+es</Elem>
   </sourceRootList>
   <projectmakefile>Random_Kill-Makefile.mk</projectmakefile>
   <confs>

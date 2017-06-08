@@ -18,8 +18,8 @@
 
 #include "NPC.hpp"
 
-/*NPC::NPC(int* aCoord, string aName, string* aLines, string** aOptions, int* aChoices, int** aRoutines) {
-    coord = new (nothrow) int[2];
+NPC::NPC(/*int* aCoord, string aName, string* aLines, string** aOptions, int* aChoices, int** aRoutines*/) {
+    /*coord = new (nothrow) int[2];
     copyArray(aCoord, coord);
     name = aName;
     lines = new (nothrow) string[vector.size(aLines)];
@@ -27,7 +27,7 @@
     options = new (nothrow) string*[vector.size(aOptions)];
     for (int i = 0; i < vector.size(aOptions); ++i)
         options[i] = new (nothrow) string[vector.size(aOptions[i])];
-    choices = new (nothrow) int[vector.size(aChoices)];
+    choices = new (nothrow) int[vector.size(aChoices)];*/
     
 }
 
@@ -35,5 +35,5 @@ NPC::NPC(const NPC& orig) {
 }
 
 NPC::~NPC() {
-}*/
+}
 
