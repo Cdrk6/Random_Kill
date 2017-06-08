@@ -52,7 +52,7 @@ class Display {
 	void calculate(float); //Calcule tout (déplacements...)
 	void draw(); //Dessine tout
 	void initMenuEnts(); //Initialise les entités du menu
-	void initGameEnts(); //Initialise les entités du jeu
+	void initGameEnts(IO*); //Initialise les entités du jeu
 };
 
 #endif

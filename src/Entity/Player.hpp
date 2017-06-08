@@ -4,10 +4,11 @@
 #include "../Texture.hpp"
 #include "Entity.hpp"
 #include "Map.hpp"
+#include <vector>
 
 class Player : public Entity {
   public:
-	Player(int, int, Texture*, Map*);
+	Player(int, int, Texture*, Map*, vector<string>);
 	~Player();
 	void draw(SDL_Renderer*) override;
 	void calculate(float) override;
@@ -15,6 +16,7 @@ class Player : public Entity {
 
   private:
 	Map* map = NULL;
+	vector<string> col;
 	int cx = 0;
 	int cy = 0;
 	int dir = 1;

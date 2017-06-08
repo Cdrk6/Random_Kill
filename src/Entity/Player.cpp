@@ -1,9 +1,10 @@
 #include "Player.hpp"
 
-Player::Player(int cx, int cy, Texture* t, Map* m) : Entity(20 * Map::C, 12 * Map::C, Map::C, Map::C, t) {
+Player::Player(int cx, int cy, Texture* t, Map* m, vector<string> col) : Entity(20 * Map::C, 12 * Map::C, Map::C, Map::C, t) {
 	Player::cx = cx;
 	Player::cy = cy;
 	Player::map = m;
+	Player::col = col;
 }
 
 Player::~Player() {
@@ -65,8 +66,34 @@ void Player::move(int d) {
 	if (moving)
 		return;
 	dir = d;
-	//if(!Collisions)
-	//return;
+	cout << col[cy + 1][cx] << col[cy][cx - 1] << col[cy][cx + 1] << col[cy - 1][cx] << endl;
+	switch (dir) {
+		case 0: //Down
+			if (col[cy + 1][cx] == '0') {
+				stop = true;
+				return;
+			}
+			break;
+		case 1: //Left
+			if (col[cy][cx - 1] == '0') {
+				stop = true;
+				return;
+			}
+			break;
+		case 2: //Right
+			if (col[cy][cx + 1] == '0') {
+				stop = true;
+				return;
+			}
+			break;
+		case 3: //Up
+			if (col[cy - 1][cx] == '0') {
+				stop = true;
+				return;
+			}
+			break;
+	}
+	cout << "hello" << endl;
 	moving = Map::NSTEP + 1;
 	switch (d) {
 		case 0: //Down
