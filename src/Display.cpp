@@ -162,8 +162,8 @@ void Display::initMenuEnts() {
 
 void Display::initGameEnts(IO* io) {
     gameEnts = vector<Entity*>();
-    int initcx = 20;//43;
-    int initcy = 20;//112;
+    int initcx = 40;//43;
+    int initcy = 43;//112;
     vector<Texture*> texs;
     texs.push_back(imgs[4]);
     texs.push_back(imgs[6]);

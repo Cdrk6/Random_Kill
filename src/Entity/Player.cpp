@@ -12,10 +12,7 @@ Player::~Player() {
 }
 
 void Player::draw(SDL_Renderer* r) {
-    //if(cMap == 0)
-        t->render(x, y, anim * Map::C, dir * Map::C, Map::C, Map::C);
-    //else
-    //    t->render(x, y, anim * Map::C, dir * Map::C, Map::C, Map::C);
+    t->render(x, y, anim * Map::C, dir * Map::C, Map::C, Map::C);
 }
 
 void Player::calculate(float timeStep) {
@@ -60,8 +57,8 @@ void Player::calculate(float timeStep) {
 }
 
 bool Player::collision(int dx, int dy) {
-    //cout << col[cMap][cy+dy][cx+dx] << endl;
-    if (col[cMap][cy + dy][cx + dx] == '0') {
+  
+    if (cx+dx < 0 || cy+dy < 0 || cx+dx >= col[cMap][0].size() || cy+dy >= col[cMap].size() || col[cMap][cy + dy][cx + dx] == '0') {
         stop = true;
         return true;
     } else if (col[cMap][cy + dy][cx + dx] - '0' > 1) { //Changement de map
