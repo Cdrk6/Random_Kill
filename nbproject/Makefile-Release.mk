@@ -39,6 +39,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/src/Display.o \
 	${OBJECTDIR}/src/Entity/Entity.o \
 	${OBJECTDIR}/src/Entity/Map.o \
+	${OBJECTDIR}/src/Entity/Menu.o \
 	${OBJECTDIR}/src/Entity/Player.o \
 	${OBJECTDIR}/src/IO.o \
 	${OBJECTDIR}/src/RK.o \
@@ -91,6 +92,11 @@ ${OBJECTDIR}/src/Entity/Map.o: src/Entity/Map.cpp
 	${MKDIR} -p ${OBJECTDIR}/src/Entity
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/Entity/Map.o src/Entity/Map.cpp
+
+${OBJECTDIR}/src/Entity/Menu.o: src/Entity/Menu.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/Entity
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/Entity/Menu.o src/Entity/Menu.cpp
 
 ${OBJECTDIR}/src/Entity/Player.o: src/Entity/Player.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/Entity

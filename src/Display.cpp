@@ -5,6 +5,8 @@ const int Display::H = 768;
 const string Display::TITLE = "Random Kill";
 const int Display::FPS = 60;
 const int Display::TICK_PER_FRAME = 1000 / FPS;
+int Display::menu = 0;
+bool Display::quit = false;
 
 Display::Display() {
     if (!initSDL())
@@ -97,6 +99,9 @@ void Display::startSDL(IO* io, Controller* c) {
         timeStep = stepTimer.getTicks() / 1000.f; //Calculate time step
         calculate(timeStep);
         stepTimer.start(); //Restart step timer
+        
+        if(menu == 1)
+            ents = gameEnts;
 
         draw();
 
@@ -113,7 +118,7 @@ void Display::initResources(IO* io) {
     fnts = io->getFonts();
     initMenuEnts();
     initGameEnts(io);
-    ents = gameEnts;
+    ents = menuEnts;
 }
 
 void Display::handleEvents(Controller* c) {
@@ -146,9 +151,17 @@ void Display::draw() {
 
 void Display::initMenuEnts() {
     menuEnts = vector<Entity*>();
+    vector<Texture*> texs;
+    texs.push_back(imgs[12]);
+    texs.push_back(imgs[13]);
+    texs.push_back(imgs[14]);
+    texs.push_back(imgs[15]);
+    texs.push_back(imgs[16]);
+    menuEnts.push_back(new Menu(texs));
 }
 
 void Display::initGameEnts(IO* io) {
+    gameEnts = vector<Entity*>();
     int initcx = 20;//43;
     int initcy = 20;//112;
     vector<Texture*> texs;
@@ -159,7 +172,6 @@ void Display::initGameEnts(IO* io) {
     texs.push_back(imgs[9]);
     texs.push_back(imgs[10]);
     texs.push_back(imgs[11]);
-    gameEnts = vector<Entity*>();
     Map* m = new Map(initcx - 20, initcy - 12, texs);
     gameEnts.push_back(m);
     gameEnts.push_back(new Player(initcx, initcy, imgs[5], m, io->getData()));

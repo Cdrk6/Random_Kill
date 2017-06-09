@@ -1,4 +1,5 @@
 #include "Controller.hpp"
+#include "Display.hpp"
 
 Controller::Controller(int timeout, int nbButtonsUsed) {
     //SDL Joystick initialization
@@ -236,25 +237,50 @@ int Controller::getIndexOfCommand(bool init, vector<Entity*> ents) {
     //Player* p = dynamic_cast <Player*> (ents[1]);
     switch (event.type) {
         case SDL_JOYBUTTONDOWN:
+            switch (Menu::state) {
+                case 0:
+                    Display::menu = 1;
+                    break;
+                case 1:
+                    Display::quit = true;
+                    break;
+            }
             return event.jbutton.button;
         case SDL_JOYHATMOTION:
-            switch (event.jhat.value) {
-                case SDL_HAT_UP:
-                    cout << "UP" << endl;
-                    ents[1]->move(3);
-                    return 15;
-                case SDL_HAT_RIGHT:
-                    cout << "RIGHT" << endl;
-                    ents[1]->move(2);
-                    return 18;
-                case SDL_HAT_DOWN:
-                    cout << "DOWN" << endl;
-                    ents[1]->move(0);
-                    return 16;
-                case SDL_HAT_LEFT:
-                    cout << "LEFT" << endl;
-                    ents[1]->move(1);
-                    return 17;
+            switch (Display::menu) {
+                case 0:
+                    switch (event.jhat.value) {
+                        case SDL_HAT_UP:
+                            cout << "UP" << endl;
+                            ents[0]->move(0);
+                            return 15;
+                        case SDL_HAT_DOWN:
+                            cout << "DOWN" << endl;
+                            ents[0]->move(1);
+                            return 16;
+                    }
+                    break;
+                case 1:
+                    switch (event.jhat.value) {
+                        case SDL_HAT_UP:
+                            cout << "UP" << endl;
+                            ents[1]->move(3);
+                            return 15;
+                        case SDL_HAT_RIGHT:
+                            cout << "RIGHT" << endl;
+                            ents[1]->move(2);
+                            return 18;
+                        case SDL_HAT_DOWN:
+                            cout << "DOWN" << endl;
+                            ents[1]->move(0);
+                            return 16;
+                        case SDL_HAT_LEFT:
+                            cout << "LEFT" << endl;
+                            ents[1]->move(1);
+
+                            return 17;
+                    }
+                    break;
             }
             break;
     }

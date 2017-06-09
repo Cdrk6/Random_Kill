@@ -7,6 +7,7 @@
 #include "Entity/Entity.hpp"
 #include "Entity/Player.hpp"
 #include "Entity/Map.hpp"
+#include "Entity/Menu.hpp"
 #include <string>
 #include <iostream>
 #include <SDL2/SDL.h>
@@ -23,7 +24,9 @@ class Display {
 	static const string TITLE; //Titre de la fenêtre
 	static const int FPS; //Image par seconde
 	static const int TICK_PER_FRAME; //Temps entre chaque images
-
+	static int menu;
+	static bool quit; //Détermine si l'affichage doit continuer (false) ou non (true)
+	
 	// Méthodes:
 	Display();
 	~Display();
@@ -33,7 +36,6 @@ class Display {
 	
   private:
 	//Variables
-	bool quit = false; //Détermine si l'affichage doit continuer (false) ou non (true)
 	SDL_Window* gWindow = NULL;	//The window we'll be rendering to
 	SDL_Renderer* gRenderer = NULL; //The window renderer
 	vector<Texture*> imgs; //Toutes les textures
