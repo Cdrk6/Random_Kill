@@ -19,3 +19,6 @@ Entity::Entity(int x, int y, Texture* t) {
 Entity::~Entity() {
 }
 
+bool Entity::collision(int dx, int dy) {
+    return false;
+}

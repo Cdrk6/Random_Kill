@@ -112,7 +112,7 @@ void Display::initResources(IO* io) {
     imgs = io->getImages();
     fnts = io->getFonts();
     initMenuEnts();
-    initGameEnts();
+    initGameEnts(io);
     ents = gameEnts;
 }
 
@@ -148,13 +148,21 @@ void Display::initMenuEnts() {
     menuEnts = vector<Entity*>();
 }
 
-void Display::initGameEnts() {
-    int initcx = 125;//43;
-    int initcy = 130;//112;
+void Display::initGameEnts(IO* io) {
+    int initcx = 20;//43;
+    int initcy = 20;//112;
+    vector<Texture*> texs;
+    texs.push_back(imgs[4]);
+    texs.push_back(imgs[6]);
+    texs.push_back(imgs[7]);
+    texs.push_back(imgs[8]);
+    texs.push_back(imgs[9]);
+    texs.push_back(imgs[10]);
+    texs.push_back(imgs[11]);
     gameEnts = vector<Entity*>();
-    Map* m = new Map(initcx - 20, initcy - 12, imgs[4]);
+    Map* m = new Map(initcx - 20, initcy - 12, texs);
     gameEnts.push_back(m);
-    gameEnts.push_back(new Player(initcx, initcy, imgs[5], m));
+    gameEnts.push_back(new Player(initcx, initcy, imgs[5], m, io->getData()));
 }
 
 void Display::exit() {

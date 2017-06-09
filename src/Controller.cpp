@@ -234,7 +234,6 @@ int Controller::getIndexOfCommand(bool init, vector<Entity*> ents) {
         return -1;
 
     //Player* p = dynamic_cast <Player*> (ents[1]);
-    //cout << event.type << endl;
     switch (event.type) {
         case SDL_JOYBUTTONDOWN:
             return event.jbutton.button;

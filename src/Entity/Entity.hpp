@@ -19,7 +19,7 @@ class Entity {
 	virtual void draw(SDL_Renderer*) = 0; //Dessine l'entité
 	virtual void calculate(float) = 0; //Calcule l'entité
 	virtual void move(int) = 0; //Essaye de déplacer l'entité en (x, y)
-	bool collision(int x, int y); //True collision; False sinon
+	virtual bool collision(int, int); //True collision; False sinon
 	
   private:
 };

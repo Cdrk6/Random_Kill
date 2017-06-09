@@ -73,7 +73,7 @@ vector<string> IO::loadTextFile(const string &path) {
     ifstream file(path);
     if (file.is_open()) {
         while (getline(file, line)) {
-            cout << line << '\n';
+            //cout << line << '\n';
             dat.push_back(line);
         }
         file.close();
@@ -103,7 +103,7 @@ void IO::loadData() {
         data[stoi(path.stem().string())] = loadTextFile((*paths)[i]);
     }
     cout << "[OK] Text files loaded : " << data.size() << endl;
-    cout << data[0][0] << endl;
+    //cout << data[0][0] << endl;
     delete paths;
 }
 

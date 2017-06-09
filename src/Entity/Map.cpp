@@ -4,16 +4,20 @@ const int Map::C = 32;
 const int Map::NSTEP = 10;
 const float Map::STEP = C / (float) NSTEP;
 
-Map::Map(int cx, int cy, Texture* t) : Entity(cx*C, cy*C, t) {
+Map::Map(int cx, int cy, vector<Texture*> t) : Entity(cx*C, cy*C, t[0]) {
     Map::cx = cx;
     Map::cy = cy;
+    Map::textures = t;
 }
 
 Map::~Map() {
 }
 
 void Map::draw(SDL_Renderer* r) {
-    t->render(0, 0, x, y, 1280, 768);
+    if (cMap == 0)
+        textures[0]->render(0, 0, x, y, 1280, 768);
+    else
+        textures[cMap]->render((1280 - textures[cMap]->getWidth()) / 2, (768 - textures[cMap]->getHeight()) / 2);
 }
 
 void Map::calculate(float timeStep) {
@@ -56,4 +60,8 @@ void Map::move(int d) {
 void Map::setCoord(int ncx, int ncy) {
     cx = ncx;
     cy = ncy;
+}
+
+void Map::setMap(int nMap) {
+    cMap = nMap;
 }
