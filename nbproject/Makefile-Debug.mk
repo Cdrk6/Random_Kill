@@ -40,6 +40,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/src/Entity/Entity.o \
 	${OBJECTDIR}/src/Entity/Map.o \
 	${OBJECTDIR}/src/Entity/Menu.o \
+	${OBJECTDIR}/src/Entity/NPC.o \
 	${OBJECTDIR}/src/Entity/Player.o \
 	${OBJECTDIR}/src/IO.o \
 	${OBJECTDIR}/src/RK.o \
@@ -97,6 +98,11 @@ ${OBJECTDIR}/src/Entity/Menu.o: src/Entity/Menu.cpp
 	${MKDIR} -p ${OBJECTDIR}/src/Entity
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/Entity/Menu.o src/Entity/Menu.cpp
+
+${OBJECTDIR}/src/Entity/NPC.o: src/Entity/NPC.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/Entity
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/Entity/NPC.o src/Entity/NPC.cpp
 
 ${OBJECTDIR}/src/Entity/Player.o: src/Entity/Player.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/Entity
