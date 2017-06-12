@@ -42,14 +42,11 @@ void Player::calculate(float timeStep) {
                     y -= Map::STEP;
                     break;
             }
-        if (moving % 2 == 0)
-            if (anim > 1)
-                anim = 0;
-            else
-                anim += 1;
+        anim = ++anim % 3;
         if (!moving) {
             //cout << x << "; " << y << endl;
             walking = false;
+            anim = 1;
             if (!stop)
                 Player::move(dir + 4);
         }

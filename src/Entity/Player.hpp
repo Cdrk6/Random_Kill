@@ -22,8 +22,8 @@ class Player : public Entity {
 	int cy = 0;
 	int tcx = 0;
 	int tcy = 0;
-	int dir = 1;
-	int anim = 0;
+	int dir = 0;
+	int anim = 1;
 	float speed = 0.25; //Temps pour parcourir une case en seconde
 	int moving = 0;
 	float time = 0;

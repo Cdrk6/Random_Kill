@@ -1,7 +1,7 @@
 #include "Map.hpp"
 
 const int Map::C = 32;
-const int Map::NSTEP = 10;
+const int Map::NSTEP = 3;
 const float Map::STEP = C / (float) NSTEP;
 
 Map::Map(int cx, int cy, vector<Texture*> t) : Entity(cx*C, cy*C, t[0]) {
