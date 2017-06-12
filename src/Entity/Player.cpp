@@ -55,13 +55,12 @@ void Player::calculate(float timeStep) {
 }
 
 bool Player::collision(int dx, int dy) {
-  
-    if (cx+dx < 0 || cy+dy < 0 || cx+dx >= col[cMap][0].size() || cy+dy >= col[cMap].size() || col[cMap][cy + dy][cx + dx] == '0') {
+    if (cx+dx < 0 || cy+dy < 0 || cx+dx >= col[cMap][0].size() || cy+dy >= col[cMap].size() || col[cMap][cy + dy][cx + dx] == '0') { //Si on est sur le bord de la map ou si collision
         stop = true;
         return true;
     } else if (col[cMap][cy + dy][cx + dx] - '0' > 1) { //Changement de map
-        stop = true;
         if (cMap == 0) {
+            stop = true;
             cMap = col[cMap][cy + dy][cx + dx] - '0' - 1;
             tcx = cx;
             tcy = cy;
@@ -70,7 +69,8 @@ bool Player::collision(int dx, int dy) {
             x = (1280 - col[cMap][0].size() * Map::C)/2 + cx * Map::C;
             y = (768 - col[cMap].size() * Map::C)/2 + cy * Map::C;
             map->setMap(cMap);
-        } else {
+        } else if(cMap != 0 && dir == 0){
+            stop = true;
             cMap = 0;
             cx = tcx;
             cy = tcy;
@@ -83,10 +83,8 @@ bool Player::collision(int dx, int dy) {
 }
 
 void Player::move(int d) {
-    if (d < 4 && !stop)
-        stop = true;
-    else if (d < 4 && stop)
-        stop = false;
+    if (d < 4)
+        stop = !stop;
     else
         d -= 4;
     if (moving)
