@@ -42,7 +42,8 @@ void Player::calculate(float timeStep) {
                     y -= Map::STEP;
                     break;
             }
-        anim = ++anim % 3;
+        if((Map::NSTEP - moving) % (Map::NSTEP / 3) == 0)
+            anim = ++anim % 3;
         if (!moving) {
             //cout << x << "; " << y << endl;
             walking = false;

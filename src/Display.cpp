@@ -3,7 +3,7 @@
 const int Display::W = 1280;
 const int Display::H = 768;
 const string Display::TITLE = "Random Kill";
-const int Display::FPS = 60;
+const int Display::FPS = 60; //11 pour le Raspi
 const int Display::TICK_PER_FRAME = 1000 / FPS;
 int Display::menu = 0;
 bool Display::quit = false;
