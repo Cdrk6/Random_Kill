@@ -20,7 +20,8 @@ class IO {
 	static const string MEN_IMG_PATH; //Position des images du menu
 	static const string MAP_IMG_PATH; //Position des images de la map
 	static const string CHA_IMG_PATH; //Position des images des personnages
-	static const string DAT_PATH; //Position des données textuelles
+	static const string COL_DAT_PATH; //Position des données de collisions
+	static const string NPC_DAT_PATH; //Position des données sur les pnj
 	static const string FNT_PATH; //Position des polices
 	static const string SND_PATH; //Position des sons
 	
@@ -30,7 +31,8 @@ class IO {
 	vector<Texture*> getMenuImages();
 	vector<Texture*> getMapImages();
 	vector<Texture*> getCharacterImages();
-	vector<vector<string>> getData();
+	vector<vector<string>> getCollisionsData();
+	vector<vector<string>> getNPCData();
 	vector<TTF_Font*> getFonts();
 	//vector<Texture*> getSounds();
 
@@ -39,7 +41,8 @@ class IO {
 	vector<Texture*> menImgs;
 	vector<Texture*> mapImgs;
 	vector<Texture*> chaImgs;
-	vector<vector<string>> data;
+	vector<vector<string>> colData;
+	vector<vector<string>> npcData;
 	vector<TTF_Font*> fonts;
 	//vector<TTF_Font*> sounds;
 	
@@ -47,8 +50,8 @@ class IO {
 	vector<string>* findAllFiles(const string&); //Trouve tous les chemins de tous les fichiers dans un répertoire
 	Texture* loadTexture(const string&); //Charge une image à l'aide du chemin passé en argument
 	vector<string> loadTextFile(const string &); //Charge un fichier texte
-	vector<Texture*> loadImages(string path); //Charge toutes les images de path dans tex
-	void loadData(); //Charge toutes les données textuelles
+	vector<Texture*> loadImages(string path); //Charge toutes les images de path
+	vector<vector<string>> loadData(string path); //Charge toutes les données textuelles dans path
 	void loadFonts(); //Charge toutes les polices
 	//void loadSounds(); //Charge tous les sons*/
 };

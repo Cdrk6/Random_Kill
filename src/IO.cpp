@@ -4,7 +4,8 @@ const string IO::S = "/";
 const string IO::MEN_IMG_PATH = "res/images/menu";
 const string IO::MAP_IMG_PATH = "res/images/map";
 const string IO::CHA_IMG_PATH = "res/images/character";
-const string IO::DAT_PATH = "res/data";
+const string IO::COL_DAT_PATH = "res/data/collisions";
+const string IO::NPC_DAT_PATH = "res/data/npc";
 const string IO::FNT_PATH = "res/fonts";
 const string IO::SND_PATH = "res/sounds";
 
@@ -13,7 +14,8 @@ IO::IO(SDL_Renderer* r) {
     menImgs = loadImages(MEN_IMG_PATH);
     mapImgs = loadImages(MAP_IMG_PATH);
     chaImgs = loadImages(CHA_IMG_PATH);
-    loadData();
+    colData = loadData(COL_DAT_PATH);
+    npcData = loadData(NPC_DAT_PATH);
     loadFonts();
     //loadSounds();
 }
@@ -98,17 +100,18 @@ vector<Texture*> IO::loadImages(string path) {
     return images;
 }
 
-void IO::loadData() {
-    vector<string>* paths = findAllFiles(DAT_PATH);
-    data = vector<vector < string>>(paths->size());
+vector<vector<string>> IO::loadData(string path) {
+    vector<string>* paths = findAllFiles(path);
+    vector<vector<string>> data = vector<vector < string>>(paths->size());
     for (int i = 0; i < paths->size(); i++) {
         filesystem::path path((*paths)[i]);
         //cout << i << ". " << (*paths)[i] << " ;FN : "<< path.stem().string() << endl;
         data[stoi(path.stem().string())] = loadTextFile((*paths)[i]);
     }
-    cout << "[OK] Text files loaded : " << data.size() << endl;
+    cout << "[OK] Text files loaded from " << path << " : " << data.size() << endl;
     //cout << data[0][0] << endl;
     delete paths;
+    return data;
 }
 
 void IO::loadFonts() {
@@ -137,8 +140,12 @@ vector<Texture*> IO::getCharacterImages() {
     return chaImgs;
 }
 
-vector<vector<string>> IO::getData() {
-    return data;
+vector<vector<string>> IO::getCollisionsData() {
+    return colData;
+}
+
+vector<vector<string>> IO::getNPCData() {
+    return npcData;
 }
 
 vector<TTF_Font*> IO::getFonts() {

@@ -154,12 +154,15 @@ void Display::initGameEnts(IO* io) {
     gameEnts = vector<Entity*>();
     
     //Initial position
-    int initcx = 20;//43;
+    int initcx = 25;//43;
     int initcy = 20;//112;
     
     Map* m = new Map(initcx - 20, initcy - 12, io->getMapImages());
     gameEnts.push_back(m);
-    gameEnts.push_back(new Player(initcx, initcy, io->getCharacterImages()[0], m, io->getData()));
+    gameEnts.push_back(new Player(initcx, initcy, io->getCharacterImages()[0], m, io->getCollisionsData()));
+    //vector<vector<string>>
+    //for (int i = 0; i < io->getNPCData().size(); i++)
+      //  gameEnts.push_back(new NPC());
 }
 
 void Display::exit() {
