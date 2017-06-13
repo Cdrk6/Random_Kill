@@ -91,8 +91,6 @@ void Display::startSDL(IO* io, Controller* c) {
     while (!quit) { //While application is running
         capTimer.start(); //Start cap timer
         avgFPS = countedFPS / (fpsTimer.getTicks() / 1000.f); //Calculate and correct fps
-        if (avgFPS > 2000000)
-            avgFPS = 0;
 
         handleEvents(c);
 
@@ -114,9 +112,8 @@ void Display::startSDL(IO* io, Controller* c) {
 }
 
 void Display::initResources(IO* io) {
-    imgs = io->getImages();
     fnts = io->getFonts();
-    initMenuEnts();
+    initMenuEnts(io);
     initGameEnts(io);
     ents = menuEnts;
 }
@@ -144,37 +141,25 @@ void Display::draw() {
     for (int i = 0; i < ents.size(); i++)
         ents[i]->draw(gRenderer);
 
-    //imgs[0]->render(10, 100);
-    //imgs[1]->render(15, 120);
+    //FPS
     Texture fps(20, 20, to_string(avgFPS), fnts[0], gRenderer);
 }
 
-void Display::initMenuEnts() {
+void Display::initMenuEnts(IO* io) {
     menuEnts = vector<Entity*>();
-    vector<Texture*> texs;
-    texs.push_back(imgs[12]);
-    texs.push_back(imgs[13]);
-    texs.push_back(imgs[14]);
-    texs.push_back(imgs[15]);
-    texs.push_back(imgs[16]);
-    menuEnts.push_back(new Menu(texs));
+    menuEnts.push_back(new Menu(io->getMenuImages()));
 }
 
 void Display::initGameEnts(IO* io) {
     gameEnts = vector<Entity*>();
+    
+    //Initial position
     int initcx = 40;//43;
     int initcy = 43;//112;
-    vector<Texture*> texs;
-    texs.push_back(imgs[4]);
-    texs.push_back(imgs[6]);
-    texs.push_back(imgs[7]);
-    texs.push_back(imgs[8]);
-    texs.push_back(imgs[9]);
-    texs.push_back(imgs[10]);
-    texs.push_back(imgs[11]);
-    Map* m = new Map(initcx - 20, initcy - 12, texs);
+    
+    Map* m = new Map(initcx - 20, initcy - 12, io->getMapImages());
     gameEnts.push_back(m);
-    gameEnts.push_back(new Player(initcx, initcy, imgs[5], m, io->getData()));
+    gameEnts.push_back(new Player(initcx, initcy, io->getCharacterImages()[0], m, io->getData()));
 }
 
 void Display::exit() {

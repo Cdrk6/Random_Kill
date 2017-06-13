@@ -8,9 +8,9 @@
       <itemPath>src/Display.hpp</itemPath>
       <itemPath>src/Entity/Entity.hpp</itemPath>
       <itemPath>src/IO.hpp</itemPath>
-      <itemPath>src/Entity/NPC.hpp</itemPath>
       <itemPath>src/Entity/Map.hpp</itemPath>
       <itemPath>src/Entity/Menu.hpp</itemPath>
+      <itemPath>src/Entity/NPC.hpp</itemPath>
       <itemPath>src/Entity/Player.hpp</itemPath>
       <itemPath>src/RK.hpp</itemPath>
       <itemPath>src/Sound.hpp</itemPath>
@@ -44,9 +44,9 @@
       <itemPath>src/Display.cpp</itemPath>
       <itemPath>src/Entity/Entity.cpp</itemPath>
       <itemPath>src/IO.cpp</itemPath>
-      <itemPath>src/Entity/NPC.cpp</itemPath>
       <itemPath>src/Entity/Map.cpp</itemPath>
       <itemPath>src/Entity/Menu.cpp</itemPath>
+      <itemPath>src/Entity/NPC.cpp</itemPath>
       <itemPath>src/Entity/Player.cpp</itemPath>
       <itemPath>src/RK.cpp</itemPath>
       <itemPath>src/Sound.cpp</itemPath>
@@ -117,10 +117,6 @@
       </item>
       <item path="src/Entity/Entity.hpp" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="src/Entity/NPC.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="src/Entity/NPC.hpp" ex="false" tool="3" flavor2="0">
-      </item>
       <item path="src/Entity/Map.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/Entity/Map.hpp" ex="false" tool="3" flavor2="0">
@@ -128,6 +124,10 @@
       <item path="src/Entity/Menu.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/Entity/Menu.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/Entity/NPC.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/Entity/NPC.hpp" ex="false" tool="3" flavor2="0">
       </item>
       <item path="src/Entity/Player.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -208,10 +208,6 @@
       </item>
       <item path="src/Entity/Entity.hpp" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="src/Entity/NPC.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="src/Entity/NPC.hpp" ex="false" tool="3" flavor2="0">
-      </item>
       <item path="src/Entity/Map.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/Entity/Map.hpp" ex="false" tool="3" flavor2="0">
@@ -219,6 +215,10 @@
       <item path="src/Entity/Menu.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/Entity/Menu.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/Entity/NPC.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/Entity/NPC.hpp" ex="false" tool="3" flavor2="0">
       </item>
       <item path="src/Entity/Player.cpp" ex="false" tool="1" flavor2="0">
       </item>

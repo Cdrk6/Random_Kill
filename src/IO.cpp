@@ -1,29 +1,34 @@
 #include "IO.hpp"
 
 const string IO::S = "/";
-const string IO::IMG_PATH = "res/images";
+const string IO::MEN_IMG_PATH = "res/images/menu";
+const string IO::MAP_IMG_PATH = "res/images/map";
+const string IO::CHA_IMG_PATH = "res/images/character";
 const string IO::DAT_PATH = "res/data";
 const string IO::FNT_PATH = "res/fonts";
 const string IO::SND_PATH = "res/sounds";
 
 IO::IO(SDL_Renderer* r) {
     gRenderer = r;
-    loadImages();
+    menImgs = loadImages(MEN_IMG_PATH);
+    mapImgs = loadImages(MAP_IMG_PATH);
+    chaImgs = loadImages(CHA_IMG_PATH);
     loadData();
     loadFonts();
     //loadSounds();
 }
 
 IO::~IO() {
-    for (int i = 0; i < images.size(); i++)
-        delete images[i];
+    for (int i = 0; i < menImgs.size(); i++)
+        delete menImgs[i];
+    for (int i = 0; i < mapImgs.size(); i++)
+        delete mapImgs[i];
+    for (int i = 0; i < chaImgs.size(); i++)
+        delete chaImgs[i];
     for (int i = 0; i < fonts.size(); i++) {
         TTF_CloseFont(fonts[i]);
         fonts[i] = NULL;
     }
-    /*for(int i = 0; i < data.size(); i++)
-        for(int j = 0; j < data[i].size(); j++)
-            delete data[i][j];*/
 }
 
 //Renvoie un tableau de string contenant tous les chemins vers tous les fichiers contenues dans p
@@ -72,26 +77,25 @@ vector<string> IO::loadTextFile(const string &path) {
     string line;
     ifstream file(path);
     if (file.is_open()) {
-        while (getline(file, line)) {
-            //cout << line << '\n';
+        while (getline(file, line))
             dat.push_back(line);
-        }
         file.close();
     }
     else cout << "Unable to open file";
     return dat;
 }
 
-void IO::loadImages() {
-    vector<string>* paths = findAllFiles(IMG_PATH);
-    images = vector<Texture*>(paths->size());
+vector<Texture*> IO::loadImages(string path) {
+    vector<string>* paths = findAllFiles(path);
+    vector<Texture*> images = vector<Texture*>(paths->size());
     for (int i = 0; i < paths->size(); i++) {
         filesystem::path path((*paths)[i]);
         //cout << i << ". " << (*paths)[i] << " ;FN : "<< path.stem().string() << endl;
         images[stoi(path.stem().string())] = loadTexture((*paths)[i]);
     }
-    cout << "[OK] Images loaded : " << images.size() << endl;
+    cout << "[OK] Images loaded from " << path << " : " << images.size() << endl;
     delete paths;
+    return images;
 }
 
 void IO::loadData() {
@@ -121,8 +125,16 @@ void IO::loadFonts() {
     delete paths;
 }
 
-vector<Texture*> IO::getImages() {
-    return images;
+vector<Texture*> IO::getMenuImages() {
+    return menImgs;
+}
+
+vector<Texture*> IO::getMapImages() {
+    return mapImgs;
+}
+
+vector<Texture*> IO::getCharacterImages() {
+    return chaImgs;
 }
 
 vector<vector<string>> IO::getData() {
