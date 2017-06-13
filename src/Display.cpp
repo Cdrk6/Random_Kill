@@ -97,8 +97,8 @@ void Display::startSDL(IO* io, Controller* c) {
         timeStep = stepTimer.getTicks() / 1000.f; //Calculate time step
         calculate(timeStep);
         stepTimer.start(); //Restart step timer
-        
-        if(menu == 1)
+
+        if (menu == 1)
             ents = gameEnts;
 
         draw();
@@ -152,17 +152,20 @@ void Display::initMenuEnts(IO* io) {
 
 void Display::initGameEnts(IO* io) {
     gameEnts = vector<Entity*>();
-    
+
     //Initial position
-    int initcx = 25;//43;
-    int initcy = 20;//112;
-    
+    int initcx = 25; //43;
+    int initcy = 20; //112;
+
     Map* m = new Map(initcx - 20, initcy - 12, io->getMapImages());
     gameEnts.push_back(m);
     gameEnts.push_back(new Player(initcx, initcy, io->getCharacterImages()[0], m, io->getCollisionsData()));
-    //vector<vector<string>>
-    //for (int i = 0; i < io->getNPCData().size(); i++)
-      //  gameEnts.push_back(new NPC());
+    vector<vector < string>> npcDat = io->getNPCData();
+    Texture* tex = NULL;
+    for (int i = 0; i < npcDat.size(); i++) {
+        tex = io->getCharacterImages()[stoi(npcDat[i][4])];
+        gameEnts.push_back(new NPC(stoi(npcDat[i][0]), stoi(npcDat[i][1]), stoi(npcDat[i][2]), stoi(npcDat[i][3]), tex, npcDat[i][5]));
+    }
 }
 
 void Display::exit() {

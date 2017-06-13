@@ -3,6 +3,7 @@ position de déplacement + position initiale x et y: 15
 zone de déplacement w et h: 5
 5
 apparence: 0
+nom : Premier NPC
 Bonjour, toi.
 Comment vas-tu ?#Bien#Mal
 0

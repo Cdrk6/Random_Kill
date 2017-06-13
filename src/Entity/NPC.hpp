@@ -1,16 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/* 
- * File:   NPC.hpp
- * Author: cedric
- *
- * Created on June 8, 2017, 9:47 AM
- */
-
 #ifndef NPC_HPP
 #define NPC_HPP
 
@@ -19,30 +6,26 @@
 #include <string>
 #include <vector>
 #include "Entity.hpp"
+#include "Map.hpp"
 
 using namespace std;
 
 class NPC : public Entity {
-public:
-    NPC();
-    virtual ~NPC();
-    void draw(SDL_Renderer*) override;
+  public:
+	NPC(int, int, int, int, Texture*, string);
+	~NPC();
+	void draw(SDL_Renderer*) override;
 	void calculate(float) override;
 	void move(int) override;
-    /*void copyArray(string* array1, string* array2);
-    void copyArray(string** array1, string** array2);
-    void copyArray(int* array1, int* array2);
-    void copyArray(int** array1, int** array2);*/
-    
-private:
-    int coord[2];
-    string name;
-    string* lines;
-    string** options;
-    int* choices;
-    bool questState;
-    int* routines[2];
 
+  private:
+	int anim = 1;
+	int dir = 0;
+	int cx = 0;
+	int cy = 0;
+	int zw = 0;
+	int zh = 0;
+	string name;
 };
 
 #endif /* NPC_HPP */

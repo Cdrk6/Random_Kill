@@ -12,7 +12,7 @@ Player::~Player() {
 }
 
 void Player::draw(SDL_Renderer* r) {
-    t->render(x, y, anim * Map::C, dir * Map::C, Map::C, Map::C);
+    t->render(x, y, anim * w, dir * h, w, h);
 }
 
 void Player::calculate(float timeStep) {

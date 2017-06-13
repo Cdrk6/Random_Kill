@@ -8,6 +8,7 @@
 #include "Entity/Player.hpp"
 #include "Entity/Map.hpp"
 #include "Entity/Menu.hpp"
+#include "Entity/NPC.hpp"
 #include <string>
 #include <iostream>
 #include <SDL2/SDL.h>
