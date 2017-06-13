@@ -66,17 +66,28 @@ bool Player::collision(int dx, int dy) {
             tcy = cy;
             cx = stoi(col[7][(cMap-1)*2]);
             cy = stoi(col[7][(cMap-1)*2+1]);
-            x = (1280 - col[cMap][0].size() * Map::C)/2 + cx * Map::C;
-            y = (768 - col[cMap].size() * Map::C)/2 + cy * Map::C;
             map->setMap(cMap);
-        } else if(cMap != 0 && dir == 0){
+            x = map->intx + cx * Map::C;
+            y = map->inty + cy * Map::C;
+        } else if(dir == 0){
             stop = true;
             cMap = 0;
             cx = tcx;
             cy = tcy;
-            x = 20 * Map::C;
-            y = 12 * Map::C;
             map->setMap(0);
+            //AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHHHHH
+            if (cx <= Map::MINCX)
+                x = cx * Map::C;
+            else if (cx >= Map::MAXCX)
+                x = (Map::CXSCREEN - (col[0][0].size() - cx)) * Map::C;
+            else
+                x = Map::CXSCREEN/2 * Map::C;
+            if (cy <= Map::MINCY)
+                y = cy * Map::C;
+            else if (cy >= Map::MAXCY)
+                y = (Map::CYSCREEN - (col[0].size() - cy)) * Map::C;
+            else
+                y = Map::CYSCREEN/2 * Map::C;
         }
     }
     return false;
@@ -132,25 +143,25 @@ void Player::move(int d) {
     }
     switch (d) {
         case 0: //Down
-            if (cy > 12 && cy < 139)
+            if (cy > Map::MINCY+1 && cy < Map::MAXCY)
                 map->move(d);
             else
                 walking = true;
             break;
         case 1: //Left
-            if (cx > 19 && cx < 143)
+            if (cx > Map::MINCX && cx < Map::MAXCX-1)
                 map->move(d);
             else
                 walking = true;
             break;
         case 2: //Right
-            if (cx > 20 && cx < 144)
+            if (cx > Map::MINCX+1 && cx < Map::MAXCX)
                 map->move(d);
             else
                 walking = true;
             break;
         case 3: //Up
-            if (cy > 11 && cy < 138)
+            if (cy > Map::MINCY && cy < Map::MAXCY-1)
                 map->move(d);
             else
                 walking = true;

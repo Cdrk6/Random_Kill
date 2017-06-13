@@ -10,6 +10,15 @@ class Map : public Entity {
 	static const int C;
 	static const int NSTEP; //Nombre d'execution de calculate par déplacement
 	static const float STEP;
+	static const int MINCX;
+	static const int MINCY;
+	static const int MAXCX;
+	static const int MAXCY;
+	static const int CXSCREEN;
+	static const int CYSCREEN;
+	
+	float intx = 0;
+	float inty = 0;
 	
 	Map(int, int, vector<Texture*>);
 	~Map();

@@ -154,8 +154,8 @@ void Display::initGameEnts(IO* io) {
     gameEnts = vector<Entity*>();
     
     //Initial position
-    int initcx = 40;//43;
-    int initcy = 43;//112;
+    int initcx = 20;//43;
+    int initcy = 20;//112;
     
     Map* m = new Map(initcx - 20, initcy - 12, io->getMapImages());
     gameEnts.push_back(m);
