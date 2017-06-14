@@ -47,7 +47,7 @@ void Player::calculate(float timeStep) {
         if ((Map::NSTEP - moving) % (Map::NSTEP / 3) == 0)
             anim = ++anim % 3;
         if (!moving) {
-            cout << x << "; " << y << endl;
+            //cout << x << "; " << y << endl;
             walking = false;
             anim = 1;
             if (!stop)
@@ -62,7 +62,7 @@ bool Player::collision(int dx, int dy) {
         return true;
     }
     
-    // Modification de la map de collision
+    // Modification de la matrice de collision
     if (col[cMap][cy][cx] - '0' < 2)
         col[cMap][cy][cx] = '1';
     if (col[cMap][cy + dy][cx + dx] - '0' < 2)
@@ -132,7 +132,7 @@ void Player::move(int d) {
             break;
     }
     moving = Map::NSTEP + 1;
-    switch (d) {
+    switch (dir) {
         case 0: //Down
             cy++;
             break;
@@ -150,28 +150,28 @@ void Player::move(int d) {
         walking = true;
         return;
     }
-    switch (d) {
+    switch (dir) {
         case 0: //Down
             if (cy > Map::MINCY + 1 && cy < Map::MAXCY)
-                map->move(d);
+                map->move(dir);
             else
                 walking = true;
             break;
         case 1: //Left
             if (cx > Map::MINCX && cx < Map::MAXCX - 1)
-                map->move(d);
+                map->move(dir);
             else
                 walking = true;
             break;
         case 2: //Right
             if (cx > Map::MINCX + 1 && cx < Map::MAXCX)
-                map->move(d);
+                map->move(dir);
             else
                 walking = true;
             break;
         case 3: //Up
             if (cy > Map::MINCY && cy < Map::MAXCY - 1)
-                map->move(d);
+                map->move(dir);
             else
                 walking = true;
             break;

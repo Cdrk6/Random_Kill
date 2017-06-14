@@ -15,6 +15,7 @@ RK::~RK() {
 
 int main(int argc, char* args[]) {
     cout << "RandomKill - V pre-alpha" << endl;
+    srand (time(NULL));
     RK rk;
     //start();
     return 0;

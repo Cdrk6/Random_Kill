@@ -19,9 +19,11 @@ class NPC : public Entity {
 	void move(int) override; //Mouvement du PNJ
 	void relativeMove(int); //Mouvement relatif au joueur
 	bool collision(int, int);
+	void generateMove();
 
   private:
 	vector<vector<string>> col;
+	float moveTime = 0;
 	float time = 0;
 	int anim = 1;
 	int dir = 0;

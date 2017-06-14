@@ -9,6 +9,8 @@
 #include "Stats.hpp"
 #include <vector>
 #include <iostream>
+#include <stdlib.h>
+#include <time.h>
 
 using namespace std;
 

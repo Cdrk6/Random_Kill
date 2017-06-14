@@ -1,11 +1,12 @@
 #include "NPC.hpp"
 
-NPC::NPC(int cx, int cy, int zw, int zh, Texture* tex, string name, vector<vector<string>> col) : Entity(0, 0, Map::C, Map::C, tex) {
+NPC::NPC(int cx, int cy, int zw, int zh, Texture* tex, string name, vector<vector<string>> col) : Entity(cx * Map::C, cy * Map::C, Map::C, Map::C, tex) {
     NPC::cx = cx;
     NPC::cy = cy;
     NPC::zw = zw;
     NPC::zh = zh;
     NPC::name = name;
+    NPC::col = col;
 }
 
 NPC::~NPC() {
@@ -15,36 +16,56 @@ void NPC::draw(SDL_Renderer* r) {
     t->render(x, y, anim * w, dir * h, w, h);
 }
 
+void NPC::generateMove() {
+    int randDir = rand() % 4;
+    cout << randDir << endl;
+    move(randDir);
+}
+
 void NPC::calculate(float timeStep) {
+    //Reset des timer
+    /*if (moving == Map::NSTEP + 1) {
+        time = 0;
+        moving--;
+    }*/
     if (moving == Map::NSTEP + 1) {
         time = 0;
         moving--;
     }
+
+    //Incrémentation des timer
+    moveTime += timeStep;
     time += timeStep;
-    if (time < speed / Map::NSTEP)
-        return;
-    time -= speed / Map::NSTEP;
-    if (moving) {
-        moving--;
-        switch (dir) {
-            case 0: //Down
-                y += Map::STEP;
-                break;
-            case 1: //Left
-                x -= Map::STEP;
-                break;
-            case 2: //Right
-                x += Map::STEP;
-                break;
-            case 3: //Up
-                y -= Map::STEP;
-                break;
-        }
-        if ((Map::NSTEP - moving) % (Map::NSTEP / 3) == 0)
-            anim = ++anim % 3;
-        if (!moving) {
-            cout << x << "; " << y << endl;
-            anim = 1;
+
+    //Le reste
+    if (moveTime >= 2) {
+        moveTime -= 2;
+        //move(1);
+        generateMove();
+    } else if (time >= speed / Map::NSTEP) {
+        time -= speed / Map::NSTEP;
+        if (moving) {
+            moving--;
+            switch (dir) {
+                case 0: //Down
+                    y += Map::STEP;
+                    break;
+                case 1: //Left
+                    x -= Map::STEP;
+                    break;
+                case 2: //Right
+                    x += Map::STEP;
+                    break;
+                case 3: //Up
+                    y -= Map::STEP;
+                    break;
+            }
+            if ((Map::NSTEP - moving) % (Map::NSTEP / 3) == 0)
+                anim = ++anim % 3;
+            if (!moving) {
+                cout << x << "; " << y << endl;
+                anim = 1;
+            }
         }
     }
 }
@@ -54,7 +75,7 @@ bool NPC::collision(int dx, int dy) {
         return true;
     }
 
-    // Modification de la map de collision
+    // Modification de la matrice de collision
     col[cMap][cy][cx] = '1';
     col[cMap][cy + dy][cx + dx] = '0';
     return false;
@@ -83,7 +104,7 @@ void NPC::move(int d) {
             break;
     }
     moving = Map::NSTEP + 1;
-    switch (d) {
+    switch (dir) {
         case 0: //Down
             cy++;
             break;
@@ -97,7 +118,6 @@ void NPC::move(int d) {
             cy--;
             break;
     }
-    //cout << cx << "; " << cy << endl;
 }
 
 void NPC::relativeMove(int) {
