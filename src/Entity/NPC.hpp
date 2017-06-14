@@ -24,9 +24,12 @@ class NPC : public Entity {
   private:
 	vector<vector<string>> col;
 	float moveTime = 0;
+	float relTime = 0;
 	float time = 0;
 	int anim = 1;
+	int relDir = 0;
 	int dir = 0;
+	int relMoving = 0;
 	int moving = 0;
 	float speed = 0.25; //Temps pour parcourir une case en seconde
 	int cx = 0;

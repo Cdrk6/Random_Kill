@@ -140,7 +140,11 @@ void Display::draw() {
     //Render all textures
     for (int i = 0; i < ents.size(); i++)
         ents[i]->draw(gRenderer);
-
+    if (Map::REDRAW && menu == 1) {
+        Map* m = dynamic_cast<Map*> (ents[0]);
+        m->redraw();
+    }
+    
     //FPS
     Texture fps(20, 20, to_string(avgFPS), fnts[0], gRenderer);
 }
@@ -160,14 +164,17 @@ void Display::initGameEnts(IO* io) {
     vector<vector < string>> colDat = io->getCollisionsData();
     vector<vector < string>> npcDat = io->getNPCData();
     Texture* tex = NULL;
-    
-    Map* m = new Map(initcx - Map::CXSCREEN/2, initcy - Map::CYSCREEN/2, io->getMapImages());
-    gameEnts.push_back(m);
-    gameEnts.push_back(new Player(initcx, initcy, io->getCharacterImages()[0], m, colDat));
+    vector<NPC*> npcs;
+
     for (int i = 0; i < npcDat.size(); i++) {
         tex = io->getCharacterImages()[stoi(npcDat[i][4])];
-        gameEnts.push_back(new NPC(stoi(npcDat[i][0]), stoi(npcDat[i][1]), stoi(npcDat[i][2]), stoi(npcDat[i][3]), tex, npcDat[i][5], colDat));
+        npcs.push_back(new NPC(stoi(npcDat[i][0]), stoi(npcDat[i][1]), stoi(npcDat[i][2]), stoi(npcDat[i][3]), tex, npcDat[i][5], colDat));
     }
+    Map* m = new Map(initcx - Map::CXSCREEN / 2, initcy - Map::CYSCREEN / 2, io->getMapImages());
+    gameEnts.push_back(m);
+    gameEnts.push_back(new Player(initcx, initcy, io->getCharacterImages()[0], m, colDat, npcs));
+    for (int i = 0; i < npcs.size(); i++)
+        gameEnts.push_back(npcs[i]);
 }
 
 void Display::exit() {

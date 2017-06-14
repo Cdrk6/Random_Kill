@@ -1,10 +1,11 @@
 #include "Player.hpp"
 
-Player::Player(int cx, int cy, Texture* t, Map* m, vector<vector<string>> col) : Entity(20 * Map::C, 12 * Map::C, Map::C, Map::C, t) {
+Player::Player(int cx, int cy, Texture* t, Map* m, vector<vector<string>> col, vector<NPC*> npcs) : Entity(20 * Map::C, 12 * Map::C, Map::C, Map::C, t) {
     Player::cx = cx;
     Player::cy = cy;
     Player::map = m;
     Player::col = col;
+    Player::npcs = npcs;
 }
 
 Player::~Player() {
@@ -13,8 +14,6 @@ Player::~Player() {
 
 void Player::draw(SDL_Renderer* r) {
     t->render(x, y, anim * w, dir * h, w, h);
-    if (Map::REDRAW)
-        map->redraw();
 }
 
 void Player::calculate(float timeStep) {
@@ -61,13 +60,13 @@ bool Player::collision(int dx, int dy) {
         stop = true;
         return true;
     }
-    
+
     // Modification de la matrice de collision
     if (col[cMap][cy][cx] - '0' < 2)
         col[cMap][cy][cx] = '1';
     if (col[cMap][cy + dy][cx + dx] - '0' < 2)
         col[cMap][cy + dy][cx + dx] = '0';
-    
+
     //Changement de map
     if (col[cMap][cy + dy][cx + dx] - '0' > 1) {
         if (cMap == 0) {
@@ -153,27 +152,33 @@ void Player::move(int d) {
     switch (dir) {
         case 0: //Down
             if (cy > Map::MINCY + 1 && cy < Map::MAXCY)
-                map->move(dir);
+                relativeMove(dir);
             else
                 walking = true;
             break;
         case 1: //Left
             if (cx > Map::MINCX && cx < Map::MAXCX - 1)
-                map->move(dir);
+                relativeMove(dir);
             else
                 walking = true;
             break;
         case 2: //Right
             if (cx > Map::MINCX + 1 && cx < Map::MAXCX)
-                map->move(dir);
+                relativeMove(dir);
             else
                 walking = true;
             break;
         case 3: //Up
             if (cy > Map::MINCY && cy < Map::MAXCY - 1)
-                map->move(dir);
+                relativeMove(dir);
             else
                 walking = true;
             break;
     }
+}
+
+void Player::relativeMove(int d) {
+    map->move(d);
+    for(int i = 0; i < npcs.size(); i++)
+        npcs[i]->relativeMove(d);
 }

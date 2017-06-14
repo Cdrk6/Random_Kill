@@ -44,6 +44,7 @@ void Map::calculate(float timeStep) {
     time -= speed / NSTEP;
     if (moving) {
         moving--;
+        
         switch (dir) {
             case 0: //Down
                 y += STEP;

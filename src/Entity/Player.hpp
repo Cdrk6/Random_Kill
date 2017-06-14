@@ -4,20 +4,23 @@
 #include "../Texture.hpp"
 #include "Entity.hpp"
 #include "Map.hpp"
+#include "NPC.hpp"
 #include <vector>
 
 class Player : public Entity {
   public:
-	Player(int, int, Texture*, Map*, vector<vector<string>>);
+	Player(int, int, Texture*, Map*, vector<vector<string>>, vector<NPC*>);
 	~Player();
 	void draw(SDL_Renderer*) override;
 	void calculate(float) override;
 	void move(int) override;
 	bool collision(int, int); //True collision, False pas de collision
+	void relativeMove(int);
 
   private:
 	Map* map = NULL;
 	vector<vector<string>> col;
+	vector<NPC*> npcs;
 	int cx = 0;
 	int cy = 0;
 	int tcx = 0;

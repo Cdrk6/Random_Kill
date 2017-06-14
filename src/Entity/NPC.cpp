@@ -24,17 +24,18 @@ void NPC::generateMove() {
 
 void NPC::calculate(float timeStep) {
     //Reset des timer
-    /*if (moving == Map::NSTEP + 1) {
-        time = 0;
-        moving--;
-    }*/
     if (moving == Map::NSTEP + 1) {
         time = 0;
         moving--;
     }
+    if (relMoving == Map::NSTEP + 1) {
+        relTime = 0;
+        relMoving--;
+    }
 
     //Incrémentation des timer
     moveTime += timeStep;
+    relTime += timeStep;
     time += timeStep;
 
     //Le reste
@@ -65,6 +66,29 @@ void NPC::calculate(float timeStep) {
             if (!moving) {
                 cout << x << "; " << y << endl;
                 anim = 1;
+            }
+        }
+    }
+    if (relTime >= speed / Map::NSTEP) {
+        relTime -= speed / Map::NSTEP;
+        if (relMoving) {
+            relMoving--;
+            switch (relDir) {
+                case 0: //Down
+                    y -= Map::STEP;
+                    break;
+                case 1: //Left
+                    x += Map::STEP;
+                    break;
+                case 2: //Right
+                    x -= Map::STEP;
+                    break;
+                case 3: //Up
+                    y += Map::STEP;
+                    break;
+            }
+            if (!relMoving) {
+                cout << x << "; " << y << endl;
             }
         }
     }
@@ -120,6 +144,7 @@ void NPC::move(int d) {
     }
 }
 
-void NPC::relativeMove(int) {
-
+void NPC::relativeMove(int d) {
+    relDir = d;
+    relMoving = Map::NSTEP + 1;
 }
