@@ -7,6 +7,7 @@
 #include <vector>
 #include "Entity.hpp"
 #include "Map.hpp"
+#include "Player.hpp"
 
 using namespace std;
 

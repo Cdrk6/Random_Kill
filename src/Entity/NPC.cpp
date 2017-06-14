@@ -15,7 +15,8 @@ NPC::~NPC() {
 }
 
 void NPC::draw(SDL_Renderer* r) {
-    t->render(x, y, anim * w, dir * h, w, h);
+    if(Player::cMap == 0)
+        t->render(x, y, anim * w, dir * h, w, h);
 }
 
 void NPC::generateMove() {

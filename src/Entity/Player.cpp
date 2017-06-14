@@ -1,5 +1,7 @@
 #include "Player.hpp"
 
+int Player::cMap = 0;
+
 Player::Player(int cx, int cy, Texture* t, Map* m, vector<vector<string*>> col) : Entity(20 * Map::C, 12 * Map::C, Map::C, Map::C, t) {
     Player::cx = cx;
     Player::cy = cy;

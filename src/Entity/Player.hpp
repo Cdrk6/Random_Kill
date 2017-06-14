@@ -9,6 +9,7 @@
 
 class Player : public Entity {
   public:
+	static int cMap;
 	Player(int, int, Texture*, Map*, vector<vector<string*>>);
 	~Player();
 	void draw(SDL_Renderer*) override;
@@ -31,7 +32,6 @@ class Player : public Entity {
 	float time = 0;
 	bool walking = false;
 	bool stop = true;
-	int cMap = 0; //Choix de la map
 };
 
 #endif /* PLAYER_HPP */
