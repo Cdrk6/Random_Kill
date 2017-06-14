@@ -73,8 +73,8 @@ bool Player::collision(int dx, int dy) {
             cMap = (*col[cMap][cy + dy])[cx + dx] - '0' - 1;
             tcx = cx;
             tcy = cy;
-            cx = stoi(*col[7][(cMap - 1)*2]);
-            cy = stoi(*col[7][(cMap - 1)*2 + 1]);
+            cx = stoi(*col[9][(cMap - 1)*2]);
+            cy = stoi(*col[9][(cMap - 1)*2 + 1]);
             map->setMap(cMap);
             x = map->intx + cx * Map::C;
             y = map->inty + cy * Map::C;

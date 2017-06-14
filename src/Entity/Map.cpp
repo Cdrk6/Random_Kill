@@ -24,14 +24,14 @@ void Map::draw(SDL_Renderer* r) {
         if (Map::REDRAW)
             textures[0]->render(0, 0, x, y, 1280, 768);
         else
-            textures[8]->render(0, 0, x, y, 1280, 768);
+            textures[10]->render(0, 0, x, y, 1280, 768);
     } else
         textures[cMap]->render(intx, inty);
 }
 
 void Map::redraw() {
     if (cMap == 0)
-        textures[7]->render(0, 0, x, y, 1280, 768);
+        textures[9]->render(0, 0, x, y, 1280, 768);
 }
 
 void Map::calculate(float timeStep) {

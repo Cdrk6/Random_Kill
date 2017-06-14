@@ -1,8 +1,6 @@
 #include "NPC.hpp"
 
-NPC::NPC(int pcx, int pcy, int cx, int cy, int zw, int zh, Texture* tex, string name, vector<vector<string*>> col) : Entity((cx - (pcx - 20)) * Map::C, (cy - (pcy - 12)) * Map::C, Map::C, Map::C, tex) {
-    cout << "zadzd "<< (cx -pcx -20) << endl;
-    cout << "zadzd "<< (cy -pcy -12) << endl;
+NPC::NPC(int pcx, int pcy, int cx, int cy, int zw, int zh, Texture* tex, string name, vector<vector<string*>> col) : Entity((cx - (pcx - Map::CXSCREEN/2)) * Map::C, (cy - (pcy - Map::CYSCREEN/2)) * Map::C, Map::C, Map::C, tex) {
     NPC::cx = cx;
     NPC::cy = cy;
     NPC::icx = cx;
@@ -38,8 +36,8 @@ void NPC::calculate(float timeStep) {
     time += timeStep;
 
     //Le reste
-    if (moveTime >= 2) {
-        moveTime -= 2;
+    if (moveTime >= 5) {
+        moveTime -= 5;
         generateMove();
     } else if (time >= speed / Map::NSTEP) {
         time -= speed / Map::NSTEP;
@@ -61,10 +59,8 @@ void NPC::calculate(float timeStep) {
             }
             if ((Map::NSTEP - moving) % (Map::NSTEP / 3) == 0)
                 anim = ++anim % 3;
-            if (!moving) {
-                //cout << x << "; " << y << endl;
+            if (!moving)
                 anim = 1;
-            }
         }
     }
     if (Map::flag != -1)

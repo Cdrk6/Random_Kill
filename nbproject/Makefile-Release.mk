@@ -37,6 +37,7 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 OBJECTFILES= \
 	${OBJECTDIR}/src/Controller.o \
 	${OBJECTDIR}/src/Display.o \
+	${OBJECTDIR}/src/Entity/Dialog.o \
 	${OBJECTDIR}/src/Entity/Entity.o \
 	${OBJECTDIR}/src/Entity/Map.o \
 	${OBJECTDIR}/src/Entity/Menu.o \
@@ -83,6 +84,11 @@ ${OBJECTDIR}/src/Display.o: src/Display.cpp
 	${MKDIR} -p ${OBJECTDIR}/src
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/Display.o src/Display.cpp
+
+${OBJECTDIR}/src/Entity/Dialog.o: src/Entity/Dialog.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src/Entity
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/Entity/Dialog.o src/Entity/Dialog.cpp
 
 ${OBJECTDIR}/src/Entity/Entity.o: src/Entity/Entity.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/Entity
