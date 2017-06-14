@@ -1,11 +1,10 @@
 #include "Player.hpp"
 
-Player::Player(int cx, int cy, Texture* t, Map* m, vector<vector<string>> col, vector<NPC*> npcs) : Entity(20 * Map::C, 12 * Map::C, Map::C, Map::C, t) {
+Player::Player(int cx, int cy, Texture* t, Map* m, vector<vector<string>> col) : Entity(20 * Map::C, 12 * Map::C, Map::C, Map::C, t) {
     Player::cx = cx;
     Player::cy = cy;
     Player::map = m;
     Player::col = col;
-    Player::npcs = npcs;
 }
 
 Player::~Player() {
@@ -179,6 +178,4 @@ void Player::move(int d) {
 
 void Player::relativeMove(int d) {
     map->move(d);
-    for(int i = 0; i < npcs.size(); i++)
-        npcs[i]->relativeMove(d);
 }

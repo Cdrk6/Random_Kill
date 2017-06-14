@@ -28,10 +28,10 @@ void NPC::calculate(float timeStep) {
         time = 0;
         moving--;
     }
-    if (relMoving == Map::NSTEP + 1) {
+    /*if (relMoving == Map::NSTEP + 1) {
         relTime = 0;
         relMoving--;
-    }
+    }*/
 
     //Incrémentation des timer
     moveTime += timeStep;
@@ -69,29 +69,8 @@ void NPC::calculate(float timeStep) {
             }
         }
     }
-    if (relTime >= speed / Map::NSTEP) {
-        relTime -= speed / Map::NSTEP;
-        if (relMoving) {
-            relMoving--;
-            switch (relDir) {
-                case 0: //Down
-                    y -= Map::STEP;
-                    break;
-                case 1: //Left
-                    x += Map::STEP;
-                    break;
-                case 2: //Right
-                    x -= Map::STEP;
-                    break;
-                case 3: //Up
-                    y += Map::STEP;
-                    break;
-            }
-            if (!relMoving) {
-                cout << x << "; " << y << endl;
-            }
-        }
-    }
+    if(Map::flag != -1)
+        relativeMove(Map::flag);
 }
 
 bool NPC::collision(int dx, int dy) {
@@ -144,7 +123,19 @@ void NPC::move(int d) {
     }
 }
 
-void NPC::relativeMove(int d) {
-    relDir = d;
-    relMoving = Map::NSTEP + 1;
+void NPC::relativeMove(int relD) {
+    switch (relD) {
+        case 0: //Down
+            y -= Map::STEP;
+            break;
+        case 1: //Left
+            x += Map::STEP;
+            break;
+        case 2: //Right
+            x -= Map::STEP;
+            break;
+        case 3: //Up
+            y += Map::STEP;
+            break;
+    }
 }

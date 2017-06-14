@@ -17,6 +17,7 @@ class Map : public Entity {
 	static const int CXSCREEN;
 	static const int CYSCREEN;
 	static const bool REDRAW; //True : affichage en 2 couches
+	static int flag;
 	
 	float intx = 0;
 	float inty = 0;

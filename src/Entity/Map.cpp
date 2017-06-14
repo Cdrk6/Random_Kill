@@ -10,6 +10,7 @@ const int Map::MAXCX = 144;
 const int Map::MAXCY = 139;
 const int Map::CXSCREEN = 40;
 const int Map::CYSCREEN = 24;
+int Map::flag = -1;
 
 Map::Map(int cx, int cy, vector<Texture*> t) : Entity(cx*C, cy*C, t[0]) {
     Map::textures = t;
@@ -34,6 +35,7 @@ void Map::redraw() {
 }
 
 void Map::calculate(float timeStep) {
+    flag = -1;
     if (moving == NSTEP + 1) {
         time = 0;
         moving--;
@@ -44,7 +46,7 @@ void Map::calculate(float timeStep) {
     time -= speed / NSTEP;
     if (moving) {
         moving--;
-        
+        flag = dir;
         switch (dir) {
             case 0: //Down
                 y += STEP;
