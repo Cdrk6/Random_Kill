@@ -27,6 +27,12 @@ IO::~IO() {
         delete mapImgs[i];
     for (int i = 0; i < chaImgs.size(); i++)
         delete chaImgs[i];
+    for (int i = 0; i < colData.size(); i++)
+        for(int j = 0; j < colData[i].size(); j++)
+            delete colData[i][j];
+    for (int i = 0; i < npcData.size(); i++)
+        for(int j = 0; j < npcData[i].size(); j++)
+            delete npcData[i][j];
     for (int i = 0; i < fonts.size(); i++) {
         TTF_CloseFont(fonts[i]);
         fonts[i] = NULL;
@@ -74,13 +80,13 @@ Texture* IO::loadTexture(const string &path) {
     return texture;
 }
 
-vector<string> IO::loadTextFile(const string &path) {
-    vector<string> dat;
+vector<string*> IO::loadTextFile(const string &path) {
+    vector<string*> dat;
     string line;
     ifstream file(path);
     if (file.is_open()) {
         while (getline(file, line))
-            dat.push_back(line);
+            dat.push_back(new string(line));
         file.close();
     }
     else cout << "Unable to open file";
@@ -100,9 +106,9 @@ vector<Texture*> IO::loadImages(string path) {
     return images;
 }
 
-vector<vector<string>> IO::loadData(string path) {
+vector<vector<string*>> IO::loadData(string path) {
     vector<string>* paths = findAllFiles(path);
-    vector<vector<string>> data = vector<vector < string>>(paths->size());
+    vector<vector<string*>> data = vector<vector < string*>>(paths->size());
     for (int i = 0; i < paths->size(); i++) {
         filesystem::path path((*paths)[i]);
         //cout << i << ". " << (*paths)[i] << " ;FN : "<< path.stem().string() << endl;
@@ -140,11 +146,11 @@ vector<Texture*> IO::getCharacterImages() {
     return chaImgs;
 }
 
-vector<vector<string>> IO::getCollisionsData() {
+vector<vector<string*>> IO::getCollisionsData() {
     return colData;
 }
 
-vector<vector<string>> IO::getNPCData() {
+vector<vector<string*>> IO::getNPCData() {
     return npcData;
 }
 

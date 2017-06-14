@@ -161,16 +161,16 @@ void Display::initGameEnts(IO* io) {
     int initcx = 25; //43;
     int initcy = 20; //112;
 
-    vector<vector < string>> colDat = io->getCollisionsData();
-    vector<vector < string>> npcDat = io->getNPCData();
+    vector<vector < string*>> colDat = io->getCollisionsData();
+    vector<vector < string*>> npcDat = io->getNPCData();
     Texture* tex = NULL;
     
     Map* m = new Map(initcx - Map::CXSCREEN / 2, initcy - Map::CYSCREEN / 2, io->getMapImages());
     gameEnts.push_back(m);
     gameEnts.push_back(new Player(initcx, initcy, io->getCharacterImages()[0], m, colDat));
     for (int i = 0; i < npcDat.size(); i++) {
-        tex = io->getCharacterImages()[stoi(npcDat[i][4])];
-        gameEnts.push_back(new NPC(stoi(npcDat[i][0]), stoi(npcDat[i][1]), stoi(npcDat[i][2]), stoi(npcDat[i][3]), tex, npcDat[i][5], colDat));
+        tex = io->getCharacterImages()[stoi(*npcDat[i][4])];
+        gameEnts.push_back(new NPC(initcx, initcy, stoi(*npcDat[i][0]), stoi(*npcDat[i][1]), stoi(*npcDat[i][2]), stoi(*npcDat[i][3]), tex, *npcDat[i][5], colDat));
     }
 }
 

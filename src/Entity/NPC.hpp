@@ -12,7 +12,7 @@ using namespace std;
 
 class NPC : public Entity {
   public:
-	NPC(int, int, int, int, Texture*, string, vector<vector<string>>);
+	NPC(int, int, int, int, int, int, Texture*, string, vector<vector<string*>>);
 	~NPC();
 	void draw(SDL_Renderer*) override;
 	void calculate(float) override;
@@ -22,18 +22,17 @@ class NPC : public Entity {
 	void generateMove();
 
   private:
-	vector<vector<string>> col;
+	vector<vector<string*>> col;
 	float moveTime = 0;
-	float relTime = 0;
 	float time = 0;
 	int anim = 1;
-	int relDir = 0;
 	int dir = 0;
-	int relMoving = 0;
 	int moving = 0;
 	float speed = 0.25; //Temps pour parcourir une case en seconde
 	int cx = 0;
 	int cy = 0;
+	int icx = 0;
+	int icy = 0;
 	int zw = 0;
 	int zh = 0;
 	int cMap = 0; //Choix de la map

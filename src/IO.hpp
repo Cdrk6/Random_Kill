@@ -31,8 +31,8 @@ class IO {
 	vector<Texture*> getMenuImages();
 	vector<Texture*> getMapImages();
 	vector<Texture*> getCharacterImages();
-	vector<vector<string>> getCollisionsData();
-	vector<vector<string>> getNPCData();
+	vector<vector<string*>> getCollisionsData();
+	vector<vector<string*>> getNPCData();
 	vector<TTF_Font*> getFonts();
 	//vector<Texture*> getSounds();
 
@@ -41,17 +41,17 @@ class IO {
 	vector<Texture*> menImgs;
 	vector<Texture*> mapImgs;
 	vector<Texture*> chaImgs;
-	vector<vector<string>> colData;
-	vector<vector<string>> npcData;
+	vector<vector<string*>> colData;
+	vector<vector<string*>> npcData;
 	vector<TTF_Font*> fonts;
 	//vector<TTF_Font*> sounds;
 	
 	//Méthodes :
 	vector<string>* findAllFiles(const string&); //Trouve tous les chemins de tous les fichiers dans un répertoire
 	Texture* loadTexture(const string&); //Charge une image à l'aide du chemin passé en argument
-	vector<string> loadTextFile(const string &); //Charge un fichier texte
+	vector<string*> loadTextFile(const string &); //Charge un fichier texte
 	vector<Texture*> loadImages(string path); //Charge toutes les images de path
-	vector<vector<string>> loadData(string path); //Charge toutes les données textuelles dans path
+	vector<vector<string*>> loadData(string path); //Charge toutes les données textuelles dans path
 	void loadFonts(); //Charge toutes les polices
 	//void loadSounds(); //Charge tous les sons*/
 };

@@ -1,6 +1,6 @@
 #include "Player.hpp"
 
-Player::Player(int cx, int cy, Texture* t, Map* m, vector<vector<string>> col) : Entity(20 * Map::C, 12 * Map::C, Map::C, Map::C, t) {
+Player::Player(int cx, int cy, Texture* t, Map* m, vector<vector<string*>> col) : Entity(20 * Map::C, 12 * Map::C, Map::C, Map::C, t) {
     Player::cx = cx;
     Player::cy = cy;
     Player::map = m;
@@ -55,26 +55,26 @@ void Player::calculate(float timeStep) {
 }
 
 bool Player::collision(int dx, int dy) {
-    if (cx + dx < 0 || cy + dy < 0 || cx + dx >= col[cMap][0].size() || cy + dy >= col[cMap].size() || col[cMap][cy + dy][cx + dx] == '0') { //Si on est sur le bord de la map ou si collision
+    if (cx + dx < 0 || cy + dy < 0 || cx + dx >= (*col[cMap][0]).size() || cy + dy >= col[cMap].size() || (*col[cMap][cy + dy])[cx + dx] == '0') { //Si on est sur le bord de la map ou si collision
         stop = true;
         return true;
     }
 
     // Modification de la matrice de collision
-    if (col[cMap][cy][cx] - '0' < 2)
-        col[cMap][cy][cx] = '1';
-    if (col[cMap][cy + dy][cx + dx] - '0' < 2)
-        col[cMap][cy + dy][cx + dx] = '0';
+    if ((*col[cMap][cy])[cx] - '0' < 2)
+        (*col[cMap][cy])[cx] = '1';
+    if ((*col[cMap][cy + dy])[cx + dx] - '0' < 2)
+        (*col[cMap][cy + dy])[cx + dx] = '0';
 
     //Changement de map
-    if (col[cMap][cy + dy][cx + dx] - '0' > 1) {
+    if ((*col[cMap][cy + dy])[cx + dx] - '0' > 1) {
         if (cMap == 0) {
             stop = true;
-            cMap = col[cMap][cy + dy][cx + dx] - '0' - 1;
+            cMap = (*col[cMap][cy + dy])[cx + dx] - '0' - 1;
             tcx = cx;
             tcy = cy;
-            cx = stoi(col[7][(cMap - 1)*2]);
-            cy = stoi(col[7][(cMap - 1)*2 + 1]);
+            cx = stoi(*col[7][(cMap - 1)*2]);
+            cy = stoi(*col[7][(cMap - 1)*2 + 1]);
             map->setMap(cMap);
             x = map->intx + cx * Map::C;
             y = map->inty + cy * Map::C;
@@ -88,7 +88,7 @@ bool Player::collision(int dx, int dy) {
             if (cx <= Map::MINCX)
                 x = cx * Map::C;
             else if (cx >= Map::MAXCX)
-                x = (Map::CXSCREEN - (col[0][0].size() - cx)) * Map::C;
+                x = (Map::CXSCREEN - ((*col[0][0]).size() - cx)) * Map::C;
             else
                 x = Map::CXSCREEN / 2 * Map::C;
             if (cy <= Map::MINCY)
@@ -144,6 +144,7 @@ void Player::move(int d) {
             cy--;
             break;
     }
+    cout << cx << " ; " << cy << endl;
     if (cMap != 0) {
         walking = true;
         return;

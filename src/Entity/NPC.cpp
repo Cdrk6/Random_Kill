@@ -1,8 +1,12 @@
 #include "NPC.hpp"
 
-NPC::NPC(int cx, int cy, int zw, int zh, Texture* tex, string name, vector<vector<string>> col) : Entity(cx * Map::C, cy * Map::C, Map::C, Map::C, tex) {
+NPC::NPC(int pcx, int pcy, int cx, int cy, int zw, int zh, Texture* tex, string name, vector<vector<string*>> col) : Entity((cx - (pcx - 20)) * Map::C, (cy - (pcy - 12)) * Map::C, Map::C, Map::C, tex) {
+    cout << "zadzd "<< (cx -pcx -20) << endl;
+    cout << "zadzd "<< (cy -pcy -12) << endl;
     NPC::cx = cx;
     NPC::cy = cy;
+    NPC::icx = cx;
+    NPC::icy = cy;
     NPC::zw = zw;
     NPC::zh = zh;
     NPC::name = name;
@@ -28,20 +32,14 @@ void NPC::calculate(float timeStep) {
         time = 0;
         moving--;
     }
-    /*if (relMoving == Map::NSTEP + 1) {
-        relTime = 0;
-        relMoving--;
-    }*/
 
     //Incrémentation des timer
     moveTime += timeStep;
-    relTime += timeStep;
     time += timeStep;
 
     //Le reste
     if (moveTime >= 2) {
         moveTime -= 2;
-        //move(1);
         generateMove();
     } else if (time >= speed / Map::NSTEP) {
         time -= speed / Map::NSTEP;
@@ -64,23 +62,25 @@ void NPC::calculate(float timeStep) {
             if ((Map::NSTEP - moving) % (Map::NSTEP / 3) == 0)
                 anim = ++anim % 3;
             if (!moving) {
-                cout << x << "; " << y << endl;
+                //cout << x << "; " << y << endl;
                 anim = 1;
             }
         }
     }
-    if(Map::flag != -1)
+    if (Map::flag != -1)
         relativeMove(Map::flag);
 }
 
 bool NPC::collision(int dx, int dy) {
-    if (cx + dx < 0 || cy + dy < 0 || cx + dx >= col[cMap][0].size() || cy + dy >= col[cMap].size() || col[cMap][cy + dy][cx + dx] != '1') { //Si on est sur le bord de la map ou si collision
+    if (cx + dx < 0 || cy + dy < 0 || cx + dx >= (*col[cMap][0]).size() || cy + dy >= col[cMap].size() || (*col[cMap][cy + dy])[cx + dx] != '1') { //Si on est sur le bord de la map ou si collision
         return true;
     }
+    if (cx + dx < icx || cy + dy < icy || cx + dx > icx + zw - 1 || cy + dy > icy + zh - 1)
+        return true;
 
     // Modification de la matrice de collision
-    col[cMap][cy][cx] = '1';
-    col[cMap][cy + dy][cx + dx] = '0';
+    (*col[cMap][cy])[cx] = '1';
+    (*col[cMap][cy + dy])[cx + dx] = '0';
     return false;
 }
 
@@ -121,6 +121,7 @@ void NPC::move(int d) {
             cy--;
             break;
     }
+    cout << cx << " ; " << cy << endl;
 }
 
 void NPC::relativeMove(int relD) {

@@ -9,7 +9,7 @@
 
 class Player : public Entity {
   public:
-	Player(int, int, Texture*, Map*, vector<vector<string>>);
+	Player(int, int, Texture*, Map*, vector<vector<string*>>);
 	~Player();
 	void draw(SDL_Renderer*) override;
 	void calculate(float) override;
@@ -19,7 +19,7 @@ class Player : public Entity {
 
   private:
 	Map* map = NULL;
-	vector<vector<string>> col;
+	vector<vector<string*>> col;
 	int cx = 0;
 	int cy = 0;
 	int tcx = 0;
