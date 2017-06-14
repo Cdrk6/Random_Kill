@@ -13,6 +13,8 @@ Player::~Player() {
 
 void Player::draw(SDL_Renderer* r) {
     t->render(x, y, anim * w, dir * h, w, h);
+    if (Map::REDRAW)
+        map->redraw();
 }
 
 void Player::calculate(float timeStep) {
@@ -42,10 +44,10 @@ void Player::calculate(float timeStep) {
                     y -= Map::STEP;
                     break;
             }
-        if((Map::NSTEP - moving) % (Map::NSTEP / 3) == 0)
+        if ((Map::NSTEP - moving) % (Map::NSTEP / 3) == 0)
             anim = ++anim % 3;
         if (!moving) {
-            //cout << x << "; " << y << endl;
+            cout << x << "; " << y << endl;
             walking = false;
             anim = 1;
             if (!stop)
@@ -55,21 +57,30 @@ void Player::calculate(float timeStep) {
 }
 
 bool Player::collision(int dx, int dy) {
-    if (cx+dx < 0 || cy+dy < 0 || cx+dx >= col[cMap][0].size() || cy+dy >= col[cMap].size() || col[cMap][cy + dy][cx + dx] == '0') { //Si on est sur le bord de la map ou si collision
+    if (cx + dx < 0 || cy + dy < 0 || cx + dx >= col[cMap][0].size() || cy + dy >= col[cMap].size() || col[cMap][cy + dy][cx + dx] == '0') { //Si on est sur le bord de la map ou si collision
         stop = true;
         return true;
-    } else if (col[cMap][cy + dy][cx + dx] - '0' > 1) { //Changement de map
+    }
+    
+    // Modification de la map de collision
+    if (col[cMap][cy][cx] - '0' < 2)
+        col[cMap][cy][cx] = '1';
+    if (col[cMap][cy + dy][cx + dx] - '0' < 2)
+        col[cMap][cy + dy][cx + dx] = '0';
+    
+    //Changement de map
+    if (col[cMap][cy + dy][cx + dx] - '0' > 1) {
         if (cMap == 0) {
             stop = true;
             cMap = col[cMap][cy + dy][cx + dx] - '0' - 1;
             tcx = cx;
             tcy = cy;
-            cx = stoi(col[7][(cMap-1)*2]);
-            cy = stoi(col[7][(cMap-1)*2+1]);
+            cx = stoi(col[7][(cMap - 1)*2]);
+            cy = stoi(col[7][(cMap - 1)*2 + 1]);
             map->setMap(cMap);
             x = map->intx + cx * Map::C;
             y = map->inty + cy * Map::C;
-        } else if(dir == 0){
+        } else if (dir == 0) {
             stop = true;
             cMap = 0;
             cx = tcx;
@@ -81,13 +92,13 @@ bool Player::collision(int dx, int dy) {
             else if (cx >= Map::MAXCX)
                 x = (Map::CXSCREEN - (col[0][0].size() - cx)) * Map::C;
             else
-                x = Map::CXSCREEN/2 * Map::C;
+                x = Map::CXSCREEN / 2 * Map::C;
             if (cy <= Map::MINCY)
                 y = cy * Map::C;
             else if (cy >= Map::MAXCY)
                 y = (Map::CYSCREEN - (col[0].size() - cy)) * Map::C;
             else
-                y = Map::CYSCREEN/2 * Map::C;
+                y = Map::CYSCREEN / 2 * Map::C;
         }
     }
     return false;
@@ -135,33 +146,31 @@ void Player::move(int d) {
             cy--;
             break;
     }
-    map->setCoord(cx, cy);
-    cout << cx << "; " << cy << endl;
     if (cMap != 0) {
         walking = true;
         return;
     }
     switch (d) {
         case 0: //Down
-            if (cy > Map::MINCY+1 && cy < Map::MAXCY)
+            if (cy > Map::MINCY + 1 && cy < Map::MAXCY)
                 map->move(d);
             else
                 walking = true;
             break;
         case 1: //Left
-            if (cx > Map::MINCX && cx < Map::MAXCX-1)
+            if (cx > Map::MINCX && cx < Map::MAXCX - 1)
                 map->move(d);
             else
                 walking = true;
             break;
         case 2: //Right
-            if (cx > Map::MINCX+1 && cx < Map::MAXCX)
+            if (cx > Map::MINCX + 1 && cx < Map::MAXCX)
                 map->move(d);
             else
                 walking = true;
             break;
         case 3: //Up
-            if (cy > Map::MINCY && cy < Map::MAXCY-1)
+            if (cy > Map::MINCY && cy < Map::MAXCY - 1)
                 map->move(d);
             else
                 walking = true;

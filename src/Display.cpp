@@ -40,7 +40,7 @@ SDL_Renderer* Display::getRenderer() {
 
 bool Display::initSDL() {
     bool success = true; //Initialization flag
-    if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO | SDL_INIT_JOYSTICK) < 0) { //Initialize SDL
+    if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO | SDL_INIT_JOYSTICK | SDL_INIT_GAMECONTROLLER) < 0) { //Initialize SDL
         cerr << "SDL could not initialize! SDL Error: " << SDL_GetError() << endl;
         success = false;
     } else {
@@ -157,14 +157,14 @@ void Display::initGameEnts(IO* io) {
     int initcx = 25; //43;
     int initcy = 20; //112;
 
-    Map* m = new Map(initcx - 20, initcy - 12, io->getMapImages());
+    Map* m = new Map(initcx - Map::CXSCREEN/2, initcy - Map::CYSCREEN/2, io->getMapImages());
     gameEnts.push_back(m);
     gameEnts.push_back(new Player(initcx, initcy, io->getCharacterImages()[0], m, io->getCollisionsData()));
     vector<vector < string>> npcDat = io->getNPCData();
     Texture* tex = NULL;
     for (int i = 0; i < npcDat.size(); i++) {
         tex = io->getCharacterImages()[stoi(npcDat[i][4])];
-        gameEnts.push_back(new NPC(stoi(npcDat[i][0]), stoi(npcDat[i][1]), stoi(npcDat[i][2]), stoi(npcDat[i][3]), tex, npcDat[i][5]));
+        gameEnts.push_back(new NPC(stoi(npcDat[i][0]), stoi(npcDat[i][1]), stoi(npcDat[i][2]), stoi(npcDat[i][3]), tex, npcDat[i][5], io->getCollisionsData()));
     }
 }
 

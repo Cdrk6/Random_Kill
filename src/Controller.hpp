@@ -10,6 +10,7 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_joystick.h>
 #include <SDL2/SDL_ttf.h>
+#include <SDL2/SDL_gamecontroller.h>
 
 #define toString(name) # name
 #define DEFAULT_TIMEOUT 5
@@ -102,7 +103,8 @@ public:
 
 private:
     GameMode gameControlType;
-    SDL_Joystick* myJoystick;
+    //SDL_GameController* myJoystick;
+	SDL_Joystick* myJoystick;
     int myNbButtonsUsed;
     int* myJoystickConfig;
     JoystickButton* buttonsPressed;

@@ -3,6 +3,7 @@
 
 Controller::Controller(int timeout, int nbButtonsUsed) {
     //SDL Joystick initialization
+    //if (SDL_Init(SDL_INIT_GAMECONTROLLER) != 0) {
     if (SDL_Init(SDL_INIT_JOYSTICK) != 0) {
         fprintf(stdout, "SDL Initialization failure : %s\n", SDL_GetError());
         exit(-1);
@@ -25,6 +26,7 @@ Controller::Controller(int timeout, int nbButtonsUsed) {
         if (event.type == SDL_JOYDEVICEADDED) {
             cout << "Joystick Connected." << endl;
             cout << "\tJoystick : " << (int) event.jdevice.which << endl;
+            //myJoystick = SDL_GameControllerOpen(event.jdevice.which);
             myJoystick = SDL_JoystickOpen(event.jdevice.which);
             gameControlType = JOYSTICK;
             cont = false;
@@ -43,6 +45,7 @@ Controller::Controller(int timeout, int nbButtonsUsed) {
 
 Controller::~Controller() {
     if (isJoystickModeEnabled())
+        //SDL_GameControllerClose(myJoystick);
         SDL_JoystickClose(myJoystick);
     if (myJoystickConfig != NULL)
         delete myJoystickConfig;
@@ -233,7 +236,10 @@ int Controller::getIndexOfCommand(bool init, vector<Entity*> ents) {
 
     if (event.type == SDL_JOYHATMOTION && event.jhat.value == 0)
         return -1;
-
+    /*bool b =  SDL_GameControllerGetButton(myJoystick, SDL_CONTROLLER_BUTTON_DPAD_UP);
+    bool Start = SDL_GameControllerGetButton(myJoystick, SDL_CONTROLLER_BUTTON_START);
+    bool b2 = SDL_GameControllerGetAttached(myJoystick);
+    cout << b2 << endl;*/
     //Player* p = dynamic_cast <Player*> (ents[1]);
     switch (event.type) {
         case SDL_JOYBUTTONDOWN:
@@ -271,7 +277,6 @@ int Controller::getIndexOfCommand(bool init, vector<Entity*> ents) {
                             return 16;
                         case SDL_HAT_LEFT:
                             ents[1]->move(1);
-
                             return 17;
                     }
                     break;

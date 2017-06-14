@@ -33,7 +33,7 @@ void Texture::free() {
 void Texture::setText(string txt) {
     free(); //Get rid of preexisting texture
 
-    SDL_Surface* textSurface = TTF_RenderText_Solid(gFont, txt.c_str(), {255, 255, 255}); //Render text surface
+    SDL_Surface* textSurface = TTF_RenderText_Solid(gFont, txt.c_str(), {0, 0, 0}); //Render text surface
     if (textSurface != NULL) {
         mTexture = SDL_CreateTextureFromSurface(gRenderer, textSurface); //Create texture from surface pixels
         if (mTexture == NULL)
