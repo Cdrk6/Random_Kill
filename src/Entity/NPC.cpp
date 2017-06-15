@@ -9,6 +9,7 @@ NPC::NPC(int pcx, int pcy, int cx, int cy, int zw, int zh, Texture* tex, string 
     NPC::zh = zh;
     NPC::name = name;
     NPC::col = col;
+    (*NPC::col[cMap][cy])[cx] = '0';
 }
 
 NPC::~NPC() {
@@ -21,7 +22,6 @@ void NPC::draw(SDL_Renderer* r) {
 
 void NPC::generateMove() {
     int randDir = rand() % 4;
-    cout << randDir << endl;
     move(randDir);
 }
 
@@ -118,7 +118,7 @@ void NPC::move(int d) {
             cy--;
             break;
     }
-    cout << cx << " ; " << cy << endl;
+    //cout << cx << " ; " << cy << endl;
 }
 
 void NPC::relativeMove(int relD) {

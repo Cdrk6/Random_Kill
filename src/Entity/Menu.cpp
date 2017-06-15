@@ -23,7 +23,8 @@ void Menu::draw(SDL_Renderer* r) {
 void Menu::calculate(float timeStep) {
 }
 
-void Menu::move(int dir) {
-    state = dir;
+void Menu::move(int d) {
+    //if(d < 0 && )
+    state = d;
 }
 

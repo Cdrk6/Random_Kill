@@ -1,0 +1,56 @@
+Keith : « As-tu déjà croisé des fées ? »
+	Oui : « Génial ! » 
+	Non : « Aimerais-tu en croiser ? »
+		Oui : « Mon amie Margie pourra t’aider. Elle vit dans une grotte. »
+		Non : « Tant pis ! »
+
+Margie : « Es-tu digne ? »
+	Oui : « Va dans la forêt. »
+	Non : « Passe ton chemin. »
+
+Brian : « Sais-tu ce qu’est une fée ? »
+	Oui : « Parfait ! »
+	Non : « Il s’agit de l’énergie présente dans chacun d’entre nous et qui permet notre libre arbitre. Aimerais-tu rencontrer la tienne? »
+		Oui : « Va voir Blasius près de la rivière. »
+		Non : « Bon Retour! »
+
+Blasius : « Ta fée t’appelle. Dis-moi, qui t’a mené jusqu’ici ? »
+	Keith, Margie et Brian : « Quête réussie »
+	Autres : « Fail »
+
+Rushi : « As-tu la fibre d’un Ninja ? »
+	Oui : « Nous allons voir ça ! »
+	Non : « Tant pis. »
+		« Que faut-il préférer à l’agréable ? » l’utile
+		« Lorsqu’un fou court, une personne saine … » court
+		« Il n’y a pas de katana pour s’attaquer à … » la gentille
+		« Le froid comme la chaleur ne dure pas jusqu’à … » l’équinoxe
+		« Que faut-il laver par le sang ? » le sang
+		« Pierre qui roule n’amasse pas … » mousse
+		« Si les bonnes nouvelles marchent, les mauvaises … » courent
+		« Que commande les hommes et le monde ? » la monnaie
+		« Qu’est-ce qui est meilleur que rien ? » peu
+		« Qu’est-ce que la base du succès ? » l’échec
+			« Tu es digne de faire partie des nôtres. Pour prouver ta valeur, il te faudra tuer Zukarin. » 
+
+Richy : « Hmmmmmmmm… »
+
+Tony : « As-tu vu des rats de rue? »
+	Oui : « C’est un animal bien sale. »
+	Non : « Va voir Moshy le chinois. »
+
+Moshy : « Un problème ? »
+	Oui : « Je n’ai rien fait de mal. »
+	Non : « Au revoir. »
+
+Professeur Khan : « Il y a beaucoup de Ninja qui trainent dans la rue. En as-tu vu un ? »
+	Oui : « C’est suspect par la bas. »
+	Non : « Rushi va pouvoir t’aider, mais je ne sais pas où il est. » 
+
+Éline : « Es-tu à la recherche de quelqu’un ? »
+	Oui : « Je te conseille de chercher dans les maisons. Elles sont parfois ouvertes ! »
+	Non : « Autant pour moi, parce qu’on me pose souvent cette question.  »
+
+Zukarin : « J’ai perdu mes clefs près de cette arbre, les as-tu vu? »
+	Oui : « Ohhhhh merci !!! »
+	Non : « Arggg, merci quand même. »

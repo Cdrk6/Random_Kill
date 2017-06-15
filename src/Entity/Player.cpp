@@ -146,7 +146,7 @@ void Player::move(int d) {
             cy--;
             break;
     }
-    cout << cx << " ; " << cy << endl;
+    //cout << cx << " ; " << cy << endl;
     if (cMap != 0) {
         walking = true;
         return;

@@ -8,7 +8,8 @@ Dialog::~Dialog() {
 }
 
 void Dialog::draw(SDL_Renderer* r) {
-    
+    t->render(100, 500);
+    //Texture fps(20, 20, to_string(avgFPS), fnts[0], r);
 }
 
 void Dialog::calculate(float timeStep) {
