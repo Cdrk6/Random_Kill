@@ -17,6 +17,7 @@ class Player : public Entity {
 	void move(int) override;
 	bool collision(int, int); //True collision, False pas de collision
 	void relativeMove(int);
+	void stopMoving();
 
   private:
 	Map* map = NULL;
@@ -26,6 +27,7 @@ class Player : public Entity {
 	int tcx = 0;
 	int tcy = 0;
 	int dir = 0;
+	int fDir = -1;
 	int anim = 1;
 	float speed = 0.25; //Temps pour parcourir une case en seconde
 	int moving = 0;

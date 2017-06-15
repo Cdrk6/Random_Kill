@@ -242,6 +242,7 @@ int Controller::getIndexOfCommand(bool init, vector<Entity*> ents) {
     cout << b2 << endl;*/
     //Player* p = dynamic_cast <Player*> (ents[1]);
     Menu* m = NULL;
+    Player* p = NULL;
     switch (event.type) {
         case SDL_JOYBUTTONDOWN:
             cout << (int) event.jbutton.button << endl;
@@ -258,6 +259,15 @@ int Controller::getIndexOfCommand(bool init, vector<Entity*> ents) {
                     }
                     break;
                 case 1:
+                    p = dynamic_cast <Player*> (ents[1]);
+                    switch ((int) event.jbutton.button) {
+                        case 0:
+                            
+                            break;
+                        case 1:
+                            p->stopMoving();
+                            break;
+                    }
                     break;
             }
             return event.jbutton.button;

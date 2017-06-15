@@ -50,8 +50,12 @@ void Player::calculate(float timeStep) {
             //cout << x << "; " << y << endl;
             walking = false;
             anim = 1;
-            if (!stop)
-                Player::move(dir + 4);
+            if (!stop) {
+                if (fDir != -1) {
+                    Player::move(fDir);
+                    fDir = -1;
+                } else Player::move(dir);
+            }
         }
     }
 }
@@ -104,15 +108,20 @@ bool Player::collision(int dx, int dy) {
     return false;
 }
 
+void Player::stopMoving() {
+    stop = true;
+}
+
 void Player::move(int d) {
-    if (d < 4)
-        stop = !stop;
-    else
-        d -= 4;
-    if (moving)
+    stop = false;
+    // if (d > 3)
+    //   d -= 4;
+    if (moving) {
+        if (dir != d)
+            fDir = d;
         return;
+    }
     dir = d;
-    //cout << col[cy + 1][cx] << col[cy][cx - 1] << col[cy][cx + 1] << col[cy - 1][cx] << endl;
     switch (dir) {
         case 0: //Down
             if (collision(0, 1))

@@ -31,20 +31,21 @@ void Menu::calculate(float timeStep) {
 }
 
 void Menu::validate() {
-    switch (state) {
-        case 0:
-            Display::menu = 1;
-            break;
-        case 1:
-            display = 1;
-            break;
-        case 2:
-            display = 2;
-            break;
-        case 3:
-            Display::quit = true;
-            break;
-    }
+    if (display == 0)
+        switch (state) {
+            case 0:
+                Display::menu = 1;
+                break;
+            case 1:
+                display = 1;
+                break;
+            case 2:
+                display = 2;
+                break;
+            case 3:
+                Display::quit = true;
+                break;
+        }
 }
 
 void Menu::unvalidate() {
