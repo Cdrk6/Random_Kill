@@ -1,7 +1,5 @@
 #include "Menu.hpp"
 
-int Menu::state = 0;
-
 Menu::Menu(vector<Texture*> texs) : Entity(0, 0, texs[0]) {
     Menu::textures = texs;
 }
@@ -10,21 +8,53 @@ Menu::~Menu() {
 }
 
 void Menu::draw(SDL_Renderer* r) {
-    t->render(0, 0);
-    if (state == 0) {
-        textures[2]->render(350, 250, textures[2]->getWidth() / 2, 0, textures[2]->getWidth() / 2, textures[2]->getHeight());
-        textures[4]->render(350, 330, 0, 0, textures[4]->getWidth() / 2, textures[4]->getHeight());
-    } else {
-        textures[2]->render(350, 250, 0, 0, textures[2]->getWidth() / 2, textures[2]->getHeight());
-        textures[4]->render(350, 330, textures[4]->getWidth() / 2, 0, textures[4]->getWidth() / 2, textures[4]->getHeight());
+    switch (display) {
+        case 0:
+            t->render(0, 0);
+            for (int i = 1; i < 5; i++) {
+                if (state + 1 == i)
+                    textures[i]->render(350, 220 + 65 * (i - 1), textures[i]->getWidth() / 2, 0, textures[i]->getWidth() / 2, textures[i]->getHeight());
+                else
+                    textures[i]->render(350, 220 + 65 * (i - 1), 0, 0, textures[i]->getWidth() / 2, textures[i]->getHeight());
+            }
+            break;
+        case 1:
+            textures[5]->render(0, 0);
+            break;
+        case 2:
+            textures[6]->render(0, 0);
+            break;
     }
 }
 
 void Menu::calculate(float timeStep) {
 }
 
+void Menu::validate() {
+    switch (state) {
+        case 0:
+            Display::menu = 1;
+            break;
+        case 1:
+            display = 1;
+            break;
+        case 2:
+            display = 2;
+            break;
+        case 3:
+            Display::quit = true;
+            break;
+    }
+}
+
+void Menu::unvalidate() {
+    state = 0;
+    display = 0;
+}
+
 void Menu::move(int d) {
-    //if(d < 0 && )
-    state = d;
+    if ((d < 0 && state == 0) || (d > 0 && state == 3))
+        return;
+    state += d;
 }
 

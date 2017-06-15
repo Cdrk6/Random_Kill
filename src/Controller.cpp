@@ -241,24 +241,19 @@ int Controller::getIndexOfCommand(bool init, vector<Entity*> ents) {
     bool b2 = SDL_GameControllerGetAttached(myJoystick);
     cout << b2 << endl;*/
     //Player* p = dynamic_cast <Player*> (ents[1]);
+    Menu* m = NULL;
     switch (event.type) {
         case SDL_JOYBUTTONDOWN:
             cout << (int) event.jbutton.button << endl;
             switch (Display::menu) {
                 case 0:
+                    m = dynamic_cast <Menu*> (ents[0]);
                     switch ((int) event.jbutton.button) {
                         case 0:
-                            switch (Menu::state) {
-                                case 0:
-                                    Display::menu = 1;
-                                    break;
-                                case 1:
-                                    Display::quit = true;
-                                    break;
-                            }
+                            m->validate();
                             break;
                         case 1:
-                            
+                            m->unvalidate();
                             break;
                     }
                     break;
@@ -271,7 +266,7 @@ int Controller::getIndexOfCommand(bool init, vector<Entity*> ents) {
                 case 0:
                     switch (event.jhat.value) {
                         case SDL_HAT_UP:
-                            ents[0]->move(0);
+                            ents[0]->move(-1);
                             return 15;
                         case SDL_HAT_DOWN:
                             ents[0]->move(1);
