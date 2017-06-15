@@ -12,8 +12,9 @@
 using namespace std;
 
 class NPC : public Entity {
-  public:
-	NPC(int, int, int, int, int, int, Texture*, string, vector<vector<string*>>);
+public:
+	bool alive = true;
+	NPC(int, int, int, int, int, int, Texture*, Texture*, string, vector<vector<string*>>);
 	~NPC();
 	void draw(SDL_Renderer*) override;
 	void calculate(float) override;
@@ -23,11 +24,12 @@ class NPC : public Entity {
 	void generateMove();
 	int getCX();
 	int getCY();
-	
+
 	bool dialog = false;
 
-  private:
+private:
 	vector<vector<string*>> col;
+	Texture* tex2 = NULL;
 	float moveTime = 0;
 	float time = 0;
 	int anim = 1;

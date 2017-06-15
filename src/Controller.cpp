@@ -267,6 +267,9 @@ int Controller::getIndexOfCommand(bool init, vector<Entity*> ents) {
                         case 1:
                             p->stopMoving();
                             break;
+						case 3:
+							p->shoot();
+							break;
                     }
                     break;
             }

@@ -4,3 +4,10 @@
 3
 2
 Keith
+As-tu déjà croisé des fées ? #Oui#Non
+Génial !
+#
+Aimerais-tu en croiser ? #Non#Oui
+Mon amie Margie pourra t’aider.
+Elle vit proche d'une grotte.
+#

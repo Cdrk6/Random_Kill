@@ -1,0 +1,9 @@
+47
+63
+2
+2
+11
+Eline
+Es-tu à la recherche de quelqu’un?#Oui#Non
+Je te conseille de chercher dans les maisons. Elles sont parfois ouvertes !
+#

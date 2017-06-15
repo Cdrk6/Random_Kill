@@ -3,6 +3,7 @@
 
 #include "Entity.hpp"
 #include "Map.hpp"
+#include <boost/algorithm/string.hpp>
 #include <vector>
 
 class Dialog : public Entity {
@@ -15,6 +16,8 @@ class Dialog : public Entity {
 	void calculate(float) override;
 	void move(int) override;
 	void setDialog(int);
+	void setChoice(bool);
+	void gotoState(int choice);
 
   private:
 	vector<vector < string*>> npcDat;
@@ -24,6 +27,8 @@ class Dialog : public Entity {
 	Map* map = NULL;
 	int state = -1;
 	int npc = 0;
+	int choice = 0;
+	bool inChoice = false;
 };
 
 #endif /* DIALOG_HPP */

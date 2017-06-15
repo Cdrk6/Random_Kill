@@ -3,4 +3,9 @@
 2
 2
 3
-Fée
+Fee
+Bonjour, je suis ta fee magique.
+Je suis tellement heureuse de te voir ! #Nom?#Age?
+Je ne peux pas te le dire.
+#
+ 

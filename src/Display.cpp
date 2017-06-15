@@ -51,7 +51,7 @@ bool Display::initSDL() {
             cerr << "Window could not be created! SDL Error: " << SDL_GetError() << endl;
             success = false;
         } else {
-            //SDL_SetWindowFullscreen(gWindow, SDL_WINDOW_FULLSCREEN); //SDL_WINDOW_FULLSCREEN); //Fullsreen
+            SDL_SetWindowFullscreen(gWindow, SDL_WINDOW_FULLSCREEN); //SDL_WINDOW_FULLSCREEN); //Fullsreen
             gRenderer = SDL_CreateRenderer(gWindow, -1, SDL_RENDERER_ACCELERATED); //Create renderer for window
             if (gRenderer == NULL) {
                 cerr << "Renderer could not be created! SDL Error: " << SDL_GetError() << endl;
@@ -160,11 +160,13 @@ void Display::initGameEnts(IO* io) {
     vector<vector < string*>> colDat = io->getCollisionsData();
     vector<vector < string*>> npcDat = io->getNPCData();
     Texture* tex = NULL;
+	Texture* tex2 = NULL;
     vector<NPC*> npcs = vector<NPC*>();
     
     for (int i = 0; i < npcDat.size(); i++) {
         tex = io->getCharacterImages()[stoi(*npcDat[i][4])];
-        npcs.push_back(new NPC(initcx, initcy, stoi(*npcDat[i][0]), stoi(*npcDat[i][1]), stoi(*npcDat[i][2]), stoi(*npcDat[i][3]), tex, *npcDat[i][5], colDat));
+		tex2 = io->getCharacterImages()[stoi(*npcDat[i][4])+14];
+        npcs.push_back(new NPC(initcx, initcy, stoi(*npcDat[i][0]), stoi(*npcDat[i][1]), stoi(*npcDat[i][2]), stoi(*npcDat[i][3]), tex, tex2, *npcDat[i][5], colDat));
     }
     Map* m = new Map(initcx - Map::CXSCREEN / 2, initcy - Map::CYSCREEN / 2, io->getMapImages());
     Dialog* d = new Dialog(0, 0, io->getMapImages()[11], io->getMapImages()[12], io->getFonts(), m, npcDat);

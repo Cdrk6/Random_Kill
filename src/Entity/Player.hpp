@@ -22,6 +22,8 @@ class Player : public Entity {
 	void stopMoving();
 	void startDialog();
 	int checkNPC(int, int); //Renvoie -1 ou l'index du PNJ
+	void shoot();
+	void checkLine(int, int);
 
   private:
 	Map* map = NULL;
@@ -42,6 +44,7 @@ class Player : public Entity {
 	bool stop = true;
 	bool dialog = false;
 	int npc = -1;
+	int npc2 = -1;
 };
 
 #endif /* PLAYER_HPP */
