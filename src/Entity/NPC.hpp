@@ -21,6 +21,10 @@ class NPC : public Entity {
 	void relativeMove(int); //Mouvement relatif au joueur
 	bool collision(int, int);
 	void generateMove();
+	int getCX();
+	int getCY();
+	
+	bool dialog = false;
 
   private:
 	vector<vector<string*>> col;

@@ -126,7 +126,10 @@ void IO::loadFonts() {
     for (int i = 0; i < paths->size(); i++) {
         filesystem::path path((*paths)[i]);
         //cout << i << ". " << (*paths)[i] << " ;FN : "<< path.stem().string() << endl;
-        fonts[stoi(path.stem().string())] = TTF_OpenFont((*paths)[i].c_str(), 30);
+        int t = 30;
+        if(stoi(path.stem().string()) == 3)
+            t = 20;
+        fonts[stoi(path.stem().string())] = TTF_OpenFont((*paths)[i].c_str(), t);
         if (!fonts[stoi(path.stem().string())])
             cerr << "Unable to load font from " << path.relative_path() << "! TTF Error: " << TTF_GetError() << endl;
     }

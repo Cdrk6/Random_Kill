@@ -1,12 +1,16 @@
 #include "Player.hpp"
+#include "NPC.hpp"
+#include "Dialog.hpp"
 
 int Player::cMap = 0;
 
-Player::Player(int cx, int cy, Texture* t, Map* m, vector<vector<string*>> col) : Entity(20 * Map::C, 12 * Map::C, Map::C, Map::C, t) {
+Player::Player(int cx, int cy, Texture* t, Map* m, vector<vector<string*>> col, vector<NPC*> npcs, Dialog* d) : Entity(20 * Map::C, 12 * Map::C, Map::C, Map::C, t) {
     Player::cx = cx;
     Player::cy = cy;
     Player::map = m;
     Player::col = col;
+    Player::npcs = npcs;
+    Player::dia = d;
 }
 
 Player::~Player() {
@@ -18,6 +22,11 @@ void Player::draw(SDL_Renderer* r) {
 }
 
 void Player::calculate(float timeStep) {
+    if (Dialog::flagStop) {
+            dialog = false;
+            npcs[npc]->dialog = false;
+            Dialog::flagStop = false;
+    }
     if (moving == Map::NSTEP + 1) {
         time = 0;
         moving--;
@@ -113,6 +122,8 @@ void Player::stopMoving() {
 }
 
 void Player::move(int d) {
+    if (dialog)
+        return;
     stop = false;
     // if (d > 3)
     //   d -= 4;
@@ -190,4 +201,46 @@ void Player::move(int d) {
 
 void Player::relativeMove(int d) {
     map->move(d);
+}
+
+void Player::startDialog() {
+    if (dialog) {
+        dia->setDialog(-1);
+        return;
+    }
+    if (cMap != 0)
+        return;
+    int fcx = cx, fcy = cy, look = 0;
+    switch (dir) {
+        case 0: //Down
+            fcy++;
+            look = 3;
+            break;
+        case 1: //Left
+            fcx--;
+            look = 2;
+            break;
+        case 2: //Right
+            fcx++;
+            look = 1;
+            break;
+        case 3: //Up
+            fcy--;
+            look = 0;
+            break;
+    }
+    npc = checkNPC(fcx, fcy);
+    if ((*col[0][fcy])[fcx] == '1' || npc == -1)
+        return;
+    dialog = true;
+    npcs[npc]->move(look);
+    npcs[npc]->dialog = true;
+    dia->setDialog(npc);
+}
+
+int Player::checkNPC(int fcx, int fcy) {
+    for (int i = 0; i < npcs.size(); i++)
+        if (npcs[i]->getCX() == fcx && npcs[i]->getCY() == fcy)
+            return i;
+    return -1;
 }

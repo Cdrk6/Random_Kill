@@ -4,13 +4,15 @@
 #include "../Texture.hpp"
 #include "Entity.hpp"
 #include "Map.hpp"
-#include "NPC.hpp"
 #include <vector>
+
+class NPC;
+class Dialog;
 
 class Player : public Entity {
   public:
 	static int cMap;
-	Player(int, int, Texture*, Map*, vector<vector<string*>>);
+	Player(int, int, Texture*, Map*, vector<vector<string*>>, vector<NPC*>, Dialog* d);
 	~Player();
 	void draw(SDL_Renderer*) override;
 	void calculate(float) override;
@@ -18,10 +20,14 @@ class Player : public Entity {
 	bool collision(int, int); //True collision, False pas de collision
 	void relativeMove(int);
 	void stopMoving();
+	void startDialog();
+	int checkNPC(int, int); //Renvoie -1 ou l'index du PNJ
 
   private:
 	Map* map = NULL;
+	Dialog* dia = NULL;
 	vector<vector<string*>> col;
+	vector<NPC*> npcs;
 	int cx = 0;
 	int cy = 0;
 	int tcx = 0;
@@ -34,6 +40,8 @@ class Player : public Entity {
 	float time = 0;
 	bool walking = false;
 	bool stop = true;
+	bool dialog = false;
+	int npc = -1;
 };
 
 #endif /* PLAYER_HPP */

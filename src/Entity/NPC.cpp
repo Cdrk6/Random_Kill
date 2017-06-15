@@ -1,6 +1,6 @@
 #include "NPC.hpp"
 
-NPC::NPC(int pcx, int pcy, int cx, int cy, int zw, int zh, Texture* tex, string name, vector<vector<string*>> col) : Entity((cx - (pcx - Map::CXSCREEN/2)) * Map::C, (cy - (pcy - Map::CYSCREEN/2)) * Map::C, Map::C, Map::C, tex) {
+NPC::NPC(int pcx, int pcy, int cx, int cy, int zw, int zh, Texture* tex, string name, vector<vector<string*>> col) : Entity((cx - (pcx - Map::CXSCREEN / 2)) * Map::C, (cy - (pcy - Map::CYSCREEN / 2)) * Map::C, Map::C, Map::C, tex) {
     NPC::cx = cx;
     NPC::cy = cy;
     NPC::icx = cx;
@@ -16,7 +16,7 @@ NPC::~NPC() {
 }
 
 void NPC::draw(SDL_Renderer* r) {
-    if(Player::cMap == 0)
+    if (Player::cMap == 0)
         t->render(x, y, anim * w, dir * h, w, h);
 }
 
@@ -82,7 +82,7 @@ bool NPC::collision(int dx, int dy) {
 }
 
 void NPC::move(int d) {
-    if (moving)
+    if (moving || dialog)
         return;
     dir = d;
     switch (dir) {
@@ -136,4 +136,12 @@ void NPC::relativeMove(int relD) {
             y += Map::STEP;
             break;
     }
+}
+
+int NPC::getCX() {
+    return cx;
+}
+
+int NPC::getCY() {
+    return cy;
 }

@@ -262,7 +262,7 @@ int Controller::getIndexOfCommand(bool init, vector<Entity*> ents) {
                     p = dynamic_cast <Player*> (ents[1]);
                     switch ((int) event.jbutton.button) {
                         case 0:
-                            
+                            p->startDialog();
                             break;
                         case 1:
                             p->stopMoving();
